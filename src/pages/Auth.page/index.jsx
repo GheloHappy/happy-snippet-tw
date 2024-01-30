@@ -1,14 +1,15 @@
+import { Routes, Route } from "react-router-dom"
+import Login from "../../components/pages/Auth/Login"
 
 const Auth = () => {
     return (
-        <div className="flex flex-col items-center justify-center flex-1 p-[24px] text-[2rem]">
-            <form className="">
-                <h1 className="">Login</h1>
-                <label>
-                    <p>Username</p>
-                    <input type="text" placeholder="Username" />
-                </label>
-            </form>
+        <div className="flex w-screen h-screen overflow-hidden items-center bg-gradient-to-r from-[#202020] to-[#0f0f0f] content-center text-white">
+            <div className="flex flex-col justify-center mx-auto">
+                <h1 className="font-serif text-[4rem] text-center">LOGIN</h1>
+                <Routes>
+                    <Route path='/' index element={<Login />} />
+                </Routes>
+            </div>
         </div>
     )
 }
