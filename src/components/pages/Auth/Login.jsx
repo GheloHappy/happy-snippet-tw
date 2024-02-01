@@ -1,7 +1,7 @@
 import { useState } from "react";
+import Options from "./Options";
 
 const Login = () => {
-
     const [fields, setFields] = useState({
         username: '',
         password: '',
@@ -43,6 +43,7 @@ const Login = () => {
                 <button className="w-full text-[1.2rem] py-2 bg-[#e6e6e6] text-black font-semibold hover:bg-black hover:text-white
                     rounded ">SUBMIT</button>
             </form>
+            <Options />
         </div>
     )
 }
