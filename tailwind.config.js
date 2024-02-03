@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        xsm: '350px',
+      },
       fontFamily: {
         serif: ['Bebas Neue'],
         flower: ['Indie Flower']
