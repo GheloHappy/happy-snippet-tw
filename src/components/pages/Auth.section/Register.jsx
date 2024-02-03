@@ -1,12 +1,67 @@
 import { useState } from "react"
+import { postData } from "../../../utils/fethcer";
 
-const Register = () => {
+const Register = ({setIsLogin}) => {
+    const [error, setError] = useState({
+        isError: false,
+        isErrorMsg: '',
+    })
+
     const [fields, setFields] = useState({
         username: '',
         email: '',
         password: '',
         confirmPass: '',
-    })
+    });
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        if (Object.values(fields).some((fieldValue) => typeof fieldValue === "string" && !fieldValue.trim(),)) {
+            setError({
+                isError: true,
+                isErrorMsg: "Please fill all fields"
+            });
+            return;
+        }
+
+        if (fields.password !== fields.confirmPass) {
+            setError({
+                isError: true,
+                isErrorMsg: "Password does not match"
+            });
+            return;
+        }
+
+        if (fields.password.length <= 5 || fields.username.length <= 5) {
+            setError({
+                isError: true,
+                isErrorMsg: "Credentials must be longer than 5"
+            });
+            return;
+        }
+
+        try {
+            const response = await postData('user', fields)
+
+            if (response.data.status) {
+                setIsLogin(true)
+            } else {
+                setError({
+                    isError: true,
+                    isErrorMsg: response.data.msg
+                });
+                return
+            }
+        } catch (err) {
+            console.log(err)
+        }
+
+        setError({
+            isError: false,
+            isErrorMsg: ""
+        });
+    }
 
     const handleChanges = e => {
         setFields(prev => {
@@ -19,11 +74,18 @@ const Register = () => {
 
     return (
         <div className="flex flex-col items-center w-full px-10">
+            {error.isError ?
+                <p className="text-red-400 text-[1.5rem] mb-3">
+                    {error.isErrorMsg}
+                </p>
+                :
+                <></>
+            }
             <form className="xsm:w-full sm:w-1/2  text-black">
                 <label className="relative rounded">
                     <p className={`${fields.username ? 'absolute -translate-y-2/3' : 'absolute top-[50%] left-[6px] opacity-0'} text-white bg-gray-900 border border-gray-700 rounded 
                     px-2 text-m font-semibold w-fit`}>Username</p>
-                    <input className="w-full text-[1.2rem] appearance-none p-2 rounded focus:outline-none mb-6"
+                    <input className="w-full text-[1.2rem] appearance-none p-3 rounded focus:outline-none mb-6"
                         type="text"
                         placeholder="Username"
                         value={fields.username}
@@ -33,7 +95,7 @@ const Register = () => {
                 <label className="relative rounded">
                     <p className={`${fields.email ? 'absolute -translate-y-2/3' : 'absolute top-[50%] left-[6px] opacity-0'} z-10 text-white bg-gray-900 border border-gray-700 rounded 
                     px-2 text-m font-semibold w-fit`}>Email</p>
-                    <input className="w-full text-[1.2rem] appearance-none p-2 rounded focus:outline-none mb-6"
+                    <input className="w-full text-[1.2rem] appearance-none p-3 rounded focus:outline-none mb-6"
                         type="email"
                         placeholder="Email"
                         value={fields.email}
@@ -43,7 +105,7 @@ const Register = () => {
                 <label className="relative rounded">
                     <p className={`${fields.password ? 'absolute -translate-y-2/3' : 'absolute top-[50%] left-[6px] opacity-0'} z-10 text-white bg-gray-900 border border-gray-700 rounded 
                     px-2 text-m font-semibold w-fit`}>Password</p>
-                    <input className="w-full text-[1.2rem] appearance-none p-2 rounded focus:outline-none  mb-4"
+                    <input className="w-full text-[1.2rem] appearance-none p-3 rounded focus:outline-none  mb-4"
                         type="password"
                         placeholder="Password"
                         value={fields.password}
@@ -53,7 +115,7 @@ const Register = () => {
                 <label className="relative rounded">
                     <p className={`${fields.confirmPass ? 'absolute -translate-y-2/3' : 'absolute top-[50%] left-[6px] opacity-0'} z-10 text-white bg-gray-900 border border-gray-700 rounded 
                     px-2 text-m font-semibold w-fit`}>Confirm Password</p>
-                    <input className="w-full text-[1.2rem] appearance-none p-2 rounded focus:outline-none  mb-4"
+                    <input className="w-full text-[1.2rem] appearance-none p-3 rounded focus:outline-none  mb-4"
                         type="password"
                         placeholder="Confirm Password"
                         value={fields.confirmPass}
@@ -61,7 +123,9 @@ const Register = () => {
                         onChange={handleChanges} />
                 </label>
                 <button className="w-full text-[1.2rem] py-2 bg-[#e6e6e6] text-black font-semibold hover:bg-black hover:text-white
-                    rounded ">SUBMIT</button>
+                    rounded "
+                    type="submit"
+                    onClick={handleSubmit}>SUBMIT</button>
             </form>
         </div>
     )

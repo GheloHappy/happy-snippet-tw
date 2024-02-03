@@ -14,7 +14,7 @@ function App() {
 function Root() {
   return (
       <Routes>
-        <Route path='/*' element={<Auth />} />
+        <Route path='/' element={<Auth />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
   )
