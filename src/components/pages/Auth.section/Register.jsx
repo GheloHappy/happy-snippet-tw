@@ -120,7 +120,7 @@ const Register = ({setIsLogin}) => {
                         placeholder="Confirm Password"
                         value={fields.confirmPass}
                         name="confirmPass"
-                        onChange={handleChanges} />
+                        onChange={handleChanges}/>
                 </label>
                 <button className="w-full text-[1.2rem] py-2 bg-[#e6e6e6] text-black font-semibold hover:bg-black hover:text-white
                     rounded "
