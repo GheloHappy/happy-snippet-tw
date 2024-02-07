@@ -85,10 +85,10 @@ const Login = () => {
                         name="password"
                         onChange={handleChanges} />
                 </label>
-                <button className="w-full text-[1.2rem] py-2 bg-[#e6e6e6] text-black font-semibold hover:bg-black hover:text-white
-                    rounded "
+                <button className="w-full text-[1.2rem] py-2 bg-[#e6e6e6] text-black font-semibold hover:bg-gray-500 hover:text-white
+                    rounded"
                     type="submit"
-                    onClick={handleLogin}>SUBMIT</button>
+                    onClick={handleLogin}>Submit</button>
             </form>
         </div>
     )

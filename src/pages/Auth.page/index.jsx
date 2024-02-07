@@ -8,9 +8,12 @@ const Auth = () => {
 
     return (
         <div className="flex w-screen h-screen overflow-hidden items-center bg-gradient-to-r from-[#202020] to-[#0f0f0f] content-center text-white">
+            <div className="text-center absolute bottom-0 w-full sm:w-auto sm:right-0 px-10 pb-5">
+                <h1 className="font-flower text-[2rem] font-bold ">Happy Snippet</h1>
+            </div>
             <div className="flex flex-col justify-center mx-auto">
                 <h1 className="font-serif text-[4rem] text-center">{isLogin ? 'Login' : 'Register'}</h1>
-                { isLogin ?
+                {isLogin ?
                     <Login />
                     :
                     <Register setIsLogin={setIsLogin} />
