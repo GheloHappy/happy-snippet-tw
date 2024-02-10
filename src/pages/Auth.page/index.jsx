@@ -1,6 +1,6 @@
-import Login from "../../components/pages/Auth.section/Login"
-import Register from "../../components/pages/Auth.section/Register"
-import Options from "../../components/pages/Auth.section/Options"
+import Login from "../../components/Auth.section/Login.jsx"
+import Register from "../../components/Auth.section/Register"
+import Options from "../../components/Auth.section/Options"
 import { useState } from "react"
 
 const Auth = () => {

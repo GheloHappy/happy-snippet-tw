@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Auth from './pages/Auth.page';
 import NotFound from './components/NotFound';
-import Home from './components/pages/Home.section';
+import Home from './pages/Home.page';
 
 function App() {
   console.log("App Rendering")

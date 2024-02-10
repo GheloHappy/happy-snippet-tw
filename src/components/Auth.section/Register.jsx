@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { postData } from "../../../utils/fethcer";
+import { postData } from "../../utils/fethcer";
 
 const Register = ({setIsLogin}) => {
     const [error, setError] = useState({
@@ -122,7 +122,7 @@ const Register = ({setIsLogin}) => {
                         name="confirmPass"
                         onChange={handleChanges}/>
                 </label>
-                <button className="w-full text-[1.2rem] py-2 bg-[#e6e6e6] text-black font-semibold hover:bg-black hover:text-white
+                <button className="w-full text-[1.2rem] py-2 bg-[#e6e6e6] text-black font-semibold hover:bg-gray-500 hover:text-white
                     rounded "
                     type="submit"
                     onClick={handleSubmit}>SUBMIT</button>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { postData } from "../../../utils/fethcer";
+import { postData } from "../../utils/fethcer";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
