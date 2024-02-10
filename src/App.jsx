@@ -2,23 +2,31 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Auth from './pages/Auth.page';
 import NotFound from './components/NotFound';
 import Home from './pages/Home.page';
+import Profile from './pages/Profile.page'
+import Snippets from './pages/Snippets.page'
+import Nav from './components/Nav.section';
 
 function App() {
   console.log("App Rendering")
   return (
     <BrowserRouter>
-        <Root />
+      <Root />
     </BrowserRouter>
   );
 }
 
 function Root() {
   return (
+    <>
+      <Nav />
       <Routes>
         <Route path='/' element={<Auth />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/snippets' element={<Snippets />} />
         <Route path='/home' element={<Home />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
+    </>
   )
 }
 
