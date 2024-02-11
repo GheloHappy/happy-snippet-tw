@@ -7,7 +7,7 @@ const Auth = () => {
     const [isLogin, setIsLogin] = useState(true)
 
     return (
-        <div className="flex w-screen h-screen overflow-hidden items-center bg-gradient-to-r from-[#202020] to-[#0f0f0f] content-center text-white">
+        <div className="flex w-screen h-screen overflow-hidden items-center content-center text-white">
             <div className="text-center absolute bottom-0 w-full sm:w-auto sm:right-0 px-10 pb-5">
                 <h1 className="font-flower text-[2rem] font-bold ">Happy Snippet</h1>
             </div>

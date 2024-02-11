@@ -16,8 +16,8 @@ function App() {
 }
 
 function Root() {
-  const match = useMatch({path: '/', end: true})
-  
+  const match = useMatch({path: '/'})
+
   return (
     <>
       {!match ? <Nav /> : <></>}
