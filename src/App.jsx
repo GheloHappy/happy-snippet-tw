@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useMatch } from 'react-router-dom';
 import Auth from './pages/Auth.page';
 import NotFound from './components/NotFound';
 import Home from './pages/Home.page';
@@ -16,9 +16,11 @@ function App() {
 }
 
 function Root() {
+  const match = useMatch({path: '/', end: true})
+  
   return (
     <>
-      <Nav />
+      {!match ? <Nav /> : <></>}
       <Routes>
         <Route path='/' element={<Auth />} />
         <Route path='/profile' element={<Profile />} />
