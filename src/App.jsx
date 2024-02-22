@@ -21,7 +21,7 @@ function Root() {
   return (
     <>
       {!match ? <Nav /> : <></>}
-      <Routes>
+      <Routes> 
         <Route path='/' element={<Auth />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/snippets' element={<Snippets />} />
