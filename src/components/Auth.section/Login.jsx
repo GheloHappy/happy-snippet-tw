@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { postData } from "../../utils/fethcer";
 import { useNavigate } from "react-router-dom";
+import { PulseLoader } from "react-spinners";
+
 
 const Login = () => {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     const [fields, setFields] = useState({
         username: '',
@@ -17,12 +20,15 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setLoading(true)
 
         if (!fields.username || !fields.password) {
             setError({
                 isError: true,
                 isErrorMsg: "Please fill all fields"
             });
+
+            setLoading(false)
             return
         }
 
@@ -35,6 +41,8 @@ const Login = () => {
                     isError: true,
                     isErrorMsg: response.data.msg
                 });
+
+                setLoading(false)
                 return
             }
         } catch (err) {
@@ -44,6 +52,7 @@ const Login = () => {
                 isErrorMsg: "Something went wrong :'("
             });
         }
+        setLoading(false)
     }
 
     const handleChanges = e => {
@@ -68,7 +77,7 @@ const Login = () => {
                 <label className="relative rounded">
                     <p className={`${fields.username ? 'absolute -translate-y-2/3' : 'absolute top-[50%] left-[6px] opacity-0'} text-white bg-gray-900 border border-gray-700 rounded 
                     px-2 text-m font-semibold w-fit`}>Username</p>
-                    <input className="w-full text-[1.2rem] appearance-none p-3 rounded focus:outline-none mb-6"
+                    <input className="w-full text-[1.2rem] appearance-none p-3 rounded focus:outline-none mb-6 font-semibold"
                         type="text"
                         placeholder="Username"
                         value={fields.username}
@@ -78,7 +87,7 @@ const Login = () => {
                 <label className="relative rounded">
                     <p className={`${fields.password ? 'absolute -translate-y-2/3' : 'absolute top-[50%] left-[6px] opacity-0'} z-10 text-white bg-gray-900 border border-gray-700 rounded 
                     px-2 text-m font-semibold w-fit`}>Password</p>
-                    <input className="w-full text-[1.2rem] appearance-none p-3 rounded focus:outline-none  mb-4"
+                    <input className="w-full text-[1.2rem] appearance-none p-3 rounded focus:outline-none mb-4 font-semibold"
                         type="password"
                         placeholder="Password"
                         value={fields.password}
@@ -88,7 +97,10 @@ const Login = () => {
                 <button className="w-full text-[1.2rem] py-2 bg-[#e6e6e6] text-black font-semibold hover:bg-gray-500 hover:text-white
                     rounded"
                     type="submit"
-                    onClick={handleLogin}>Submit</button>
+                    disabled={loading}
+                    onClick={handleLogin}>
+                    {loading ? <PulseLoader color="#fff" size={10} /> : 'Submit'}
+                </button>
             </form>
         </div>
     )

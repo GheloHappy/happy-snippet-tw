@@ -1,7 +1,9 @@
 import { useState } from "react"
 import { postData } from "../../utils/fethcer";
+import { PulseLoader } from "react-spinners";
 
-const Register = ({setIsLogin}) => {
+const Register = ({ setIsLogin }) => {
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState({
         isError: false,
         isErrorMsg: '',
@@ -16,12 +18,15 @@ const Register = ({setIsLogin}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setLoading(true)
 
         if (Object.values(fields).some((fieldValue) => typeof fieldValue === "string" && !fieldValue.trim(),)) {
             setError({
                 isError: true,
                 isErrorMsg: "Please fill all fields"
             });
+
+            setLoading(false)
             return;
         }
 
@@ -30,6 +35,8 @@ const Register = ({setIsLogin}) => {
                 isError: true,
                 isErrorMsg: "Password does not match"
             });
+
+            setLoading(false)
             return;
         }
 
@@ -38,6 +45,8 @@ const Register = ({setIsLogin}) => {
                 isError: true,
                 isErrorMsg: "Credentials must be longer than 5"
             });
+
+            setLoading(false)
             return;
         }
 
@@ -51,6 +60,8 @@ const Register = ({setIsLogin}) => {
                     isError: true,
                     isErrorMsg: response.data.msg
                 });
+
+                setLoading(false)
                 return
             }
         } catch (err) {
@@ -61,6 +72,8 @@ const Register = ({setIsLogin}) => {
             isError: false,
             isErrorMsg: ""
         });
+
+        setLoading(false)
     }
 
     const handleChanges = e => {
@@ -120,12 +133,15 @@ const Register = ({setIsLogin}) => {
                         placeholder="Confirm Password"
                         value={fields.confirmPass}
                         name="confirmPass"
-                        onChange={handleChanges}/>
+                        onChange={handleChanges} />
                 </label>
                 <button className="w-full text-[1.2rem] py-2 bg-[#e6e6e6] text-black font-semibold hover:bg-gray-500 hover:text-white
                     rounded "
                     type="submit"
-                    onClick={handleSubmit}>SUBMIT</button>
+                    disabled={loading}
+                    onClick={handleSubmit}>
+                    {loading ? <PulseLoader color="#fff" size={10} /> : 'Submit'}
+                </button>
             </form>
         </div>
     )
