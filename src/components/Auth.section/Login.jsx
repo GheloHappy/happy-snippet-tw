@@ -2,6 +2,7 @@ import { useState } from "react";
 import { postData } from "../../utils/fethcer";
 import { useNavigate } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
+import cookies from 'react-cookies'
 
 const Login = () => {
     const navigate = useNavigate();
@@ -34,6 +35,13 @@ const Login = () => {
         try {
             const response = await postData('auth', fields);
             if (response.data.token) {
+                cookies.save('_hs', response.data.token, {
+                    maxAge: 86400,
+                    path: '/',
+                    //secure: true,
+                    //sameSite: 'Lax',
+                    //httpOnly: true, //uncomment for live
+                })
                 navigate('/home')
             } else {
                 setError({

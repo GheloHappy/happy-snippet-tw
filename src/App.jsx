@@ -5,6 +5,7 @@ import Home from './pages/Home.page';
 import Profile from './pages/Profile.page'
 import Snippets from './pages/Snippets.page'
 import Nav from './components/Nav.section';
+import UnprotectedRoute from './middleware/UnprotectedRoute.md';
 
 function App() {
   console.log("App Rendering")
@@ -23,7 +24,7 @@ function Root() {
     <>
       {!match ? <Nav /> : <></>} 
       <Routes> 
-        <Route path='/' element={<Auth />} />
+        <Route path='/' element={<UnprotectedRoute><Auth /></UnprotectedRoute>} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/snippets' element={<Snippets />} />
         <Route path='/home' element={<Home />} />
