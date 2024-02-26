@@ -3,7 +3,6 @@ import { postData } from "../../utils/fethcer";
 import { useNavigate } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
 
-
 const Login = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
