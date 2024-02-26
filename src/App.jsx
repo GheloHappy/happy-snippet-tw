@@ -19,8 +19,9 @@ function Root() {
   const match = useMatch({path: '/'})
 
   return (
+    //update middleware
     <>
-      {!match ? <Nav /> : <></>}
+      {!match ? <Nav /> : <></>} 
       <Routes> 
         <Route path='/' element={<Auth />} />
         <Route path='/profile' element={<Profile />} />
