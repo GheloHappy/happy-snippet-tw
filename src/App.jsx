@@ -6,6 +6,7 @@ import Profile from './pages/Profile.page'
 import Snippets from './pages/Snippets.page'
 import Nav from './components/Nav.section';
 import UnprotectedRoute from './middleware/UnprotectedRoute.md';
+import ProtectedRoute from './middleware/ProtectedRoute.md';
 
 function App() {
   console.log("App Rendering")
@@ -17,7 +18,7 @@ function App() {
 }
 
 function Root() {
-  const match = useMatch({path: '/'})
+  const match = useMatch({path: '/'}) 
 
   return (
     //update middleware 
@@ -25,9 +26,9 @@ function Root() {
       {!match ? <Nav /> : <></>} 
       <Routes> 
         <Route path='/' element={<UnprotectedRoute><Auth /></UnprotectedRoute>} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/snippets' element={<Snippets />} />
-        <Route path='/home' element={<Home />} />
+        <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path='/snippets' element={<ProtectedRoute><Snippets /></ProtectedRoute>} />
+        <Route path='/home' element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>
