@@ -5,7 +5,7 @@ const Options = ({setIsLogin, isLogin}) => {
                 {isLogin ?
                     <div className="xsm:flex gap-[8px] items-center justify-center ">
                         <p className="text-[1.5rem]">Don't have an account?</p>
-                        <p to={'/register'} className="text-[1.5rem] text-cyan-300 cursor-pointer" onClick={() => setIsLogin(false)}>Register</p>
+                        <p className="text-[1.5rem] text-cyan-300 cursor-pointer" onClick={() => setIsLogin(false)}>Register</p>
                     </div>
                     :
                     <div className="xsm:flex gap-[8px] items-center justify-center ">
