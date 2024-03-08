@@ -2,7 +2,7 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
 const Nav = () => {
     return (
-        <nav className="sticky w-full bg-gray-700 p-3 md:justify-between md:items-center flex flex-col md:flex-row text-white shadow">
+        <nav className="fixed top-0 w-full bg-gray-700 p-3 md:justify-between md:items-center flex flex-col md:flex-row text-white shadow">
             <Link to="/" className="text-[1.5rem] md:text-[2rem] ml-5 md:ml-2">Happy Snippets</Link>
             <ul className="flex justify-end gap-10">
                 <CustomLink to="/home">Home</CustomLink>

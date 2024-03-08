@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children }) => {
             return
         }
         
-    }, token)
+    }, [token])
 
     return (
         <>{ children }</>

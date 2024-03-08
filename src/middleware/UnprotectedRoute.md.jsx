@@ -11,7 +11,7 @@ const UnprotectedRoute = ({ children }) => {
             navigate('/home')
             return
         }
-    }, [])
+    }, [token, navigate])
 
     return (
         <>{!token && children}</>
