@@ -7,7 +7,7 @@ const CodeSnippet = () => {
                 <label className="font-semibold">Title: </label>
                 <input type="text" className="w-1/2 rounded text-[1.1rem] p-2 text-black capitalize" />
                 <label className="font-semibold">Snippet: </label>
-                <TextareaAutosize
+                <TextareaAutosize 
                     className="text-black w-full p-2 rounded"
                     minRows={3}
                     maxRows={6}
