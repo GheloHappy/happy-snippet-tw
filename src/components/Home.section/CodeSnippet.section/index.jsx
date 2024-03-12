@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import { dark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import languageOptions from './Language.options';
-import CodeSnippetCard from './CodeSnippetCard.section';
 
 const CodeSnippet = () => {
     const [title, setTitle] = useState('');
@@ -80,7 +78,6 @@ const CodeSnippet = () => {
                 >
                     Save
                 </button>
-                {/* <CodeSnippetCard language={selectedLanguage} theme={oneLight} snippet={snippet} /> */}
             </form>
         </div>
     );
