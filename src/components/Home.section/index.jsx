@@ -7,6 +7,7 @@ const Home = ({selectedLanguage, snippet}) => {
         <div className="flex flex-col items-center justify-center mt-[5rem]">
             <h1 className="text-[2rem] text-center text-white">Create a Snippet</h1>
             <CodeSnippet />
+            
             <CodeSnippetCard language={selectedLanguage} theme={oneLight} snippet={snippet} />
         </div>
     )
