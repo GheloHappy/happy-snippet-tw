@@ -13,4 +13,4 @@ const Home = ({selectedLanguage, snippet}) => {
     )
 }
 
-export default Home; 
+export default Home;
