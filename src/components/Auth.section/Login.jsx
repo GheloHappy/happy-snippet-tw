@@ -3,6 +3,7 @@ import { postData } from "../../utils/fethcer";
 import { useNavigate } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
 import cookies from 'react-cookies'
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -35,8 +36,9 @@ const Login = () => {
         try {
             const response = await postData('auth', fields);
             if (response.data.token) {
+                const decoded = jwtDecode(response.data.token);
                 cookies.save('_hs', response.data.token, {
-                    maxAge: 86400,
+                    maxAge: decoded.maxAge,
                     path: '/',
                     //secure: true,
                     //sameSite: 'Lax',

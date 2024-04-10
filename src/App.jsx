@@ -29,7 +29,7 @@ function Root() {
         <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path='/snippets' element={<ProtectedRoute><Snippets /></ProtectedRoute>} />
         <Route path='/home' element={<ProtectedRoute><Home /></ProtectedRoute>} />
-        <Route path='*' element={<NotFound />} />
+        <Route path='*' element={<ProtectedRoute><NotFound /></ProtectedRoute>} />
       </Routes>
     </>
   )
