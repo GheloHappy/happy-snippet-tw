@@ -9,7 +9,7 @@ import UnprotectedRoute from './middleware/UnprotectedRoute.md';
 import ProtectedRoute from './middleware/ProtectedRoute.md';
 
 function App() {
-  console.log("App Rendering")
+  console.log("App Rendering") 
   return (
     <BrowserRouter>
       <Root />
