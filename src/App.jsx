@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, useMatch } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import Auth from './pages/Auth.page';
 import NotFound from './components/NotFound';
 import Home from './pages/Home.page';
@@ -7,24 +8,27 @@ import Snippets from './pages/Snippets.page'
 import Nav from './components/Nav.section';
 import UnprotectedRoute from './middleware/UnprotectedRoute.md';
 import ProtectedRoute from './middleware/ProtectedRoute.md';
+import store from './redux/store';
 
 function App() {
-  console.log("App Rendering") 
+  console.log("App Rendering")
   return (
-    <BrowserRouter>
-      <Root />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Root />
+      </BrowserRouter>
+    </Provider>
   );
 }
 
 function Root() {
-  const match = useMatch({path: '/'}) 
+  const match = useMatch({ path: '/' })
 
   return (
     //update middleware 
     <>
-      {!match ? <Nav /> : <></>} 
-      <Routes> 
+      {!match ? <Nav /> : <></>}
+      <Routes>
         <Route path='/' element={<UnprotectedRoute><Auth /></UnprotectedRoute>} />
         <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path='/snippets' element={<ProtectedRoute><Snippets /></ProtectedRoute>} />
