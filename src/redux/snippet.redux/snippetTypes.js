@@ -1,0 +1,1 @@
+export const SET_SNIPPET = "SET_SNIPPET";
