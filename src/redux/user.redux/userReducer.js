@@ -7,11 +7,13 @@ const initialState = {
 }
 
 const userReducer = (state = initialState, action) => {
+
     switch (action.type) {
         case IS_SIGNEDIN:
             return {
                 ...state,
-                is_signin: action.payload.status,
+                is_signin: action.payload,
+                
             }
         case SET_USER_NAME:
             return {

@@ -4,9 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
 import cookies from 'react-cookies'
 import { jwtDecode } from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { isSignedIn } from "../../redux/user.redux/userActions";
 
 const Login = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
 
     const [fields, setFields] = useState({
@@ -44,6 +47,8 @@ const Login = () => {
                     //sameSite: 'Lax',
                     //httpOnly: true, //uncomment for live
                 })
+                 
+                dispatch(isSignedIn(true))
                 navigate('/home')
             } else {
                 setError({

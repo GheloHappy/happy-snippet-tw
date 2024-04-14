@@ -1,8 +1,8 @@
 import { IS_SIGNEDIN, SET_USER_NAME } from "./userTypes";
 
-export const isSignedIn = (status) => ({
+export const isSignedIn = (type) => ({
     type: IS_SIGNEDIN,
-    payload: { status }
+    payload:  type 
 })
 
 export const setUserName = (type) => ({
