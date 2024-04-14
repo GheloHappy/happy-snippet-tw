@@ -1,4 +1,4 @@
-import { createStore } from "redux"
+import { combineReducers, createStore } from "redux"
 import userReducer from "./user.redux/userReducer";
 import snippetReducer from "./snippet.redux/snippetReducer";
 
