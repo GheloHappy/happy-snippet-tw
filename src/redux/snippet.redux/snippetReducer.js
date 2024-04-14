@@ -2,7 +2,7 @@ import { SET_SNIPPET } from "./snippetTypes"
 
 
 const initialState = {
-    snippet: "",
+    code_snippet: "",
 }
 
 const snippetReducer = (state = initialState, action) => {

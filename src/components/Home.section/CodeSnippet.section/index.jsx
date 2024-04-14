@@ -2,18 +2,17 @@ import React, { useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import languageOptions from './Language.options';
 
-const CodeSnippet = () => {
+
+const CodeSnippet = ({setCodeSnippet, setLanguage}) => {
     const [title, setTitle] = useState('');
-    const [snippet, setSnippet] = useState('');
     const [isPrivate, setIsPrivate] = useState(false);
-    const [selectedLanguage, setSelectedLanguage] = useState('javascript');
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
     };
 
     const handleSnippetChange = (e) => {
-        setSnippet(e.target.value);
+        setCodeSnippet(e.target.value)
     };
 
     const handleCheckboxChange = (e) => {
@@ -21,16 +20,14 @@ const CodeSnippet = () => {
     };
 
     const handleLanguageChange = (e) => {
-        setSelectedLanguage(e.target.value);
+        setLanguage(e.target.value);
     };
 
     const handleSave = () => {
         console.log("Title:", title);
-        console.log("Snippet:", snippet);
         console.log("Is Private?", isPrivate);
-        console.log("Selected Language:", selectedLanguage);
         setTitle('');
-        setSnippet('');
+
         setIsPrivate(false);
     };
 
@@ -47,9 +44,9 @@ const CodeSnippet = () => {
                 />
                 <label className="font-semibold">Snippet: </label>
                 <select
-                    value={selectedLanguage}
                     onChange={handleLanguageChange}
                     className="w-1/4 p-2 rounded text-black"
+                    value="javascript"
                 >
                     {languageOptions.map(option => (
                         <option key={option.value} value={option.value}>{option.label}</option>
@@ -60,7 +57,6 @@ const CodeSnippet = () => {
                     minRows={3}
                     maxRows={10}
                     placeholder='Enter your snippet here...'
-                    value={snippet}
                     onChange={handleSnippetChange}
                 />
                 <div className="flex gap-2">
