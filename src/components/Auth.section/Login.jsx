@@ -9,7 +9,6 @@ import { isSignedIn } from "../../redux/user.redux/userActions";
 
 const Login = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
 
     const [fields, setFields] = useState({
@@ -47,8 +46,7 @@ const Login = () => {
                     //sameSite: 'Lax',
                     //httpOnly: true, //uncomment for live
                 })
-                 
-                dispatch(isSignedIn(true))
+
                 navigate('/home')
             } else {
                 setError({

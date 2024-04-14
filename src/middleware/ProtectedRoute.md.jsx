@@ -12,8 +12,7 @@ const ProtectedRoute = ({ children }) => {
     const token = cookies.load('_hs');
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const is_signin = useSelector((state) => state.is_signin);
-
+    
     useEffect(() => {
         if (!token) {
             dispatch(isSignedIn(false));
