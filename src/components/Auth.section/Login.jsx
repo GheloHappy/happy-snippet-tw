@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { postData } from "../../utils/fethcer";
+import { postData } from "../../utils/fetcher";
 import { useNavigate } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
 import cookies from 'react-cookies'

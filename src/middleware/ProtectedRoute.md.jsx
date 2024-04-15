@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { jwtDecode } from 'jwt-decode'
 import _ from 'lodash';
-import { postData } from '../utils/fethcer'
+import { postData } from '../utils/fetcher'
 import { isSignedIn } from '../redux/user.redux/userActions'
 
 

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { postData } from "../../utils/fethcer";
+import { postData } from "../../utils/fetcher";
 import { PulseLoader } from "react-spinners";
 
 const Register = ({ setIsLogin }) => {
