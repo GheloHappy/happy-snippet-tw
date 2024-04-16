@@ -27,7 +27,6 @@ const CodeSnippet = ({setCodeSnippet, setLanguage}) => {
         console.log("Title:", title);
         console.log("Is Private?", isPrivate);
         setTitle('');
-
         setIsPrivate(false);
     };
 
