@@ -31,7 +31,7 @@ const CodeSnippet = ({setCodeSnippet, setLanguage}) => {
     };
 
     return (
-        <div className="text-white mt-[1rem] w-1/2 text-center border p-5 rounded">
+        <div className="text-white mt-[1rem] w-full text-center border p-5 rounded">
             <form className="flex flex-col gap-5 items-start">
                 <label className="font-semibold">Title: </label>
                 <input
