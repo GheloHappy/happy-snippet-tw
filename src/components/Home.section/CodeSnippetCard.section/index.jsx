@@ -1,5 +1,5 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-
+ 
 const CodeSnippetCard = ({ language, theme, snippet }) => {
     return (
         <div className='text-start w-full h-screen'>
