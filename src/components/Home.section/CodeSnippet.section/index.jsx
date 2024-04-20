@@ -3,7 +3,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import languageOptions from './Language.options';
 
 
-const CodeSnippet = ({setCodeSnippet, setLanguage}) => {
+const CodeSnippet = ({ setCodeSnippet, setLanguage, setIsPreview }) => {
     const [title, setTitle] = useState('');
     const [isPrivate, setIsPrivate] = useState(false);
 
@@ -31,34 +31,45 @@ const CodeSnippet = ({setCodeSnippet, setLanguage}) => {
     };
 
     return (
-        <div className="text-white mt-[1rem] w-full text-center border p-5 rounded">
-            <form className="flex flex-col gap-5 items-start">
-                <label className="font-semibold">Title: </label>
+        <div className="text-white mt-[1rem] w-full text-center border p-3 rounded">
+            <form className="flex flex-col gap-5">
+                {/* <label className="font-semibold">Title: </label>
                 <input
                     type="text"
                     className="w-1/2 rounded text-[1.1rem] p-2 text-black"
                     placeholder='Enter your title here...'
                     value={title}
                     onChange={handleTitleChange}
-                />
-                <label className="font-semibold">Snippet: </label>
-                <select
-                    onChange={handleLanguageChange}
-                    className="w-1/4 p-2 rounded text-black"
-                    value="javascript"
-                >
-                    {languageOptions.map(option => (
-                        <option key={option.value} value={option.value}>{option.label}</option>
-                    ))}
-                </select>
+                /> */}
+                <div className='w-full flex gap-5'>
+                    <label className="font-semibold">Language: </label>
+                    <select
+                        onChange={handleLanguageChange}
+                        className="w-1/4 p-2 rounded text-black"
+                        value="javascript"
+                    >
+                        {languageOptions.map(option => (
+                            <option key={option.value} value={option.value}>{option.label}</option>
+                        ))}
+                    </select>
+                    <div className='w-full text-end'>
+                        <button
+                            className="border-white border-[2px] text-[1.2rem] rounded w-1/5"
+                            onClick={handleSave}
+                        >
+                            Save
+                        </button>
+                    </div>
+                </div>
+
                 <TextareaAutosize
                     className="text-black w-full p-2 rounded"
-                    minRows={3}
-                    maxRows={10}
+                    minRows={10}
+                    maxRows={30}
                     placeholder='Enter your snippet here...'
                     onChange={handleSnippetChange}
                 />
-                <div className="flex gap-2">
+                {/* <div className="flex gap-2">
                     <input
                         type="checkbox"
                         checked={isPrivate}
@@ -72,7 +83,7 @@ const CodeSnippet = ({setCodeSnippet, setLanguage}) => {
                     onClick={handleSave}
                 >
                     Save
-                </button>
+                </button> */}
             </form>
         </div>
     );
