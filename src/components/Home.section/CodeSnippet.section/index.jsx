@@ -3,7 +3,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import languageOptions from './Language.options';
 
 
-const CodeSnippet = ({ setCodeSnippet, setLanguage, setIsPreview }) => {
+const CodeSnippet = ({ setCodeSnippet, setLanguage }) => {
     const [title, setTitle] = useState('');
     const [isPrivate, setIsPrivate] = useState(false);
 
@@ -45,7 +45,7 @@ const CodeSnippet = ({ setCodeSnippet, setLanguage, setIsPreview }) => {
                     <label className="font-semibold">Language: </label>
                     <select
                         onChange={handleLanguageChange}
-                        className="w-1/4 p-2 rounded text-black"
+                        className="w-1/3 p-2 rounded text-black"
                         value="javascript"
                     >
                         {languageOptions.map(option => (

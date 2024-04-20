@@ -12,16 +12,17 @@ const Home = () => {
     return (
         <>
             {isPrevew ?
-                <SnippetPreview language={language} theme={oneLight} snippet={code_snippet} />
+                <SnippetPreview language={language} theme={oneLight} snippet={code_snippet} setIsPreview={setIsPreview}/>
                 :
                 <div className="flex mt-[5rem] w-full p-5 gap-3">
                     {/* <h1 className="text-[2rem] text-center text-white">Create a Snippet</h1> */}
                     <div className="w-1/2">
                         <CodeSnippet setCodeSnippet={setCodeSnippet} setLanguage={setLanguage} 
-                        setIsPreview={setIsPreview}/>
+                        />
                     </div>
                     <div className="w-1/2">
-                        <CodeSnippetCard language={language} theme={oneLight} snippet={code_snippet} />
+                        <CodeSnippetCard language={language} theme={oneLight} snippet={code_snippet} 
+                        setIsPreview={setIsPreview}/>
                     </div>
                 </div>
             }
