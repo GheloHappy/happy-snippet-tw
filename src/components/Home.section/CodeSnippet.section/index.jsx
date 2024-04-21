@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import languageOptions from './Language.options';
+import { setSnippet } from '../../../redux/snippet.redux/snippetActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 
-const CodeSnippet = ({ setCodeSnippet, setLanguage }) => {
+const CodeSnippet = ({ setLanguage }) => {
     const [title, setTitle] = useState('');
     const [isPrivate, setIsPrivate] = useState(false);
+    const dispatch = useDispatch()
+    const snippet = useSelector((state) => state.snippet.snippet)
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
     };
 
     const handleSnippetChange = (e) => {
-        setCodeSnippet(e.target.value)
+        dispatch(setSnippet(e.target.value))
     };
 
     const handleCheckboxChange = (e) => {
@@ -68,6 +72,7 @@ const CodeSnippet = ({ setCodeSnippet, setLanguage }) => {
                     maxRows={30}
                     placeholder='Enter your snippet here...'
                     onChange={handleSnippetChange}
+                    value={snippet}
                 />
                 {/* <div className="flex gap-2">
                     <input

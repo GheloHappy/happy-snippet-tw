@@ -9,6 +9,7 @@ import Nav from './components/Nav.section';
 import UnprotectedRoute from './middleware/UnprotectedRoute.md';
 import ProtectedRoute from './middleware/ProtectedRoute.md';
 import store from './redux/store';
+import Welcome from './components/Welcome.section';
 
 function App() {
   console.log("App Rendering")
@@ -30,6 +31,7 @@ function Root() {
       {!match ? <Nav /> : <></>}
       <Routes>
         <Route path='/' element={<UnprotectedRoute><Auth /></UnprotectedRoute>} />
+        <Route path='/welcome' element={<ProtectedRoute><Welcome /></ProtectedRoute>} />
         <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path='/snippets' element={<ProtectedRoute><Snippets /></ProtectedRoute>} />
         <Route path='/home' element={<ProtectedRoute><Home /></ProtectedRoute>} />

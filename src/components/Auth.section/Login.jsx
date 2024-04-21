@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
 import cookies from 'react-cookies'
 import { jwtDecode } from "jwt-decode";
-import { useDispatch } from "react-redux";
-import { isSignedIn } from "../../redux/user.redux/userActions";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserSettings } from "../../redux/user.redux/userActions";
 
 const Login = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
 
     const [fields, setFields] = useState({
         username: '',
@@ -47,6 +48,18 @@ const Login = () => {
                     //httpOnly: true, //uncomment for live
                 })
 
+                const settings = decoded.user_settings
+
+                if(settings.exist) {
+                    dispatch(setUserSettings({
+                        exist: settings.exist,
+                        dark_mode: settings.values.dark_mode,
+                        snippet_theme: settings.values.snippet_theme,
+                        snippet_line_numbers: settings.values.snippet_line_numbers,
+                        snippet_wrap_lines: settings.values.snippet_wrap_lines,
+                    }))
+                }
+                
                 navigate('/home')
             } else {
                 setError({
