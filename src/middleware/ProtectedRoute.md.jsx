@@ -12,17 +12,17 @@ const ProtectedRoute = ({ children }) => {
     const token = cookies.load('_hs');
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    // const user_settings = localStorage.getItem('user_settings')
+    const user_settings = localStorage.getItem('user_settings')
 
     useEffect(() => {
         if (!token) {
             handleLogout();
         }
 
-        // if (!user_settings || user_settings === null) {
-        //     navigate('/welcome')
-        //     return
-        // }
+        if (!user_settings || user_settings === null) {
+            navigate('/welcome');
+            return;
+        }
 
         try {
             const handleValidToken = _.debounce(async () => {
@@ -43,7 +43,7 @@ const ProtectedRoute = ({ children }) => {
         dispatch(isSignedIn(true))
         // dispatch(setUserName(decoded.name));
 
-    }, [token])
+    }, [token, navigate, user_settings])
 
     const handleLogout = () => {
         dispatch(isSignedIn(false));
