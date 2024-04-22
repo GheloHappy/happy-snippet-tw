@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { jwtDecode } from 'jwt-decode'
 import _ from 'lodash';
 import { postData } from '../utils/fetcher'
-import { isSignedIn } from '../redux/user.redux/userActions'
+import { isSignedIn, setUserId } from '../redux/user.redux/userActions'
 
 
 const ProtectedRoute = ({ children }) => {
@@ -17,11 +17,7 @@ const ProtectedRoute = ({ children }) => {
     useEffect(() => {
         if (!token) {
             handleLogout();
-        }
-
-        if (!user_settings || user_settings === null) {
-            navigate('/welcome');
-            return;
+            return
         }
 
         try {
@@ -38,10 +34,14 @@ const ProtectedRoute = ({ children }) => {
             handleLogout();
         }
         // dispatch(setUserToken(token))
-        // const decoded = jwtDecode(token);
-        // dispatch(setUserType(decoded.auth))
+        const decoded = jwtDecode(token);
+        dispatch(setUserId(decoded.id));
         dispatch(isSignedIn(true))
-        // dispatch(setUserName(decoded.name));
+
+        if (!user_settings || user_settings === null) {
+            navigate('/welcome');
+            return;
+        }
 
     }, [token, navigate, user_settings])
 
@@ -51,7 +51,6 @@ const ProtectedRoute = ({ children }) => {
         localStorage.clear();
         cookies.remove('_hs');
         navigate('/');
-        return
     };
 
     return (

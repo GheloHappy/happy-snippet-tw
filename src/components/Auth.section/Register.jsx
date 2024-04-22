@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { postData } from "../../utils/fetcher";
 import { PulseLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const Register = ({ setIsLogin }) => {
     const [loading, setLoading] = useState(false);
@@ -54,6 +55,8 @@ const Register = ({ setIsLogin }) => {
             const response = await postData('user', fields)
 
             if (response.data.status) {
+                
+                toast.success("User successfully registered.")
                 setIsLogin(true)
             } else {
                 setError({

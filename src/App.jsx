@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route, useMatch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Provider } from 'react-redux';
 import Auth from './pages/Auth.page';
 import NotFound from './components/NotFound';
@@ -17,6 +19,18 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Root />
+        <ToastContainer
+          position="top-center"
+          autoClose={1000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable
+          pauseOnHover={false}
+          theme="light"
+        />
       </BrowserRouter>
     </Provider>
   );

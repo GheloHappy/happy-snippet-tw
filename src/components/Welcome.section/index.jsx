@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { themesOptions } from './ThemesOptions.section';
+import { toast } from 'react-toastify';
+import { postData } from '../../utils/fetcher';
+import { useSelector } from 'react-redux';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const Welcome = () => {
+    const user_id = useSelector((state) => state.user.user_id)
     const [snippet_theme, setSnippetTheme] = useState(oneDark);
+    const [selectedThemeName, setSelectedThemeName] = useState('one-dark');
     const [user_settings, setUserSettings] = useState({
         dark_mode: false,
         snippet_line_numbers: false,
@@ -22,12 +27,31 @@ const Welcome = () => {
     const handleThemeChange = (e) => {
         const selectedThemeName = e.target.value;
         const selectedTheme = themesOptions.find(option => option.label === selectedThemeName)?.value;
+        setSelectedThemeName(selectedThemeName);
         if (selectedTheme) {
             setSnippetTheme(selectedTheme);
         }
     };
 
+    const handleSave = async () => {
+        console.log(selectedThemeName)
+        const data = {
+            user_id: user_id,
+            dark_mode: user_settings.dark_mode,
+            snippet_theme: selectedThemeName,
+            snippet_line_numbers: user_settings.snippet_line_numbers,
+            snippet_wrap_lines: user_settings.snippet_wrap_lines,
+        }
 
+        try {
+            const response = await postData('settings', data)
+
+            console.log(response)
+        } catch (err) {
+            console.log(err)
+            toast.error('Internal Server Error');
+        }
+    }
     return (
         <div className="w-full h-screen pt-[5rem] flex flex-col items-center justify-center">
             <div className={`w-5/6 ${user_settings.dark_mode ? 'bg-black text-white' : 'bg-white text-black'} rounded flex flex-col items-center text-center gap-3 p-3`}>
@@ -88,7 +112,8 @@ const Welcome = () => {
                         {sampleText()}
                     </SyntaxHighlighter>
                 </div>
-                <button className='bg-[#282C34] rounded font-semibold text-white text-[1.5rem] w-1/5 p-1'>Save</button>
+                <button onClick={handleSave}
+                className='bg-[#282C34] rounded font-semibold text-white text-[1.5rem] w-1/5 p-1'>Save</button>
             </div>
         </div>
     )

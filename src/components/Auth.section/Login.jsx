@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
 import cookies from 'react-cookies'
 import { jwtDecode } from "jwt-decode";
-import { useDispatch, useSelector } from "react-redux";
-import { setUserSettings } from "../../redux/user.redux/userActions";
+import { useDispatch } from "react-redux";
+import { setUserId, setUserSettings } from "../../redux/user.redux/userActions";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -59,6 +59,8 @@ const Login = () => {
                         snippet_wrap_lines: settings.values.snippet_wrap_lines,
                     }))
                 }
+
+                dispatch(setUserId(decoded.id))
                 
                 navigate('/home')
             } else {

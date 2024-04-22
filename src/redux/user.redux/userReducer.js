@@ -1,9 +1,10 @@
-import { IS_SIGNEDIN, SET_USER_NAME, SET_USER_SETTINGS } from "./userTypes"
+import { IS_SIGNEDIN, SET_USER_ID, SET_USER_NAME, SET_USER_SETTINGS } from "./userTypes"
 
 
 const initialState = {
     is_signin: false,
     user_name: "",
+    user_id: 0,
     user_settings: {
         exist: false,
         dark_mode: false,
@@ -26,6 +27,11 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user_name: action.payload
+            }
+        case SET_USER_ID:
+            return {
+                ...state,
+                user_id: action.payload
             }
         case SET_USER_SETTINGS:
             const updatedSettings = {

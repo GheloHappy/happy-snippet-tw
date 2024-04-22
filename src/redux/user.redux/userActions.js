@@ -1,4 +1,4 @@
-import { IS_SIGNEDIN, SET_USER_NAME, SET_USER_SETTINGS } from "./userTypes";
+import { IS_SIGNEDIN, SET_USER_ID, SET_USER_NAME, SET_USER_SETTINGS } from "./userTypes";
 
 export const isSignedIn = (type) => ({
     type: IS_SIGNEDIN,
@@ -13,4 +13,9 @@ export const setUserName = (type) => ({
 export const setUserSettings = (settings) => ({
     type: SET_USER_SETTINGS,
     payload: settings
+})
+
+export const setUserId = (type) => ({
+    type: SET_USER_ID,
+    payload: type
 })
