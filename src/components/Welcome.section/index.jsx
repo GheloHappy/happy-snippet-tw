@@ -3,14 +3,18 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { themesOptions } from './ThemesOptions.section';
 import { toast } from 'react-toastify';
 import { postData } from '../../utils/fetcher';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { useNavigate } from 'react-router-dom';
+import { setUserSettings } from '../../redux/user.redux/userActions';
 
 const Welcome = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const user_id = useSelector((state) => state.user.user_id)
     const [snippet_theme, setSnippetTheme] = useState(oneDark);
     const [selectedThemeName, setSelectedThemeName] = useState('one-dark');
-    const [user_settings, setUserSettings] = useState({
+    const [user_settings, setUserLocalSettings] = useState({
         dark_mode: false,
         snippet_line_numbers: false,
         snippet_wrap_lines: false,
@@ -18,7 +22,7 @@ const Welcome = () => {
 
     const handleCheckChanges = e => {
         const { name, checked } = e.target;
-        setUserSettings(prev => ({
+        setUserLocalSettings(prev => ({
             ...prev,
             [name]: checked
         }));
@@ -34,7 +38,6 @@ const Welcome = () => {
     };
 
     const handleSave = async () => {
-        console.log(selectedThemeName)
         const data = {
             user_id: user_id,
             dark_mode: user_settings.dark_mode,
@@ -46,7 +49,20 @@ const Welcome = () => {
         try {
             const response = await postData('settings', data)
 
-            console.log(response)
+            if (response.data.status) {
+                dispatch(setUserSettings({
+                    exist: true,
+                    dark_mode: user_settings.dark_mode,
+                    snippet_theme: selectedThemeName,
+                    snippet_line_numbers: user_settings.snippet_line_numbers,
+                    snippet_wrap_lines: user_settings.snippet_wrap_lines,
+                }))
+
+                toast.success(response.data.msg)
+                navigate('/home')
+            } else {
+                toast.error(response.data.msg)
+            }
         } catch (err) {
             console.log(err)
             toast.error('Internal Server Error');
@@ -113,7 +129,7 @@ const Welcome = () => {
                     </SyntaxHighlighter>
                 </div>
                 <button onClick={handleSave}
-                className='bg-[#282C34] rounded font-semibold text-white text-[1.5rem] w-1/5 p-1'>Save</button>
+                    className='bg-[#282C34] rounded font-semibold text-white text-[1.5rem] w-1/5 p-1'>Save</button>
             </div>
         </div>
     )
