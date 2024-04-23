@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import languageOptions from './Language.options';
-import { setSnippet } from '../../../redux/snippet.redux/snippetActions';
+import { setSnippet, setSnippetLanguage } from '../../../redux/snippet.redux/snippetActions';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const CodeSnippet = ({ setLanguage }) => {
+const CodeSnippet = () => {
     const [title, setTitle] = useState('');
     const [isPrivate, setIsPrivate] = useState(false);
     const dispatch = useDispatch()
     const snippet = useSelector((state) => state.snippet.snippet)
+    const language = useSelector((state) => state.snippet.snippet_language)
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
@@ -24,7 +25,7 @@ const CodeSnippet = ({ setLanguage }) => {
     };
 
     const handleLanguageChange = (e) => {
-        setLanguage(e.target.value);
+        dispatch(setSnippetLanguage(e.target.value));
     };
 
     const handleSave = () => {
@@ -36,7 +37,7 @@ const CodeSnippet = ({ setLanguage }) => {
 
     return (
         <div className="text-white mt-[1rem] w-full text-center border p-3 rounded">
-            <form className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5">
                 {/* <label className="font-semibold">Title: </label>
                 <input
                     type="text"
@@ -50,7 +51,7 @@ const CodeSnippet = ({ setLanguage }) => {
                     <select
                         onChange={handleLanguageChange}
                         className="w-1/3 p-2 rounded text-black"
-                        value="javascript"
+                        value={language}
                     >
                         {languageOptions.map(option => (
                             <option key={option.value} value={option.value}>{option.label}</option>
@@ -89,7 +90,7 @@ const CodeSnippet = ({ setLanguage }) => {
                 >
                     Save
                 </button> */}
-            </form>
+            </div>
         </div>
     );
 };

@@ -1,6 +1,7 @@
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import SyntaxHighlighterComponent from '../CodeSnippet.SyntaxHighlighter.section';
 
-const CodeSnippetCard = ({ language, theme, snippet, setIsPreview }) => {
+const CodeSnippetCard = ({ setIsPreview }) => {
+    
     return (
         <div className='text-start w-full h-screen'>
             <div className='flex flex-col items-center justify-center  border p-3 rounded mt-[1rem]'>
@@ -16,9 +17,7 @@ const CodeSnippetCard = ({ language, theme, snippet, setIsPreview }) => {
                         </div>
                     </div>
 
-                    <SyntaxHighlighter language={language} style={theme} showLineNumbers={true}>
-                        {snippet}
-                    </SyntaxHighlighter>
+                    <SyntaxHighlighterComponent />
                 </div>
             </div>
 
