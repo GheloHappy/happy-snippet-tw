@@ -1,29 +1,34 @@
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { themesOptions } from '../../Welcome.section/ThemesOptions.section';
 
 const SyntaxHighlighterComponent = () => {
+    const [theme, setTheme] = useState()
     const snippet = useSelector((state) => state.snippet.snippet)
     const language = useSelector((state) => state.snippet.snippet_language)
-    const wrapLines = useSelector((state) => state.user.user_settings.snippet_wrap_lines)
-    const lineNumbers = useSelector((state) => state.user.user_settings.snippet_line_numbers)
 
-    // const { snippet, language, wrapLines, lineNumbers } = useSelector((state) => ({
-    //     snippet: state.snippet.snippet,
-    //     language: state.snippet.snippet_language,
-    //     wrapLines: state.user.user_settings.snippet_wrap_lines,
-    //     lineNumbers: state.user.user_settings.snippet_line_numbers,
-    // }));
+    const user_settings = JSON.parse(localStorage.getItem('user_settings'));
+
+    useEffect(() => {
+        const getTheme = () => {
+            const selectedTheme = themesOptions.find(option => option.label === user_settings.snippet_theme)?.value;
+            setTheme(selectedTheme)
+        }
+        getTheme();
+    }, [])
 
     return (
+
         <SyntaxHighlighter
             language={language}
-            style={oneDark}
-            showLineNumbers={lineNumbers}
-            wrapLongLines={wrapLines}
+            style={theme}
+            showLineNumbers={user_settings.snippet_line_numbers}
+            wrapLongLines={user_settings.snippet_wrap_lines}
         >
             {snippet}
         </SyntaxHighlighter>
+
     )
 }
 

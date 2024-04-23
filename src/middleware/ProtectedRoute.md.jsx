@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children }) => {
     const token = cookies.load('_hs');
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const user_settings = localStorage.getItem('user_settings')
+    const userSettings = JSON.parse(localStorage.getItem('user_settings'));
 
     useEffect(() => {
         if (!token) {
@@ -38,12 +38,12 @@ const ProtectedRoute = ({ children }) => {
         dispatch(setUserId(decoded.id));
         dispatch(isSignedIn(true))
 
-        if (!user_settings || user_settings === null) {
+        if (!userSettings.exist) {
             navigate('/welcome');
             return;
         }
 
-    }, [token, navigate, user_settings])
+    }, [token, navigate])
 
     const handleLogout = () => {
         dispatch(isSignedIn(false));

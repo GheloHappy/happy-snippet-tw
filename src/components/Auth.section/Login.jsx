@@ -50,7 +50,7 @@ const Login = () => {
 
                 const settings = decoded.user_settings
 
-                if(settings.exist) {
+                if (settings.exist) {
                     dispatch(setUserSettings({
                         exist: settings.exist,
                         dark_mode: settings.values.dark_mode,
@@ -58,10 +58,19 @@ const Login = () => {
                         snippet_line_numbers: settings.values.snippet_line_numbers,
                         snippet_wrap_lines: settings.values.snippet_wrap_lines,
                     }))
+                } else {
+                    const settings = {
+                        exist: false,
+                        dark_mode: false,
+                        snippet_theme: "coy",
+                        snippet_line_numbers: false,
+                        snippet_wrap_lines: false
+                    }
+                    localStorage.setItem("user_settings", JSON.stringify(settings))
                 }
 
                 dispatch(setUserId(decoded.id))
-                
+
                 navigate('/home')
             } else {
                 setError({
