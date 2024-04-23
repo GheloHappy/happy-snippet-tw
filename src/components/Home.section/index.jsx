@@ -13,12 +13,12 @@ const Home = () => {
             {isPrevew ?
                 <SnippetPreview theme={oneLight} setIsPreview={setIsPreview}/>
                 :
-                <div className="flex mt-[5rem] w-full p-5 gap-3">
+                <div className="flex-col md:flex-row flex mt-[5rem] w-full p-5 gap-3">
                     {/* <h1 className="text-[2rem] text-center text-white">Create a Snippet</h1> */}
-                    <div className="w-1/2">
+                    <div className="md:w-1/2 w-full">
                         <CodeSnippet />
                     </div>
-                    <div className="w-1/2">
+                    <div className="md:w-1/2 w-full">
                         <CodeSnippetCard  setIsPreview={setIsPreview}/>
                     </div>
                 </div>

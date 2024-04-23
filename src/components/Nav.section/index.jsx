@@ -1,8 +1,12 @@
 import DesktopNav from "./DesktopNav.section";
+import MobileNav from "./MobileNav.section";
 
 const Nav = () => {
     return (
-        <DesktopNav />
+        <>
+            <DesktopNav />
+            <MobileNav />
+        </>
     )
 }
 
