@@ -69,18 +69,16 @@ const Welcome = () => {
         }
     }
     return (
-        <div className="w-full h-screen pt-[5rem] flex flex-col items-center justify-center">
-            <div className={`w-5/6 ${user_settings.dark_mode ? 'bg-black text-white' : 'bg-white text-black'} rounded flex flex-col items-center text-center gap-3 p-3`}>
-                <h1 className="font-semibold text-[1.5rem] mt-[1rem]">Welcome before you proceed please select your settings.</h1>
-                <p className="font-semibold">You can change it later in (Profile) settings.</p>
+        <div className="w-full h-full mt-[5rem] flex flex-col items-center justify-center">
+            <div className={`w-[90%] ${user_settings.dark_mode ? 'bg-black text-white' : 'bg-white text-black'} rounded flex flex-col 
+            items-center text-center gap-1 md:gap-3 p-2 md:p-3`}>
+                <h1 className="font-semibold text-[1.3rem] sm:text-[1.5rem]">Welcome! before you proceed please select your settings.</h1>
 
-                <div className='flex w-full justify-center gap-2'>
-                    <div className='flex flex-col items-center justify-center'>
-                        <label className='text-[1.2rem] font-semibold'>Theme : </label>
-                    </div>
+                <div className='flex sm:flex-row flex-col w-full justify-center items-center gap-1 mt-3'>
+                    <label className='sm:text-[1.2rem] text-[1rem] font-semibold hidden sm:flex'>Theme : </label>
                     <select
                         onChange={handleThemeChange}
-                        className="w-1/4 p-2 rounded bg-[#282C34] text-white"
+                        className="p-2 rounded bg-[#282C34] text-white"
                         defaultValue="javascript"
                     >
                         {themesOptions.map((option, index) => (
@@ -89,9 +87,8 @@ const Welcome = () => {
                     </select>
                 </div>
 
-
-                <div className='flex gap-3 w-full items-center justify-center'>
-                    <label className='rounded bg-[#282C34] text-white p-2 text-[1.2rem]'>
+                <div className='flex sm:flex-row flex-col gap-1 md:gap-3 w-full items-center justify-center'>
+                    <label className='rounded bg-[#282C34] text-white p-2 sm:text-[1.2rem] text-[1rem]'>
                         Dark Mode
                         <input
                             className='ml-2'
@@ -101,7 +98,7 @@ const Welcome = () => {
                             onClick={handleCheckChanges}
                         />
                     </label>
-                    <label className='rounded bg-[#282C34] text-white p-2 text-[1.2rem]'>
+                    <label className='rounded bg-[#282C34] text-white p-2 sm:text-[1.2rem] text-[1rem]'>
                         Show Line Numbers
                         <input
                             className='ml-2'
@@ -111,7 +108,7 @@ const Welcome = () => {
                             onClick={handleCheckChanges}
                         />
                     </label>
-                    <label className='rounded bg-[#282C34] text-white p-2 text-[1.2rem]'>
+                    <label className='rounded bg-[#282C34] text-white p-2 sm:text-[1.2rem] text-[1rem]'>
                         Wrap Lines
                         <input
                             className='ml-2'
@@ -122,14 +119,15 @@ const Welcome = () => {
                         />
                     </label>
                 </div>
-                <div className='w-full h-full p-3 text-[1.1rem]'>
+                <div className='w-full h-full p-1 sm:p-3 sm:text-[1.1rem] text-[.9rem]'>
                     <SyntaxHighlighter language='javascript' style={snippet_theme} showLineNumbers={user_settings.snippet_line_numbers}
                         wrapLongLines={user_settings.snippet_wrap_lines}>
                         {sampleText()}
                     </SyntaxHighlighter>
                 </div>
                 <button onClick={handleSave}
-                    className='bg-[#282C34] rounded font-semibold text-white text-[1.5rem] w-1/5 p-1'>Save</button>
+                    className='bg-[#282C34] rounded font-semibold text-white sm:text-[1.5rem] text-[1.2rem] w-1/4 md:w-1/6 px-2'>Save</button>
+                <p className="font-semibold mt-1">"You can change it later in (Profile) settings."</p>
             </div>
         </div>
     )
