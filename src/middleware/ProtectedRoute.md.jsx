@@ -15,12 +15,13 @@ const ProtectedRoute = ({ children }) => {
     const userSettings = JSON.parse(localStorage.getItem('user_settings'));
 
     useEffect(() => {
-        if (!token) {
-            handleLogout();
-            return
-        }
-
         try {
+            if (!token) {
+                handleLogout();
+                return
+            }
+
+
             const handleValidToken = _.debounce(async () => {
                 const response = await postData('token', { token })
                 if (!response.data.approved) {
@@ -29,18 +30,19 @@ const ProtectedRoute = ({ children }) => {
             }, 600)
 
             handleValidToken();
+
+            // dispatch(setUserToken(token))
+            const decoded = jwtDecode(token);
+            dispatch(setUserId(decoded.id));
+            dispatch(isSignedIn(true))
+
+            if (!userSettings.exist) {
+                navigate('/welcome');
+                return;
+            }
         } catch (err) {
             console.error('Error verifying user:', err)
             handleLogout();
-        }
-        // dispatch(setUserToken(token))
-        const decoded = jwtDecode(token);
-        dispatch(setUserId(decoded.id));
-        dispatch(isSignedIn(true))
-
-        if (!userSettings.exist) {
-            navigate('/welcome');
-            return;
         }
 
     }, [token, navigate])

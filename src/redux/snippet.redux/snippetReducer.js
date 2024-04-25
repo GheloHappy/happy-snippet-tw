@@ -1,9 +1,10 @@
-import { SET_SNIPPET, SET_SNIPPET_LANGUAGE } from "./snippetTypes"
+import { SET_SNIPPET, SET_SNIPPET_LANGUAGE, SET_SNIPPET_SAVE } from "./snippetTypes"
 
 
 const initialState = {
     code_snippet: "",
     snippet_language: "javascript",
+    snippet_save: false,
 }
 
 const snippetReducer = (state = initialState, action) => {
@@ -17,6 +18,11 @@ const snippetReducer = (state = initialState, action) => {
             return {
                 ...state,
                 snippet_language: action.payload
+            }
+        case SET_SNIPPET_SAVE:
+            return {
+                ...state,
+                snippet_save: action.payload
             }
         default:
             return state;

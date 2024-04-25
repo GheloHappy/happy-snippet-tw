@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import languageOptions from './Language.options';
-import { setSnippet, setSnippetLanguage } from '../../../redux/snippet.redux/snippetActions';
+import { setSnippet, setSnippetLanguage, setSnippetSave } from '../../../redux/snippet.redux/snippetActions';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const CodeSnippet = () => {
+const CodeSnippet = ({setIsPreview}) => {
     const [title, setTitle] = useState('');
     const [isPrivate, setIsPrivate] = useState(false);
     const dispatch = useDispatch()
@@ -28,24 +28,9 @@ const CodeSnippet = () => {
         dispatch(setSnippetLanguage(e.target.value));
     };
 
-    const handleSave = () => {
-        console.log("Title:", title);
-        console.log("Is Private?", isPrivate);
-        setTitle('');
-        setIsPrivate(false);
-    };
-
     return (
         <div className="text-white mt-[1rem] w-full text-center border p-3 rounded">
             <div className="flex flex-col gap-5">
-                {/* <label className="font-semibold">Title: </label>
-                <input
-                    type="text"
-                    className="w-1/2 rounded text-[1.1rem] p-2 text-black"
-                    placeholder='Enter your title here...'
-                    value={title}
-                    onChange={handleTitleChange}
-                /> */}
                 <div className='w-full flex gap-5'>
                     <label className="font-semibold">Language: </label>
                     <select
@@ -60,7 +45,7 @@ const CodeSnippet = () => {
                     <div className='w-1/2 text-end'>
                         <button
                             className="border-white border-[2px] text-[1.2rem] rounded px-4"
-                            onClick={handleSave}
+                            onClick={() => {dispatch(setSnippetSave(true)), setIsPreview(true)}}
                         >
                             Save
                         </button>

@@ -51,11 +51,22 @@ const Register = ({ setIsLogin }) => {
             return;
         }
 
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(fields.email)) {
+            setError({
+                isError: true,
+                isErrorMsg: "Please enter a valid email address"
+            });
+            setLoading(false);
+            return;
+        }
+
         try {
             const response = await postData('user', fields)
 
             if (response.data.status) {
-                
+
                 toast.success("User successfully registered.")
                 setIsLogin(true)
             } else {
@@ -91,7 +102,7 @@ const Register = ({ setIsLogin }) => {
     return (
         <div className="flex flex-col items-center w-full px-10">
             {error.isError ?
-                <p className="text-red-400 text-[1.5rem] mb-3">
+                <p className="text-red-400 text-[1.5rem] mb-3 text-center">
                     {error.isErrorMsg}
                 </p>
                 :

@@ -103,7 +103,7 @@ const Login = () => {
     return (
         <div className="flex flex-col items-center w-full px-10">
             {error.isError ?
-                <p className="text-red-400 text-[1.5rem] mb-3">
+                <p className="text-red-400 text-[1.5rem] mb-3 text-center">
                     {error.isErrorMsg}
                 </p>
                 :

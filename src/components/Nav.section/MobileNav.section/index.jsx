@@ -2,12 +2,22 @@ import { RxCross1 } from "react-icons/rx"
 import { useDispatch } from "react-redux"
 import { setNavState } from "../../../redux/system.redux.j/systemActions"
 import { CustomLink } from "../DesktopNav.section"
+import { useNavigate } from "react-router-dom"
+import cookies from "react-cookies"
 
 const MobileNav = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate();
+    
+    const handleLogout = () => {
+        localStorage.clear();
+        cookies.remove('_hs');
+        dispatch(setNavState(false))
+        navigate('/');
+    }
 
     return (
-        <div className="fixed flex flex-col justify-end items-end top-0 w-full h-screen bg-white bg-opacity-5 backdrop-filter backdrop-blur-sm md:hidden">
+        <div className="fixed flex flex-col justify-end items-end top-0 w-full h-full bg-white bg-opacity-5 backdrop-filter backdrop-blur-sm md:hidden">
             <div className="h-full w-4/5 bg-white flex flex-col ">
                 <div className="flex w-full p-3 border items-center justify-center">
                     <div className="w-full">
@@ -30,7 +40,7 @@ const MobileNav = () => {
                 <div className="w-full bg-green-200">
                     <h1>About</h1>
                 </div>
-                <button>Logout</button>
+                <button onClick={handleLogout}>Logout</button>
             </div>
         </div>
 

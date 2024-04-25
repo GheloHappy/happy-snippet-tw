@@ -1,12 +1,15 @@
 import cookies from 'react-cookies'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     
     const handleLogout = () => {
         localStorage.clear();
         cookies.remove('_hs');
+        dispatch(setNavState(false))
         navigate('/');
     }
 
