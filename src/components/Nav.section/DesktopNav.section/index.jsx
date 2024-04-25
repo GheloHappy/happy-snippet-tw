@@ -25,10 +25,11 @@ const DesktopNav = () => {
 export function CustomLink({ to, children, ...props }) {
     const resolvedPath = useResolvedPath(to)
     const isActive = useMatch({ path: resolvedPath.pathname, end: true })
+    const dispatch = useDispatch();
 
     return (
-        <li className={`text-[1.2rem] font-semibold ${isActive ? "text-red-400" : ""}`}>
-            <Link to={to} {...props}>
+        <li className={`text-[1.2rem] font-semibold ${isActive ? "text-red-400" : ""}`} onClick={() => {dispatch(setNavState(false))}}>
+            <Link to={to} {...props} >
                 {children}
             </Link>
         </li>

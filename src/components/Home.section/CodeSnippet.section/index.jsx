@@ -50,16 +50,16 @@ const CodeSnippet = () => {
                     <label className="font-semibold">Language: </label>
                     <select
                         onChange={handleLanguageChange}
-                        className="w-1/3 p-2 rounded text-black"
+                        className="w-1/2 p-2 rounded text-black"
                         value={language}
                     >
                         {languageOptions.map(option => (
                             <option key={option.value} value={option.value}>{option.label}</option>
                         ))}
                     </select>
-                    <div className='w-full text-end'>
+                    <div className='w-1/2 text-end'>
                         <button
-                            className="border-white border-[2px] text-[1.2rem] rounded w-1/5"
+                            className="border-white border-[2px] text-[1.2rem] rounded px-4"
                             onClick={handleSave}
                         >
                             Save

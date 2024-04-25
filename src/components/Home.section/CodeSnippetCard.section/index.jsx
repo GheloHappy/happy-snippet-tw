@@ -10,7 +10,7 @@ const CodeSnippetCard = ({ setIsPreview }) => {
                         <label className="font-semibold">Preview: </label>
                         
                         <div className='w-full text-end'>
-                            <button className='border-white border-[2px] text-[1.2rem] rounded w-1/5'
+                            <button className='border-white border-[2px] text-[1.2rem] rounded px-3'
                             onClick={() => setIsPreview(true)}>
                                 View
                             </button>
