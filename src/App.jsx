@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import Auth from './pages/Auth.page';
 import NotFound from './components/NotFound';
 import Home from './pages/Home.page';
-import Profile from './pages/Profile.page'
+import Settings from './pages/Settings.page'
 import Snippets from './pages/Snippets.page'
 import Nav from './components/Nav.section';
 import UnprotectedRoute from './middleware/UnprotectedRoute.md';
@@ -46,7 +46,7 @@ function Root() {
       <Routes>
         <Route path='/' element={<UnprotectedRoute><Auth /></UnprotectedRoute>} />
         <Route path='/welcome' element={<ProtectedRoute><Welcome /></ProtectedRoute>} />
-        <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path='/settings' element={<ProtectedRoute><Settings /></ProtectedRoute>} />
         <Route path='/snippets' element={<ProtectedRoute><Snippets /></ProtectedRoute>} />
         <Route path='/home' element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path='*' element={<ProtectedRoute><NotFound /></ProtectedRoute>} />

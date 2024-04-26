@@ -110,7 +110,7 @@ const Login = () => {
                 <></>
             }
             <form className="xsm:w-full sm:w-[70%] text-black">
-                <label className="relative rounded">
+                <label className="relative rounded ">
                     <p className={`${fields.username ? 'absolute -translate-y-2/3' : 'absolute top-[50%] left-[6px] opacity-0'} text-white bg-gray-900 border border-gray-700 rounded 
                     px-2 text-m font-semibold w-fit`}>Username</p>
                     <input className="w-full text-[1.2rem] appearance-none p-3 rounded focus:outline-none mb-6 font-semibold"

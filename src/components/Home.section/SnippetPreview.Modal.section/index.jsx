@@ -24,7 +24,7 @@ const SnippetPreview = ({ setIsPreview }) => {
                             <label className="font-semibold text-[1rem] mr-2">Title: </label>
                             <input
                                 type="text"
-                                className="w-full sm:w-1/2 md:w-1/4 rounded text-[1rem] p-2 text-black"
+                                className="w-full sm:w-1/2 md:w-1/4 rounded text-[1rem] font-b p-2 text-black"
                                 placeholder='Enter your title here...'
                             />
                         </div>

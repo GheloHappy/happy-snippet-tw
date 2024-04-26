@@ -31,7 +31,7 @@ const MobileNav = () => {
                     <ul className="flex flex-col justify-end gap-10">
                         <CustomLink to="/home">Home</CustomLink>
                         <CustomLink to="/snippets">Snippets</CustomLink>
-                        <CustomLink to="/profile">Profile</CustomLink>
+                        <CustomLink to="/settings">Settings</CustomLink>
                     </ul>
                 </div>
                 <div className="w-full bg-slate-100 h-1/6 items-center justify-center flex flex-col">
