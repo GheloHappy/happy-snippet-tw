@@ -2,7 +2,7 @@ import { SET_SNIPPET, SET_SNIPPET_LANGUAGE, SET_SNIPPET_SAVE } from "./snippetTy
 
 
 const initialState = {
-    code_snippet: "",
+    snippet_code: "",
     snippet_language: "javascript",
     snippet_save: false,
 }
@@ -12,7 +12,7 @@ const snippetReducer = (state = initialState, action) => {
         case SET_SNIPPET:
             return {
                 ...state,
-                snippet: action.payload,
+                snippet_code: action.payload,
             }
         case SET_SNIPPET_LANGUAGE:
             return {
