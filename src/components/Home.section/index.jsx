@@ -4,7 +4,7 @@ import { useState } from "react";
 import SnippetPreview from "./SnippetPreview.Modal.section";
 // import { useSelector } from "react-redux";
 
-const Home = () => {
+const HomeSection = () => {
     const [isPrevew, setIsPreview] = useState(false)
 
     return (
@@ -27,4 +27,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default HomeSection;
