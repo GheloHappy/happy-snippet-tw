@@ -1,27 +1,18 @@
-import React, { useState } from 'react';
+
 import TextareaAutosize from 'react-textarea-autosize';
 import languageOptions from './Language.options';
 import { setSnippet, setSnippetLanguage, setSnippetSave } from '../../../redux/snippet.redux/snippetActions';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const CodeSnippet = ({setIsPreview}) => {
-    const [title, setTitle] = useState('');
-    const [isPrivate, setIsPrivate] = useState(false);
+const CodeSnippet = ({ setIsPreview }) => {
     const dispatch = useDispatch()
-    const snippet = useSelector((state) => state.snippet.snippet)
+    const snippet = useSelector((state) => state.snippet.snippet_code)
     const language = useSelector((state) => state.snippet.snippet_language)
-
-    const handleTitleChange = (e) => {
-        setTitle(e.target.value);
-    };
 
     const handleSnippetChange = (e) => {
         dispatch(setSnippet(e.target.value))
-    };
-
-    const handleCheckboxChange = (e) => {
-        setIsPrivate(e.target.checked);
+        snippet
     };
 
     const handleLanguageChange = (e) => {
@@ -43,12 +34,16 @@ const CodeSnippet = ({setIsPreview}) => {
                         ))}
                     </select>
                     <div className='w-1/2 text-end'>
-                        <button
-                            className="border-white border-[2px] text-[1.2rem] rounded px-4"
-                            onClick={() => {dispatch(setSnippetSave(true)), setIsPreview(true)}}
-                        >
-                            Save
-                        </button>
+                        {snippet ?
+                            <button
+                                className="border-white border-[2px] text-[1.2rem] rounded px-4"
+                                onClick={() => { dispatch(setSnippetSave(true)), setIsPreview(true) }}
+                            >
+                                Save
+                            </button>
+                            : null
+                        }
+
                     </div>
                 </div>
 
@@ -60,21 +55,6 @@ const CodeSnippet = ({setIsPreview}) => {
                     onChange={handleSnippetChange}
                     value={snippet}
                 />
-                {/* <div className="flex gap-2">
-                    <input
-                        type="checkbox"
-                        checked={isPrivate}
-                        onChange={handleCheckboxChange}
-                        className=""
-                    />
-                    <label>Make it private?</label>
-                </div>
-                <button
-                    className="border-white border-[3px] text-[1.5rem] rounded w-1/6"
-                    onClick={handleSave}
-                >
-                    Save
-                </button> */}
             </div>
         </div>
     );
