@@ -16,7 +16,7 @@ const DesktopNav = () => {
             </ul>
             <div className="md:hidden flex items-center justify-end w-full ">
                 <button  onClick={() => {dispatch(setNavState(true))}}
-                className="text-[2rem] pr-3"><MdOutlineMenu /></button>
+                className="text-[2rem]"><MdOutlineMenu /></button>
             </div>
         </nav>
     )

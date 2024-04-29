@@ -31,11 +31,6 @@ const ProtectedRoute = ({ children }) => {
 
             handleValidToken();
 
-            // dispatch(setUserToken(token))
-            const decoded = jwtDecode(token);
-            dispatch(setUserId(decoded.id));
-            dispatch(isSignedIn(true))
-
             if (!userSettings.exist) {
                 navigate('/welcome');
                 return;
@@ -44,6 +39,11 @@ const ProtectedRoute = ({ children }) => {
             console.error('Error verifying user:', err)
             handleLogout();
         }
+
+        // dispatch(setUserToken(token))
+        const decoded = jwtDecode(token);
+        dispatch(setUserId(decoded.id));
+        dispatch(isSignedIn(true))
 
     }, [token, navigate])
 

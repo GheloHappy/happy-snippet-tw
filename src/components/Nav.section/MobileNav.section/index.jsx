@@ -24,7 +24,7 @@ const MobileNav = () => {
                         <h1 className="text-[1.5rem] ">Snippet</h1>
                     </div>
                     <div className="w-full h-full text-end flex flex-col items-end justify-center">
-                        <button onClick={() => { dispatch(setNavState(false)) }} className="text-[1.5rem] pr-3"><RxCross1 /></button>
+                        <button onClick={() => { dispatch(setNavState(false)) }} className="text-[1.5rem] "><RxCross1 /></button>
                     </div>
                 </div>
                 <div className="w-full bg-red-100 flex flex-col items-start justify-center h-full">
