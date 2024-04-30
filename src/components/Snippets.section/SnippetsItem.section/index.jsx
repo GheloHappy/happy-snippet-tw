@@ -3,7 +3,7 @@ const SnippetsItem = ({ data }) => {
     return (
         <>
             {data.length > 0 ? (
-                data.user_snippet.map((item, index) => {
+                data.map((item, index) => {
                     <div key={index} className="w-full bg-white rounded flex">
                         <h1>{item.snippet_title}</h1>
                     </div>
