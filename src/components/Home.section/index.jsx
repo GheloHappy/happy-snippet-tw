@@ -6,7 +6,6 @@ import SnippetPreview from "./SnippetPreview.Modal.section";
 
 const HomeSection = () => {
     const [isPrevew, setIsPreview] = useState(false)
-
     return (
         <>
             {isPrevew ?

@@ -6,18 +6,18 @@ import { useSelector } from "react-redux"
 const SnippetSection = () => {
     const user_id = useSelector((state) => state.user.user_id)
     const [data, setData] = useState([])
-    
+
     useEffect(() => {
         const fetchSnippets = async () => {
-            if (user_id > 0) {
-                try {
+            try {
+                if (user_id > 0) {
                     const response = await getData(`snippet/list/${user_id}`)
 
-                    setData(response.data)
+                    setData(response.data.user_snippet)
                 }
-                catch (err) {
-                    console.log(err)
-                }
+            }
+            catch (err) {
+                console.log(err)
             }
         }
 
@@ -26,7 +26,7 @@ const SnippetSection = () => {
 
     return (
         <div className="flex-col md:flex-row flex mt-[3.5rem] md:mt-[4.5rem] w-full p-5 gap-1 md:gap-3 items-center justify-center">
-            <SnippetsItem data={data ? data : [] } />
+            <SnippetsItem data={data} />
         </div>
     )
 }

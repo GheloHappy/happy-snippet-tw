@@ -44,6 +44,7 @@ const ProtectedRoute = ({ children }) => {
         const decoded = jwtDecode(token);
         dispatch(setUserId(decoded.id));
         dispatch(isSignedIn(true))
+        //console.log("mid: " + decoded.id)
 
     }, [token, navigate])
 
