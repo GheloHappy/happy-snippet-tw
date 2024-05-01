@@ -10,6 +10,7 @@ import { postData } from '../../../utils/fetcher';
 import _ from 'lodash';
 
 const SnippetPreview = ({ setIsPreview }) => {
+    const today = new Date().toISOString().substring(0, 10);
     const dispatch = useDispatch()
     const isSaving = useSelector((state) => state.snippet.snippet_save)
     const user_id = useSelector((state) => state.user.user_id)
@@ -18,6 +19,7 @@ const SnippetPreview = ({ setIsPreview }) => {
     const [isLoading, setIsLoading] = useState(false)
 
     const [fields, setFields] = useState({
+        date: today,
         user_id: user_id,
         snippet_title: '',
         snippet_language: snippet_language,
