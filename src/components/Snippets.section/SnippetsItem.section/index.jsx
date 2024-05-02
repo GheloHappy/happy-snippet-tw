@@ -6,9 +6,15 @@ const SnippetsItem = ({ data }) => {
                 data.map((item, index) => (
                     <div key={index} className="w-full bg-white rounded flex text-[1rem] p-3 mt-3 gap-5 overflow-auto ">
                         <div className="grid grid-cols-3 w-full">
-                            <h1 className="">{item.date}</h1>
-                            <h1 className="">{item.snippet_title}</h1>
-                            <h1 className="">{item.snippet_language}</h1>
+                            <div className="w-full flex flex-col items-center justify-center font-semibold">
+                                <p className="">{item.date}</p>
+                            </div>
+                            <div className="w-full overflow-auto p-2">
+                                <p className="">{item.snippet_title}</p>
+                            </div>
+                            <div className="w-full flex flex-col items-end pr-4 justify-center">
+                                <button className="font-semibold text-blue-500 underline">View</button>
+                            </div>
                         </div>
                     </div>
                 ))

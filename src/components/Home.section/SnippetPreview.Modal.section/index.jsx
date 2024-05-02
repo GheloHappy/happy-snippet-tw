@@ -36,6 +36,12 @@ const SnippetPreview = ({ setIsPreview }) => {
             return
         }
 
+        if (!fields.snippet_title.length < 50) {
+            toast.warning("Title must be lower than 50 characters!")
+            setIsLoading(false)
+            return
+        }
+
         try {
             const response = await postData('snippet', fields);
 
