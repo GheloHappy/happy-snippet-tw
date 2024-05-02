@@ -1,4 +1,4 @@
-import SyntaxHighlighterComponent from '../CodeSnippet.SyntaxHighlighter.section';
+import SyntaxHighlighterComponent from '../../CodeSnippet.SyntaxHighlighter';
 
 const CodeSnippetCard = ({ setIsPreview }) => {
     

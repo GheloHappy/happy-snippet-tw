@@ -1,12 +1,12 @@
 import { RxCross1 } from 'react-icons/rx';
-import SyntaxHighlighterComponent from '../CodeSnippet.SyntaxHighlighter.section';
+import SyntaxHighlighterComponent from '../CodeSnippet.SyntaxHighlighter';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSnippet, setSnippetSave } from '../../../redux/snippet.redux/snippetActions';
+import { setSnippet, setSnippetSave } from '../../redux/snippet.redux/snippetActions';
 import { FaSave } from 'react-icons/fa';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import Loading from '../../Loading';
-import { postData } from '../../../utils/fetcher';
+import Loading from '../Loading';
+import { postData } from '../../utils/fetcher';
 import _ from 'lodash';
 
 const SnippetPreview = ({ setIsPreview }) => {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { themesOptions } from '../../Welcome.section/ThemesOptions.section';
+import { themesOptions } from '../Welcome.section/ThemesOptions.section';
 
 const SyntaxHighlighterComponent = () => {
     const [theme, setTheme] = useState()

@@ -21,7 +21,6 @@ const ProtectedRoute = ({ children }) => {
                 return
             }
 
-
             const handleValidToken = _.debounce(async () => {
                 const response = await postData('token', { token })
                 if (!response.data.approved) {

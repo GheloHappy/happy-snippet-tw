@@ -1,7 +1,7 @@
 import CodeSnippet from "./CodeSnippet.section";
 import CodeSnippetCard from './CodeSnippetCard.section'
 import { useState } from "react";
-import SnippetPreview from "./SnippetPreview.Modal.section";
+import SnippetPreview from "../SnippetPreview.Modal";
 // import { useSelector } from "react-redux";
 
 const HomeSection = () => {
