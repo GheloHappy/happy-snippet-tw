@@ -1,12 +1,10 @@
-import { useState } from "react";
 import { toast } from "react-toastify";
 import { postData } from "../../../utils/fetcher";
 import { useSelector } from "react-redux";
 
-const SnippetsItem = ({ data }) => {
+const SnippetsItem = ({ data, setIsLoading }) => {
     const user_id = useSelector((state) => state.user.user_id)
-    const [isLoading, setIsLoading] = useState(false)
-
+    
     const handleView = async (snippet_id) => {
 
         setIsLoading(true)
@@ -19,7 +17,7 @@ const SnippetsItem = ({ data }) => {
             const snippet_data = await postData('snippet/list', payload)
 
             console.log(snippet_data)
-        } catch (err){
+        } catch (err) {
             console.log(err)
             toast.error('Internal Server Error.')
         }
@@ -40,7 +38,7 @@ const SnippetsItem = ({ data }) => {
                             </div>
                             <div className="w-full flex flex-col items-end pr-4 justify-center">
                                 <button className="font-semibold text-blue-500 underline"
-                                onClick={() => handleView(index)}>View</button>
+                                    onClick={() => handleView(item.id)}>View</button>
                             </div>
                         </div>
                     </div>
