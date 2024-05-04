@@ -36,7 +36,7 @@ const SnippetPreview = ({ setIsPreview }) => {
             return
         }
 
-        if (!fields.snippet_title.length < 50) {
+        if (!fields.snippet_title.length > 50) {
             toast.warning("Title must be lower than 50 characters!")
             setIsLoading(false)
             return

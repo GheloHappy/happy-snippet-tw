@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const SnippetsItem = ({ data, setIsLoading }) => {
     const user_id = useSelector((state) => state.user.user_id)
-    
+
     const handleView = async (snippet_id) => {
 
         setIsLoading(true)
@@ -33,7 +33,7 @@ const SnippetsItem = ({ data, setIsLoading }) => {
                             <div className="w-full flex flex-col items-center justify-center font-semibold">
                                 <p className="">{item.date}</p>
                             </div>
-                            <div className="w-full overflow-auto p-2">
+                            <div className="w-full overflow-auto p-2 flex flex-col text-center">
                                 <p className="">{item.snippet_title}</p>
                             </div>
                             <div className="w-full flex flex-col items-end pr-4 justify-center">
@@ -44,7 +44,9 @@ const SnippetsItem = ({ data, setIsLoading }) => {
                     </div>
                 ))
             ) : (
-                <h1 className="text-white">No data</h1>
+                <div className="w-full h-full flex flex-col items-center justify-center">
+                    <h1 className="text-white font-bold text-[3rem]">No data</h1>
+                </div>
             )}
         </div>
     )
