@@ -1,7 +1,9 @@
+import { useDispatch } from 'react-redux';
 import SyntaxHighlighterComponent from '../../CodeSnippet.SyntaxHighlighter';
+import { setSnippetView } from '../../../redux/snippet.redux/snippetActions';
 
-const CodeSnippetCard = ({ setIsPreview }) => {
-    
+const CodeSnippetCard = () => {
+    const dispatch = useDispatch()
     return (
         <div className='text-start w-full h-screen'>
             <div className='flex flex-col items-center justify-center  border p-3 rounded mt-[1rem]'>
@@ -11,7 +13,7 @@ const CodeSnippetCard = ({ setIsPreview }) => {
                         
                         <div className='w-full text-end'>
                             <button className='border-white border-[2px] text-[1.2rem] rounded px-3'
-                            onClick={() => setIsPreview(true)}>
+                            onClick={() => dispatch(setSnippetView(true))}>
                                 View
                             </button>
                         </div>

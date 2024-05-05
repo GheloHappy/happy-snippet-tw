@@ -1,1 +1,2 @@
 export const SET_NAV_STATE = "SET_NAV_STATE"
+export const SET_PAGE_NUMBER = "SET_PAGE_NUMBER"

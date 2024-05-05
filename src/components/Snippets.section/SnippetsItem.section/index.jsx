@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { postData } from "../../../utils/fetcher";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setSnippet, setSnippetLanguage, setSnippetTittle, setSnippetView } from "../../../redux/snippet.redux/snippetActions";
+import { setPageNumber } from "../../../redux/system.redux.j/systemActions";
 
-const SnippetsItem = ({ data, setIsLoading }) => {
+const SnippetsItem = ({ data, setDataView, setIsLoading }) => {
+    const dispatch = useDispatch();
     const user_id = useSelector((state) => state.user.user_id);
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10; // Adjust the number of items per page as needed
+    const page_number = useSelector((state) => state.system.page_number)
+    const itemsPerPage = 10; 
 
     const handleView = async (snippet_id) => {
         setIsLoading(true);
@@ -16,8 +19,15 @@ const SnippetsItem = ({ data, setIsLoading }) => {
                 user_id: user_id,
             };
 
-            const snippet_data = await postData('snippet/list', payload);
-            console.log(snippet_data);
+            const response = await postData('snippet/list', payload);
+            
+            const snippet_data = response.data.user_snippet
+            
+            dispatch(setSnippetLanguage(snippet_data.snippet_language))
+            dispatch(setSnippet(snippet_data.snippet_code))
+            dispatch(setSnippetTittle(snippet_data.snippet_title))
+            dispatch(setSnippetView(true))
+            setDataView(snippet_data)
         } catch (err) {
             console.log(err);
             toast.error('Internal Server Error.');
@@ -25,11 +35,11 @@ const SnippetsItem = ({ data, setIsLoading }) => {
         setIsLoading(false);
     };
 
-    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfLastItem = page_number * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const paginate = (page_number) => dispatch(setPageNumber(page_number));
 
     return (
         <div className="md:w-3/4 w-full overflow-auto">
@@ -57,7 +67,7 @@ const SnippetsItem = ({ data, setIsLoading }) => {
             {/* Pagination */}
             <ul className="flex justify-center mt-4 w-full text-black">
                 {Array.from({ length: Math.ceil(data.length / itemsPerPage) }, (_, index) => (
-                    <li key={index} className="mx-1">
+                    <li key={index} className="mx-2">
                         <button onClick={() => paginate(index + 1)} className="text-white text-[1.2rem] font-semibold">{index + 1}</button>
                     </li>
                 ))}

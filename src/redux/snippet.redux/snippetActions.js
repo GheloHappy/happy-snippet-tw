@@ -1,4 +1,4 @@
-import { SET_SNIPPET, SET_SNIPPET_LANGUAGE, SET_SNIPPET_SAVE } from "./snippetTypes";
+import { SET_SNIPPET, SET_SNIPPET_LANGUAGE, SET_SNIPPET_SAVE, SET_SNIPPET_TITTLE, SET_SNIPPET_VIEW } from "./snippetTypes";
 
 export const setSnippet = (snippet) => ({
     type: SET_SNIPPET,
@@ -10,7 +10,17 @@ export const setSnippetLanguage = (language) => ({
     payload: language,
 });
 
+export const setSnippetTittle = (title) => ({
+    type: SET_SNIPPET_TITTLE,
+    payload: title,
+})
+
 export const setSnippetSave = (status) => ({
     type: SET_SNIPPET_SAVE,
+    payload: status,
+})
+
+export const setSnippetView = (status) => ({
+    type: SET_SNIPPET_VIEW,
     payload: status,
 })

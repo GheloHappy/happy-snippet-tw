@@ -1,11 +1,11 @@
 
 import TextareaAutosize from 'react-textarea-autosize';
 import languageOptions from './Language.options';
-import { setSnippet, setSnippetLanguage, setSnippetSave } from '../../../redux/snippet.redux/snippetActions';
+import { setSnippet, setSnippetLanguage, setSnippetSave, setSnippetView } from '../../../redux/snippet.redux/snippetActions';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const CodeSnippet = ({ setIsPreview }) => {
+const CodeSnippet = () => {
     const dispatch = useDispatch()
     const snippet = useSelector((state) => state.snippet.snippet_code)
     const language = useSelector((state) => state.snippet.snippet_language)
@@ -37,7 +37,7 @@ const CodeSnippet = ({ setIsPreview }) => {
                         {snippet ?
                             <button
                                 className="border-white border-[2px] text-[1.2rem] rounded px-4"
-                                onClick={() => { dispatch(setSnippetSave(true)), setIsPreview(true) }}
+                                onClick={() => { dispatch(setSnippetSave(true)), dispatch(setSnippetView(true)) }}
                             >
                                 Save
                             </button>

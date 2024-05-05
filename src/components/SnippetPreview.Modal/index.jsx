@@ -1,7 +1,7 @@
 import { RxCross1 } from 'react-icons/rx';
 import SyntaxHighlighterComponent from '../CodeSnippet.SyntaxHighlighter';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSnippet, setSnippetSave } from '../../redux/snippet.redux/snippetActions';
+import { setSnippet, setSnippetSave, setSnippetView } from '../../redux/snippet.redux/snippetActions';
 import { FaSave } from 'react-icons/fa';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -9,13 +9,15 @@ import Loading from '../Loading';
 import { postData } from '../../utils/fetcher';
 import _ from 'lodash';
 
-const SnippetPreview = ({ setIsPreview }) => {
+const SnippetPreview = () => {
     const today = new Date().toISOString().substring(0, 10);
     const dispatch = useDispatch()
     const isSaving = useSelector((state) => state.snippet.snippet_save)
+    const isViewing = useSelector((state) => state.snippet.snippet_view)
     const user_id = useSelector((state) => state.user.user_id)
     const snippet_language = useSelector((state) => state.snippet.snippet_language)
     const snippet_code = useSelector((state) => state.snippet.snippet_code)
+    const snippet_title = useSelector((state) => state.snippet.snippet_title)
     const [isLoading, setIsLoading] = useState(false)
 
     const [fields, setFields] = useState({
@@ -72,7 +74,6 @@ const SnippetPreview = ({ setIsPreview }) => {
     function Clear(response) {
         toast.success(response.data.msg)
         setIsLoading(false)
-        setIsPreview(false)
         dispatch(setSnippetSave(false))
         dispatch(setSnippet(''))
     }
@@ -83,10 +84,10 @@ const SnippetPreview = ({ setIsPreview }) => {
                 <div className='w-full h-full p-5 bg-none'>
                     <div className='w-full p-2 bg-white flex rounded-tl-md rounded-tr-md'>
                         <div className='w-1/2 text-start items-start justify-center flex flex-col'>
-                            <p className='text-[1.1rem] font-semibold'>{isSaving ? "Save Preview" : "Full screen Preview"}</p>
+                            <p className='text-[1.1rem] font-semibold'>{isSaving ? "Save Preview" : isViewing ? snippet_title : "Full Screen Preview"}</p>
                         </div>
                         <div className='w-1/2 items-end justify-center flex flex-col'>
-                            <button className='text-[1.3rem] font-bold' onClick={() => { setIsPreview(false), dispatch(setSnippetSave(false)) }}><RxCross1 /></button>
+                            <button className='text-[1.3rem] font-bold' onClick={() => { dispatch(setSnippetSave(false)), dispatch(setSnippetView(false)) }}><RxCross1 /></button>
                         </div>
                     </div>
                     {isSaving ?
