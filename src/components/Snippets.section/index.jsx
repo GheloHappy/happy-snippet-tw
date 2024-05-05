@@ -14,9 +14,10 @@ const SnippetSection = () => {
         const fetchSnippets = async () => {
             try {
                 if (user_id > 0) {
-                    const response = await getData(`snippet/list/${user_id}`)
+                    const response = await getData(`snippet/list/${user_id}`);
+                    const sortedData = response.data.user_snippet.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                    setData(response.data.user_snippet)
+                    setData(sortedData);
                 }
             }
             catch (err) {
