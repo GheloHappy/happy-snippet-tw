@@ -6,9 +6,10 @@ import { useSelector } from "react-redux";
 
 const HomeSection = () => {
     const isViewing = useSelector((state) => state.snippet.snippet_view)
+    const isPreview = useSelector((state) => state.snippet.snippet_preview)
     return (
         <>
-            {isViewing ?
+            {isViewing || isPreview ?
                 <SnippetPreview />
                 :
                 <div className="flex-col md:flex-row flex mt-[2rem] md:mt-[3rem] w-full p-5 gap-1 md:gap-3">

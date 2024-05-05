@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import SyntaxHighlighterComponent from '../../CodeSnippet.SyntaxHighlighter';
-import { setSnippetView } from '../../../redux/snippet.redux/snippetActions';
+import { setSnippetPreview } from '../../../redux/snippet.redux/snippetActions';
 
 const CodeSnippetCard = () => {
     const dispatch = useDispatch()
@@ -13,7 +13,7 @@ const CodeSnippetCard = () => {
                         
                         <div className='w-full text-end'>
                             <button className='border-white border-[2px] text-[1.2rem] rounded px-3'
-                            onClick={() => dispatch(setSnippetView(true))}>
+                            onClick={() => (dispatch(setSnippetPreview(true)) )}>
                                 View
                             </button>
                         </div>
