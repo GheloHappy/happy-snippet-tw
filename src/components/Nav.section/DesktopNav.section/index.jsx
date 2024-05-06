@@ -36,7 +36,7 @@ const DesktopNav = () => {
                     <GiDiamondsSmile />
                     {
                         isProfile ?
-                            <div className="w-[15%] flex flex-col absolute bg-white text-black text-[1.1rem] font-bold right-4 top-16 rounded  p-3 gap-3">
+                            <div className="w-[15%] flex flex-col absolute bg-white text-black text-[1.1rem] font-bold right-4 top-16 rounded  p-3 gap-8">
                                 <span className="w-full flex gap-2 items-center justify-center">
                                     <MdOutlineSettings />
                                     <Link to="/settings">Settings</Link>

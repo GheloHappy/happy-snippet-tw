@@ -74,8 +74,14 @@ const SnippetPreview = () => {
 
     function Clear(response) {
         toast.success(response.data.msg)
+        handleCloseClear()
+    }
+
+    const handleCloseClear = () => {
         setIsLoading(false)
         dispatch(setSnippetSave(false))
+        dispatch(setSnippetView(false))
+        dispatch(setSnippetPreview(false))
         dispatch(setSnippet(''))
     }
 
@@ -95,15 +101,13 @@ const SnippetPreview = () => {
             <div className="w-full h-screen absolute overflow-auto flex flex-col items-center justify-center bg-white bg-opacity-5 backdrop-filter backdrop-blur-sm">
                 <div className='w-full h-full p-5 bg-none'>
                     <div className='w-full p-2 bg-white flex rounded-tl-md rounded-tr-md'>
-                        <div className='w-1/2 text-start items-start justify-center flex flex-col'>
-                            <p className='text-[1.1rem] font-semibold'>{isSaving ? "Save Preview" : isViewing ? snippet_title : "Full Screen Preview"}</p>
+                        <div className='w-full text-start items-start justify-center flex flex-col pl-2'>
+                            <p className='md:text-[2rem] text-[1.3rem] font-semibold'>{isSaving ? "Save Preview" : isViewing ? snippet_title : "Full Screen Preview"}</p>
                         </div>
-                        <div className='w-1/2 items-end justify-center flex flex-col'>
-                            <button className='text-[1.3rem] font-bold' onClick={() => {
-                                dispatch(setSnippetSave(false)),
-                                dispatch(setSnippetView(false)),
-                                dispatch(setSnippetPreview(false))
-                            }}>
+                        <div className='w-[10%] items-end justify-center flex flex-col'>
+                            <button className='text-[1.5rem] text-red-500 font-bold' onClick={
+                                handleCloseClear
+                            }>
                                 <RxCross1 />
                             </button>
                         </div>
