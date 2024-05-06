@@ -37,17 +37,21 @@ const DesktopNav = () => {
                     {
                         isProfile ?
                             <div className="w-[15%] flex flex-col absolute bg-white text-black text-[1.1rem] font-bold right-4 top-16 rounded  p-3 gap-8">
-                                <span className="w-full flex gap-2 items-center justify-center">
-                                    <MdOutlineSettings />
-                                    <Link to="/settings">Settings</Link>
-                                </span>
-                                <span className="w-full flex gap-2 items-center justify-center">
-                                    <FaExclamation />
-                                    <Link to="/about">About</Link>
-                                </span>
+                                <Link to="/settings">
+                                    <span className="w-full flex gap-2 items-center justify-center">
+                                        <MdOutlineSettings />
+                                        Settings
+                                    </span>
+                                </Link>
+                                <Link to="/about">
+                                    <span className="w-full flex gap-2 items-center justify-center">
+                                        <FaExclamation />
+                                        About
+                                    </span>
+                                </Link>
                                 <span className="w-full flex flex-col items-center justify-center p-3  border rounded bg-slate-50">
                                     <span className="flex items-center justify-center gap-2 text-red-500"
-                                    onClick={handleLogout}>
+                                        onClick={handleLogout}>
                                         <RiShutDownLine />
                                         Logout
                                     </span>
