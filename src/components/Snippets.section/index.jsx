@@ -88,7 +88,7 @@ const SnippetSection = () => {
                             placeholder={`Search Title`}
                             type="text"
                             onChange={handleSearch} />
-                        <button className="text-[2rem]"><IoIosSearch /> </button>
+                        {/* <button className="text-[2rem]"><IoIosSearch /> </button> */}
                     </div>
                     <SnippetsItem data={data}
                         setIsLoading={setIsLoading}

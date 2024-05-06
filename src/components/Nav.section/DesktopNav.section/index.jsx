@@ -12,7 +12,8 @@ const DesktopNav = () => {
             <ul className="hidden md:flex justify-end gap-10">
                 <CustomLink to="/home">Home</CustomLink>
                 <CustomLink to="/snippets">Snippets</CustomLink>
-                <CustomLink to="/settings">Settings</CustomLink>
+                {/* <CustomLink to="/settings">Settings</CustomLink> */}
+                <CustomLink to="/profile">Profile</CustomLink>
             </ul>
             <div className="md:hidden flex items-center justify-end w-full ">
                 <button  onClick={() => {dispatch(setNavState(true))}}
