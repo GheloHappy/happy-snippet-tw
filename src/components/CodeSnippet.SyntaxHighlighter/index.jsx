@@ -11,19 +11,21 @@ const SyntaxHighlighterComponent = () => {
     const user_settings = JSON.parse(localStorage.getItem('user_settings'));
 
     useEffect(() => {
-        const getTheme = () => {
-            const selectedTheme = themesOptions.find(option => option.label === user_settings.snippet_theme)?.value;
-            setTheme(selectedTheme)
+        if (user_settings) {
+            const getTheme = () => {
+                const selectedTheme = themesOptions.find(option => option.label === user_settings.snippet_theme)?.value;
+                setTheme(selectedTheme)
+            }
+            getTheme();
         }
-        getTheme();
     }, [])
 
     return (
         <SyntaxHighlighter
             language={language}
             style={theme}
-            showLineNumbers={user_settings.snippet_line_numbers}
-            wrapLongLines={user_settings.snippet_wrap_lines}
+            showLineNumbers={user_settings ? user_settings.snippet_line_numbers : false}
+            wrapLongLines={user_settings ? user_settings.snippet_wrap_lines : false}
         >
             {snippet}
         </SyntaxHighlighter>

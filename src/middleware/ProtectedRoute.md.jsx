@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom'
 import { jwtDecode } from 'jwt-decode'
 import _ from 'lodash';
 import { postData } from '../utils/fetcher'
-import { isSignedIn, setUserId } from '../redux/user.redux/userActions'
-
+import { isSignedIn, setUserId, setUserSettings } from '../redux/user.redux/userActions'
+import { setNavState } from '../redux/system.redux.j/systemActions'
 
 const ProtectedRoute = ({ children }) => {
     const token = cookies.load('_hs');
+    const storage = JSON.parse(localStorage.getItem('user_settings'));
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const userSettings = JSON.parse(localStorage.getItem('user_settings'));
 
     useEffect(() => {
         try {
@@ -30,28 +30,36 @@ const ProtectedRoute = ({ children }) => {
 
             handleValidToken();
 
-            if (!userSettings.exist) {
+            if (!storage.exist) {
                 navigate('/welcome');
                 return;
             }
+
+            // dispatch(setUserToken(token))
+            const decoded = jwtDecode(token);
+            dispatch(setUserId(decoded.id));
+            dispatch(isSignedIn(true))
+
+            dispatch(setUserSettings({
+                exist: storage.exist,
+                dark_mode: storage.dark_mode,
+                snippet_theme: storage.snippet_theme,
+                snippet_line_numbers: storage.snippet_line_numbers,
+                snippet_wrap_lines: storage.snippet_wrap_lines,
+            }))
+
         } catch (err) {
             console.error('Error verifying user:', err)
             handleLogout();
         }
 
-        // dispatch(setUserToken(token))
-        const decoded = jwtDecode(token);
-        dispatch(setUserId(decoded.id));
-        dispatch(isSignedIn(true))
-        //console.log("mid: " + decoded.id)
-
     }, [token, navigate])
 
     const handleLogout = () => {
-        dispatch(isSignedIn(false));
-        // dispatch(setUserName(""))
         localStorage.clear();
         cookies.remove('_hs');
+        dispatch(isSignedIn(false));
+        dispatch(setNavState(false))
         navigate('/');
     };
 
