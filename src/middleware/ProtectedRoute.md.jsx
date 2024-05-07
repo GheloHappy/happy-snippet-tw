@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import cookies from 'react-cookies'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { jwtDecode } from 'jwt-decode'
 import _ from 'lodash';
