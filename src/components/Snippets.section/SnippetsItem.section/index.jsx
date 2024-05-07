@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { postData } from "../../../utils/fetcher";
 import { useDispatch, useSelector } from "react-redux";
-import { setSnippet, setSnippetLanguage, setSnippetTittle, setSnippetView } from "../../../redux/snippet.redux/snippetActions";
+import { setSnippet, setSnippetLanguage, setSnippetPreview, setSnippetSave, setSnippetTittle, setSnippetView } from "../../../redux/snippet.redux/snippetActions";
 import { setPageNumber } from "../../../redux/system.redux.j/systemActions";
 import { FaSadTear } from "react-icons/fa";
 import { SyncLoader } from "react-spinners";
@@ -29,6 +29,7 @@ const SnippetsItem = ({ data, setIsLoading, isSearching }) => {
             dispatch(setSnippet(snippet_data.snippet_code))
             dispatch(setSnippetTittle(snippet_data.snippet_title))
             dispatch(setSnippetView(true))
+            dispatch(setSnippetSave(false))
         } catch (err) {
             console.log(err);
             toast.error('Internal Server Error.');
@@ -67,8 +68,8 @@ const SnippetsItem = ({ data, setIsLoading, isSearching }) => {
                             </div>
                         ))
                     ) : (
-                        <div className="w-full h-full flex flex-col items-center justify-center">
-                            <h1 className="text-white font-bold text-[3rem] mt-[2rem] flex items-center gap-3"><FaSadTear /> Not found. </h1>
+                        <div className="w-full h-full mt-[10rem] flex flex-col items-center justify-center">
+                            <h1 className="text-white font-bold text-[2rem] md:text-[3rem] mt-[2rem] flex items-center gap-3"><FaSadTear /> Not found. </h1>
                         </div>
                     )}
                     {/* Pagination */}

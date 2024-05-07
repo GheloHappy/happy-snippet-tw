@@ -6,8 +6,8 @@ import { Link, useNavigate } from "react-router-dom"
 import cookies from "react-cookies"
 import { GiDiamondsSmile } from "react-icons/gi"
 import { RiShutDownLine } from "react-icons/ri"
-import { FaExclamation } from "react-icons/fa"
-import { MdOutlineKeyboardArrowRight } from "react-icons/md"
+import { FaExclamation, FaFileCode } from "react-icons/fa"
+import { MdHome, MdOutlineKeyboardArrowRight, MdOutlineSettings } from "react-icons/md"
 
 const MobileNav = () => {
     const dispatch = useDispatch()
@@ -33,9 +33,18 @@ const MobileNav = () => {
                 </div>
                 <div className="w-full flex flex-col items-start justify-center h-full">
                     <ul className="flex flex-col justify-end gap-10 pl-4">
-                        <CustomLink to="/home">Home</CustomLink>
-                        <CustomLink to="/snippets">Snippets</CustomLink>
-                        <CustomLink to="/settings">Settings</CustomLink>
+                        <div className="flex items-center gap-1 text-[1.3rem]">
+                            <MdHome />
+                            <CustomLink to="/home">Home</CustomLink>
+                        </div>
+                        <div className="flex items-center gap-1 text-[1.3rem]">
+                            <FaFileCode />
+                            <CustomLink to="/snippets">Snippets</CustomLink>
+                        </div>
+                        <div className="flex items-center gap-1 text-[1.3rem]">
+                            <MdOutlineSettings />
+                            <CustomLink to="/settings">Settings</CustomLink>
+                        </div>
                     </ul>
                 </div>
                 <div className="w-full border-t h-[10%] items-start px-3 p-4">
@@ -43,16 +52,18 @@ const MobileNav = () => {
                         <GiDiamondsSmile />
                         <span className="font-flower">Snippet User</span>
                     </div>
-                   
+
                 </div>
                 <div className="w-full flex text-center text-[1.2rem] font-bold gap-2 p-4">
-                    <div className="flex items-center gap-2 w-1/2">
-                        <FaExclamation />
-                        <Link to="/about">About</Link>
-                    </div>
-                    <div className="flex text-[1.5rem] font-bold w-1/2 justify-end">
-                        <MdOutlineKeyboardArrowRight />
-                    </div>
+                    <Link to="/about" className="flex w-full">
+                        <div className="flex items-center gap-2 w-1/2">
+                            <FaExclamation />
+                            About
+                        </div>
+                        <div className="flex text-[1.5rem] font-bold w-1/2 justify-end">
+                            <MdOutlineKeyboardArrowRight />
+                        </div>
+                    </Link>
                 </div>
                 <div className="w-full flex flex-col items-center justify-center text-[1.3rem] p-3 border rounded bg-slate-50"
                     onClick={handleLogout}>

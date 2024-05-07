@@ -17,10 +17,10 @@ const DesktopNav = () => {
 
     function background() {
         if (!is_dark) {
-            return "bg-white text-black"
+            return "bg-gray-100 text-black border border-black"
         }
 
-        return "bg-black text-white"
+        return "bg-black text-white border border-white"
     }
 
     const handleProfile = () => {
@@ -35,7 +35,7 @@ const DesktopNav = () => {
     }
 
     return (
-        <nav className={`fixed top-0 w-full ${background()} p-3 md:justify-between md:items-center flex md:flex-row shadow`}>
+        <nav className={`fixed top-0 w-full ${background()} p-3 md:justify-between md:items-center flex md:flex-row shadow rounded`}>
             <Link to="/" className="text-[1.2rem] sm:text-[1.5rem] md:text-[2rem] md:ml-2 w-full items-center justify-center">Happy Snippet</Link>
             <ul className="hidden md:flex justify-end gap-10 md:items-center md:justify-center">
                 <CustomLink to="/home">Home</CustomLink>

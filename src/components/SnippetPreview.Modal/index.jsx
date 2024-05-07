@@ -78,11 +78,13 @@ const SnippetPreview = () => {
     }
 
     const handleCloseClear = () => {
+        if (isViewing) {
+            dispatch(setSnippet(''))
+        }
         setIsLoading(false)
         dispatch(setSnippetSave(false))
         dispatch(setSnippetView(false))
         dispatch(setSnippetPreview(false))
-        dispatch(setSnippet(''))
     }
 
     const handleCopy = () => {
@@ -112,7 +114,7 @@ const SnippetPreview = () => {
                             </button>
                         </div>
                     </div>
-                    {isSaving ?
+                    {isSaving && !isViewing && !isPreview ?
                         <>
                             <div className='w-full p-2 flex items-center bg-slate-100 border'>
                                 <label className="font-semibold text-[1rem] mr-2">Title: </label>
