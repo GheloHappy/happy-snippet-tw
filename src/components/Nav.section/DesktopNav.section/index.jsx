@@ -41,12 +41,12 @@ const DesktopNav = () => {
                 <CustomLink to="/home">Home</CustomLink>
                 <CustomLink to="/snippets">Snippets</CustomLink>
                 {/* <CustomLink to="/settings">Settings</CustomLink> */}
-                <div className={`w-full text-[2rem] rounded-full p-2 ${is_dark ? "bg-white text-black" : "bg-black text-white"}`}
+                <div className={`w-full text-[2rem] rounded-full p-2 mr-3 ${is_dark ? "bg-white text-black" : "bg-black text-white"}`}
                     onClick={handleProfile}>
                     <GiDiamondsSmile />
                     {
                         isProfile ?
-                            <div className={`w-[15%] flex flex-col ${background()}  absolute text-[1.1rem] font-bold right-4 top-16 rounded  p-3 gap-8`}>
+                            <div className={`w-[15%] flex flex-col ${background()}  absolute text-[1.1rem] font-bold right-8 top-16 rounded  p-3 gap-8`}>
                                 <Link to="/settings">
                                     <span className="w-full flex gap-2 items-center justify-center">
                                         <MdOutlineSettings />
