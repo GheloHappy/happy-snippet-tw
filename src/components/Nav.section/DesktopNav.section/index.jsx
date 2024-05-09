@@ -36,7 +36,7 @@ const DesktopNav = () => {
 
     return (
         <nav className={`fixed top-0 w-full ${background()} p-3 md:justify-between md:items-center flex md:flex-row shadow rounded`}>
-            <Link to="/" className="text-[1.2rem] sm:text-[1.5rem] md:text-[2rem] md:ml-2 w-full items-center justify-center">Happy Snippet</Link>
+            <Link to="/" className="text-[1.2rem] sm:text-[1.5rem] md:text-[2rem] md:ml-2 w-full items-center justify-center font-flower">Happy Snippet</Link>
             <ul className="hidden md:flex justify-end gap-10 md:items-center md:justify-center">
                 <CustomLink to="/home">Home</CustomLink>
                 <CustomLink to="/snippets">Snippets</CustomLink>
