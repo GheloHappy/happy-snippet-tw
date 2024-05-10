@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Information from '../../components/Settings.section/Information.section'
 import ThemeSettings from '../../components/Settings.section/ThemeSettings.section'
-import ChangePass from '../../components/Settings.section/ChangePass.section'
+import ChangeAccountSettings from '../../components/Settings.section/ChangeAccountSettings.section'
 
 const Settings = () => {
     const [settingsNum, setSettingsNum] = useState(1)
@@ -16,7 +16,7 @@ const Settings = () => {
                             <span className="sm:hidden">Info</span>
                         </button>
                         <button className={`w-full p-5 ${settingsNum === 2 ? 'bg-white text-black' : "bg-none"}`} onClick={() => setSettingsNum(2)}>Theme Settings</button>
-                        <button className={`w-full p-5 ${settingsNum === 3 ? 'bg-white text-black' : "bg-none"}`} onClick={() => setSettingsNum(3)}>Change Password</button>
+                        <button className={`w-full p-5 ${settingsNum === 3 ? 'bg-white text-black' : "bg-none"}`} onClick={() => setSettingsNum(3)}>Account Settings</button>
                     </div>
                 </div>
                 <div className='md:w-[70%] h-full flex flex-col items-center justify-center bg-gray-50 text-black md:rounded-r-lg p-3'>
@@ -28,7 +28,7 @@ const Settings = () => {
                                 case 2:
                                     return <ThemeSettings />
                                 case 3:
-                                    return <ChangePass />
+                                    return <ChangeAccountSettings />
                                 default:
                                     return <Information />
                             }
