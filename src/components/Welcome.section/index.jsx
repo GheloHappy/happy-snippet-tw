@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { postData } from '../../utils/fetcher';
 import { useDispatch, useSelector } from 'react-redux';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { useNavigate } from 'react-router-dom';
+import { useMatch, useNavigate } from 'react-router-dom';
 import { setUserSettings } from '../../redux/user.redux/userActions';
 
 const Welcome = () => {
@@ -19,6 +19,9 @@ const Welcome = () => {
         snippet_line_numbers: false,
         snippet_wrap_lines: false,
     })
+
+    //handling in settings
+    const isSettings = useMatch({ path: '/settings' })
 
     const handleCheckChanges = e => {
         const { name, checked } = e.target;
@@ -69,11 +72,10 @@ const Welcome = () => {
         }
     }
     return (
-        <div className="w-full h-full mt-[5rem] flex flex-col items-center justify-center">
+        <div className={`w-full h-full ${isSettings ? 'mt-[1rem' : 'mt-[5rem]'} flex flex-col items-center justify-center`}>
             <div className={`w-[90%] ${user_settings.dark_mode ? 'bg-black text-white' : 'bg-white text-black'} rounded flex flex-col 
             items-center text-center gap-1 md:gap-3 p-2 md:p-3`}>
-                <h1 className="font-semibold text-[1.3rem] sm:text-[1.5rem]">Welcome! before you proceed please select your settings.</h1>
-
+                {isSettings ? null : <h1 className="font-semibold text-[1.3rem] sm:text-[1.5rem]">Welcome! before you proceed please select your settings.</h1>}
                 <div className='flex sm:flex-row flex-col w-full justify-center items-center gap-1 mt-3'>
                     <label className='sm:text-[1.2rem] text-[1rem] font-semibold hidden sm:flex'>Theme : </label>
                     <select
@@ -127,7 +129,7 @@ const Welcome = () => {
                 </div>
                 <button onClick={handleSave}
                     className='bg-[#282C34] rounded font-semibold text-white sm:text-[1.5rem] text-[1.2rem] w-1/4 md:w-1/6 px-2'>Save</button>
-                <p className="font-semibold mt-1">"You can change it later in (Profile) settings."</p>
+                {isSettings ? null : <p className="font-semibold mt-1">"You can change it later in (Profile) settings."</p>}
             </div>
         </div>
     )

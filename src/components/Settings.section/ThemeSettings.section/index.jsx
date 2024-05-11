@@ -1,7 +1,9 @@
+import Welcome from "../../Welcome.section"
+
 const ThemeSettings = () => {
     return (
-        <div>
-            <h1>Theme Settings</h1>
+        <div className="w-full h-full">
+            <Welcome />
         </div>
     )
 }
