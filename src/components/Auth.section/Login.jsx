@@ -66,6 +66,7 @@ const Login = () => {
                         snippet_line_numbers: false,
                         snippet_wrap_lines: false
                     }
+
                     localStorage.setItem("user_settings", JSON.stringify(settings))
                 }
 

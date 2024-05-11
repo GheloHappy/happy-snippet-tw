@@ -62,6 +62,10 @@ const Welcome = () => {
                 }))
 
                 toast.success(response.data.msg)
+                if(isSettings){
+                    navigate('/settings')
+                    return
+                }
                 navigate('/home')
             } else {
                 toast.error(response.data.msg)

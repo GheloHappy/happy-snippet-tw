@@ -1,4 +1,4 @@
-import { IS_SIGNEDIN, SET_USER_ID, SET_USER_NAME, SET_USER_SETTINGS } from "./userTypes"
+import { IS_SIGNEDIN, SET_USER_DISPLAY_NAME, SET_USER_ID, SET_USER_NAME, SET_USER_SETTINGS } from "./userTypes"
 
 
 const initialState = {
@@ -11,7 +11,8 @@ const initialState = {
         snippet_theme: "coy",
         snippet_line_numbers: false,
         snippet_wrap_lines: false
-    }
+    },
+    user_display_name: '',
 }
 
 const userReducer = (state = initialState, action) => {
@@ -43,6 +44,11 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user_settings: updatedSettings
+            }
+        case SET_USER_DISPLAY_NAME:
+            return {
+                ...state,
+                user_display_name: payload
             }
         default:
             return state;

@@ -12,6 +12,8 @@ import { MdHome, MdOutlineKeyboardArrowRight, MdOutlineSettings } from "react-ic
 const MobileNav = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
+    const storage = JSON.parse(localStorage.getItem('user_info'))
+    console.log(storage)
 
     const handleLogout = () => {
         localStorage.clear();
@@ -50,7 +52,7 @@ const MobileNav = () => {
                 <div className="w-full border-t h-[10%] items-start px-3 p-4">
                     <div className="p-2 bg-black text-white rounded-full text-[1.5rem] sm:text-[2rem] gap-4 flex items-center justify-center">
                         <GiDiamondsSmile />
-                        <span className="font-flower">Snippet User</span>
+                        <span className="font-flower">{storage ? storage : 'Snippet User'}</span>
                     </div>
 
                 </div>

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { jwtDecode } from 'jwt-decode'
 import _ from 'lodash';
 import { postData } from '../utils/fetcher'
-import { isSignedIn, setUserId, setUserSettings } from '../redux/user.redux/userActions'
+import { isSignedIn, setUserDisplayName, setUserId, setUserName, setUserSettings } from '../redux/user.redux/userActions'
 import { setNavState } from '../redux/system.redux.j/systemActions'
 
 const ProtectedRoute = ({ children }) => {
@@ -39,6 +39,7 @@ const ProtectedRoute = ({ children }) => {
             const decoded = jwtDecode(token);
             dispatch(setUserId(decoded.id));
             dispatch(isSignedIn(true))
+            dispatch(setUserName(decoded.user))
 
             dispatch(setUserSettings({
                 exist: storage.exist,
