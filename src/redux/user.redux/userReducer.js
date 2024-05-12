@@ -48,7 +48,7 @@ const userReducer = (state = initialState, action) => {
         case SET_USER_DISPLAY_NAME:
             return {
                 ...state,
-                user_display_name: payload
+                user_display_name: action.payload
             }
         default:
             return state;

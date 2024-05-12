@@ -5,7 +5,7 @@ import { PulseLoader } from "react-spinners";
 import cookies from 'react-cookies'
 import { jwtDecode } from "jwt-decode";
 import { useDispatch } from "react-redux";
-import { setUserId, setUserSettings } from "../../redux/user.redux/userActions";
+import { setUserDisplayName, setUserId, setUserSettings } from "../../redux/user.redux/userActions";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -71,6 +71,7 @@ const Login = () => {
                 }
 
                 dispatch(setUserId(decoded.id))
+                dispatch(setUserDisplayName(decoded.display_name))
 
                 navigate('/home')
             } else {

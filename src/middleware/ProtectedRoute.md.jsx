@@ -40,6 +40,7 @@ const ProtectedRoute = ({ children }) => {
             dispatch(setUserId(decoded.id));
             dispatch(isSignedIn(true))
             dispatch(setUserName(decoded.user))
+            dispatch(setUserDisplayName(decoded.display_name))
 
             dispatch(setUserSettings({
                 exist: storage.exist,

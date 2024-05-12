@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import { getData, postData } from "../../../utils/fetcher"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
+import { setUserDisplayName } from "../../../redux/user.redux/userActions"
+import _ from "lodash"
 
 const Information = () => {
+    const dispatch = useDispatch()
     const username = useSelector((state) => state.user.user_name)
-
     const [fields, setFields] = useState({
         username: '',
         display_name: '',
@@ -29,8 +31,8 @@ const Information = () => {
                     birthday: user_info.birthday || '',
                     backup_email: user_info.backup_email || '',
                 };
-                
-                localStorage.setItem("user_info", JSON.stringify(user_info.display_name))
+
+                dispatch(setUserDisplayName(user_info.display_name))
 
                 setFields(fetchedFields);
             }
@@ -44,15 +46,20 @@ const Information = () => {
 
         try {
             if (fields.display_name === '' || !fields.display_name) {
-                
+
                 toast.warning('Display Name is required.')
                 return
             }
 
             const response = await postData(`user/info`, fields)
 
-
             toast.success(response.data.msg)
+
+            let debounce_fun = _.debounce(function (){
+                location.reload(true)
+            }, 600)
+
+            debounce_fun();
         } catch (err) {
             console.log(err)
             toast.error('Internal Server Error')

@@ -1,5 +1,5 @@
 import { RxCross1 } from "react-icons/rx"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setNavState } from "../../../redux/system.redux.j/systemActions"
 import { CustomLink } from "../DesktopNav.section"
 import { Link, useNavigate } from "react-router-dom"
@@ -8,12 +8,13 @@ import { GiDiamondsSmile } from "react-icons/gi"
 import { RiShutDownLine } from "react-icons/ri"
 import { FaExclamation, FaFileCode } from "react-icons/fa"
 import { MdHome, MdOutlineKeyboardArrowRight, MdOutlineSettings } from "react-icons/md"
+import { useEffect } from "react"
 
 const MobileNav = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
-    const storage = JSON.parse(localStorage.getItem('user_info'))
-    console.log(storage)
+
+    const display_name = useSelector((state) => state.user.user_display_name)
 
     const handleLogout = () => {
         localStorage.clear();
@@ -52,7 +53,7 @@ const MobileNav = () => {
                 <div className="w-full border-t h-[10%] items-start px-3 p-4">
                     <div className="p-2 bg-black text-white rounded-full text-[1.5rem] sm:text-[2rem] gap-4 flex items-center justify-center">
                         <GiDiamondsSmile />
-                        <span className="font-flower">{storage ? storage : 'Snippet User'}</span>
+                        <span className="font-flower">{display_name ? display_name : "Snippet User"}</span>
                     </div>
 
                 </div>
