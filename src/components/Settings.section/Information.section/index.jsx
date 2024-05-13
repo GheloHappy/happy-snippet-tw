@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import { setUserDisplayName } from "../../../redux/user.redux/userActions"
 import _ from "lodash"
+import { PulseLoader } from "react-spinners"
 
 const Information = () => {
     const dispatch = useDispatch()
     const username = useSelector((state) => state.user.user_name)
+    const [isLoading, setIsLoading] = useState(false)
     const [fields, setFields] = useState({
         username: '',
         display_name: '',
@@ -18,27 +20,35 @@ const Information = () => {
     });
 
     useEffect(() => {
-        const fetchInfo = async () => {
+        setIsLoading(true)
+        try {
+            const fetchInfo = async () => {
 
-            if (username) {
-                const info = await getData(`user/info/${username}`)
-                const { user_info } = info.data;
-                const fetchedFields = {
-                    username: user_info.username || '',
-                    display_name: user_info.display_name || '',
-                    first_name: user_info.first_name || '',
-                    last_name: user_info.last_name || '',
-                    birthday: user_info.birthday || '',
-                    backup_email: user_info.backup_email || '',
-                };
+                if (username) {
+                    const info = await getData(`user/info/${username}`)
+                    const { user_info } = info.data;
+                    const fetchedFields = {
+                        username: user_info.username || '',
+                        display_name: user_info.display_name || '',
+                        first_name: user_info.first_name || '',
+                        last_name: user_info.last_name || '',
+                        birthday: user_info.birthday || '',
+                        backup_email: user_info.backup_email || '',
+                    };
 
-                dispatch(setUserDisplayName(user_info.display_name))
+                    dispatch(setUserDisplayName(user_info.display_name))
 
-                setFields(fetchedFields);
+                    setFields(fetchedFields);
+                }
             }
+
+
+            fetchInfo()
+        } catch (err) {
+            console.log(err)
         }
 
-        fetchInfo()
+        setIsLoading(false)
     }, [username])
 
     const handleUpdateInfo = async (e) => {
@@ -55,11 +65,11 @@ const Information = () => {
 
             toast.success(response.data.msg)
 
-            let debounce_fun = _.debounce(function (){
-                location.reload(true)
-            }, 600)
+            // let debounce_fun = _.debounce(function () {
+            //     location.reload(true)
+            // }, 600)
 
-            debounce_fun();
+            // debounce_fun();
         } catch (err) {
             console.log(err)
             toast.error('Internal Server Error')
