@@ -46,9 +46,15 @@ const userReducer = (state = initialState, action) => {
                 user_settings: updatedSettings
             }
         case SET_USER_DISPLAY_NAME:
+            const updatedInfo = {
+                // ...state.user_settings,
+                ...action.payload
+            };
+
+            localStorage.setItem("user_info", JSON.stringify(updatedInfo));
             return {
                 ...state,
-                user_display_name: action.payload
+                user_display_name: updatedInfo.display_name
             }
         default:
             return state;

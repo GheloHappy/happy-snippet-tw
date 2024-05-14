@@ -11,6 +11,7 @@ import { setNavState } from '../redux/system.redux.j/systemActions'
 const ProtectedRoute = ({ children }) => {
     const token = cookies.load('_hs');
     const storage = JSON.parse(localStorage.getItem('user_settings'));
+    // const infoStorage = JSON.parse(localStorage.getItem('user_info'));
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -40,8 +41,11 @@ const ProtectedRoute = ({ children }) => {
             dispatch(setUserId(decoded.id));
             dispatch(isSignedIn(true))
             dispatch(setUserName(decoded.user))
-            console.log(decoded)
-            dispatch(setUserDisplayName(decoded.display_name))
+            // dispatch(setUserDisplayName(decoded.display_name))
+
+            // if (infoStorage) {
+            //     dispatch(setUserDisplayName(infoStorage))
+            // }
 
             dispatch(setUserSettings({
                 exist: storage.exist,

@@ -71,7 +71,8 @@ const Login = () => {
                 }
 
                 dispatch(setUserId(decoded.id))
-                dispatch(setUserDisplayName(decoded.display_name))
+                //dispatch(setUserDisplayName(decoded.display_name))
+                localStorage.setItem("user_info", JSON.stringify(decoded.display_name))
 
                 navigate('/home')
             } else {

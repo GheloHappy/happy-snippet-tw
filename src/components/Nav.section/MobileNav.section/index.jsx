@@ -14,7 +14,7 @@ const MobileNav = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
 
-    const display_name = useSelector((state) => state.user.user_display_name)
+    const info = JSON.parse(localStorage.getItem('user_info'));
 
     const handleLogout = () => {
         localStorage.clear();
@@ -53,7 +53,7 @@ const MobileNav = () => {
                 <div className="w-full border-t h-[10%] items-start px-3 p-4">
                     <div className="p-2 bg-black text-white rounded-full text-[1.5rem] sm:text-[2rem] gap-4 flex items-center justify-center">
                         <GiDiamondsSmile />
-                        <span className="font-flower">{display_name ? display_name : "Snippet User"}</span>
+                        <span className="font-flower">{info.display_name ? info.display_name : "Snippet User"}</span>
                     </div>
 
                 </div>

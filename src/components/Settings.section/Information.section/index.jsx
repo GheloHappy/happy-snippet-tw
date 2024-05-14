@@ -5,11 +5,13 @@ import { toast } from "react-toastify"
 import { setUserDisplayName } from "../../../redux/user.redux/userActions"
 import _ from "lodash"
 import { PulseLoader } from "react-spinners"
+import { useNavigate } from "react-router-dom"
 
 const Information = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const username = useSelector((state) => state.user.user_name)
-    const [isLoading, setIsLoading] = useState(false)
+    //const [isLoading, setIsLoading] = useState(false)
     const [fields, setFields] = useState({
         username: '',
         display_name: '',
@@ -20,7 +22,7 @@ const Information = () => {
     });
 
     useEffect(() => {
-        setIsLoading(true)
+        //setIsLoading(true)
         try {
             const fetchInfo = async () => {
 
@@ -35,9 +37,7 @@ const Information = () => {
                         birthday: user_info.birthday || '',
                         backup_email: user_info.backup_email || '',
                     };
-
-                    dispatch(setUserDisplayName(user_info.display_name))
-
+                    //localStorage.setItem("user_info", JSON.stringify(user_info.display_name))
                     setFields(fetchedFields);
                 }
             }
@@ -48,7 +48,7 @@ const Information = () => {
             console.log(err)
         }
 
-        setIsLoading(false)
+        //setIsLoading(false)
     }, [username])
 
     const handleUpdateInfo = async (e) => {
@@ -62,6 +62,9 @@ const Information = () => {
             }
 
             const response = await postData(`user/info`, fields)
+
+
+            dispatch(setUserDisplayName({ display_name: fields.display_name }))
 
             toast.success(response.data.msg)
 
