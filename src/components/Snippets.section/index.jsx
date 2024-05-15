@@ -45,7 +45,6 @@ const SnippetSection = () => {
                 if (searchItem) {
                     const response = await postData(`snippet/list/search`, payload);
                     const sortedData = response.data.user_snippet.sort((a, b) => new Date(b.date) - new Date(a.date));
-
                     setData(sortedData);
                 }
             }

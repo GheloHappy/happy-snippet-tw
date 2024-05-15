@@ -54,12 +54,15 @@ const SnippetsItem = ({ data, setIsLoading, isSearching }) => {
                     {currentItems.length > 0 ? (
                         currentItems.map((item, index) => (
                             <div key={index} className="w-full bg-white rounded flex text-[1rem] p-3 mt-2 gap-5">
-                                <div className="grid grid-cols-3 w-full">
+                                <div className="grid grid-cols-4 w-full">
                                     <div className="w-full flex flex-col items-center justify-center font-semibold">
                                         <p>{item.date}</p>
                                     </div>
                                     <div className="w-full overflow-auto p-2 flex flex-col text-center">
                                         <p>{item.snippet_title}</p>
+                                    </div>
+                                    <div className="w-full p-2 flex flex-col text-center items-center justify-center">
+                                        <p className={`font-semibold ${item.is_public ? "text-red-500" : "text-green-600" }`}>{item.is_public ? "Public" : "Private"}</p>
                                     </div>
                                     <div className="w-full flex flex-col items-end pr-4 justify-center">
                                         <button className="font-semibold text-blue-500 underline" onClick={() => handleView(item.id)}>View</button>
