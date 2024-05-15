@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { themesOptions } from './ThemesOptions.section';
 import { toast } from 'react-toastify';
@@ -23,22 +23,35 @@ const Welcome = () => {
     //handling in settings
     const isSettings = useMatch({ path: '/settings' })
 
+    useEffect(() => {
+        // Retrieve user settings from local storage
+        const savedSettings = JSON.parse(localStorage.getItem('user_settings'));
+        if (savedSettings) {
+            setUserLocalSettings(savedSettings);
+            setTheme(savedSettings.snippet_theme)
+        }
+    }, []);
+
     const handleCheckChanges = e => {
         const { name, checked } = e.target;
         setUserLocalSettings(prev => ({
             ...prev,
             [name]: checked
         }));
-    }
+    };
 
     const handleThemeChange = (e) => {
-        const selectedThemeName = e.target.value;
-        const selectedTheme = themesOptions.find(option => option.label === selectedThemeName)?.value;
-        setSelectedThemeName(selectedThemeName);
+        const target = e.target.value;
+        setTheme(target)
+    };
+
+    function setTheme(theme) {
+        const selectedTheme = themesOptions.find(option => option.label === theme)?.value;
+        setSelectedThemeName(theme);
         if (selectedTheme) {
             setSnippetTheme(selectedTheme);
         }
-    };
+    }
 
     const handleSave = async () => {
         const data = {
@@ -85,7 +98,7 @@ const Welcome = () => {
                     <select
                         onChange={handleThemeChange}
                         className="p-2 rounded bg-[#282C34] text-white"
-                        defaultValue="javascript"
+                        value={selectedThemeName}
                     >
                         {themesOptions.map((option, index) => (
                             <option key={index} value={option.label}>{option.label}</option>
@@ -100,8 +113,8 @@ const Welcome = () => {
                             className='ml-2'
                             type="checkbox"
                             name='dark_mode'
-                            value={user_settings.dark_mode}
-                            onClick={handleCheckChanges}
+                            checked={user_settings.dark_mode}
+                            onChange={handleCheckChanges}
                         />
                     </label>
                     <label className='rounded bg-[#282C34] text-white p-2 sm:text-[1.2rem] text-[1rem]'>
@@ -109,9 +122,9 @@ const Welcome = () => {
                         <input
                             className='ml-2'
                             type="checkbox"
-                            value={user_settings.snippet_line_numbers}
+                            checked={user_settings.snippet_line_numbers}
                             name='snippet_line_numbers'
-                            onClick={handleCheckChanges}
+                            onChange={handleCheckChanges}
                         />
                     </label>
                     <label className='rounded bg-[#282C34] text-white p-2 sm:text-[1.2rem] text-[1rem]'>
@@ -120,8 +133,8 @@ const Welcome = () => {
                             className='ml-2'
                             type="checkbox"
                             name='snippet_wrap_lines'
-                            value={user_settings.snippet_wrap_lines}
-                            onClick={handleCheckChanges}
+                            checked={user_settings.snippet_wrap_lines}
+                            onChange={handleCheckChanges}
                         />
                     </label>
                 </div>

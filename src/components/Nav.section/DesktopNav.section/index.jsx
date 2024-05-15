@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useMatch, useNavigate, useResolvedPath } from "react-router-dom";
 import { setNavState } from "../../../redux/system.redux.j/systemActions";
 import { GiDiamondsSmile } from "react-icons/gi";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RiShutDownLine } from "react-icons/ri";
 import { FaExclamation } from "react-icons/fa";
 import cookies from 'react-cookies'
@@ -15,13 +15,10 @@ const DesktopNav = () => {
     const [isProfile, setIsProfile] = useState(false)
     const is_dark = useSelector((state) => state.user.user_settings.dark_mode)
     const info = JSON.parse(localStorage.getItem('user_info'))
+    const navRef = useRef(null);
 
     function background() {
-        if (!is_dark) {
-            return "bg-gray-100 text-black border border-black"
-        }
-
-        return "bg-black text-white border border-white"
+        return is_dark ? "bg-black text-white border border-white" : "bg-gray-100 text-black border border-black";
     }
 
     const handleProfile = () => {
@@ -35,8 +32,21 @@ const DesktopNav = () => {
         navigate('/');
     }
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (navRef.current && !navRef.current.contains(event.target)) {
+                setIsProfile(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [navRef]);
+
     return (
-        <nav className={`fixed top-0 w-full ${background()} p-3 md:justify-between md:items-center flex md:flex-row shadow rounded`}>
+        <nav ref={navRef} className={`fixed top-0 w-full ${background()} p-3 md:justify-between md:items-center flex md:flex-row shadow rounded`}>
             <Link to="/" className="text-[1.2rem] sm:text-[1.5rem] md:text-[2rem] md:ml-2 w-full items-center justify-center font-flower">Happy Snippet</Link>
             <ul className="hidden md:flex justify-end gap-10 md:items-center md:justify-center">
                 <CustomLink to="/home">Home</CustomLink>
