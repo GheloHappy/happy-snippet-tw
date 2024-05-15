@@ -5,11 +5,9 @@ import { toast } from "react-toastify"
 import { setUserDisplayName } from "../../../redux/user.redux/userActions"
 import _ from "lodash"
 import { PulseLoader } from "react-spinners"
-import { useNavigate } from "react-router-dom"
 
 const Information = () => {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const username = useSelector((state) => state.user.user_name)
     //const [isLoading, setIsLoading] = useState(false)
     const [fields, setFields] = useState({
@@ -56,9 +54,20 @@ const Information = () => {
 
         try {
             if (fields.display_name === '' || !fields.display_name) {
-
                 toast.warning('Display Name is required.')
                 return
+            }
+
+            if (fields.display_name.length >= 10) {
+                toast.warning('Display Name must be less than 11 characters.')
+                return
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(fields.backup_email)) {
+                toast.warning("Please enter a valid email address")
+                return;
             }
 
             const response = await postData(`user/info`, fields)
@@ -67,12 +76,6 @@ const Information = () => {
             dispatch(setUserDisplayName({ display_name: fields.display_name }))
 
             toast.success(response.data.msg)
-
-            // let debounce_fun = _.debounce(function () {
-            //     location.reload(true)
-            // }, 600)
-
-            // debounce_fun();
         } catch (err) {
             console.log(err)
             toast.error('Internal Server Error')

@@ -23,6 +23,14 @@ const Welcome = () => {
     //handling in settings
     const isSettings = useMatch({ path: '/settings' })
 
+    function background() {
+        if (!user_settings.dark_mode) {
+            return "bg-gray-100 text-black border border-black"
+        }
+
+        return "bg-black text-white border border-white"
+    }
+
     const handleCheckChanges = e => {
         const { name, checked } = e.target;
         setUserLocalSettings(prev => ({
@@ -62,7 +70,7 @@ const Welcome = () => {
                 }))
 
                 toast.success(response.data.msg)
-                if(isSettings){
+                if (isSettings) {
                     navigate('/settings')
                     return
                 }
@@ -77,7 +85,7 @@ const Welcome = () => {
     }
     return (
         <div className={`w-full h-full ${isSettings ? 'mt-[1rem' : 'mt-[5rem]'} flex flex-col items-center justify-center`}>
-            <div className={`w-[90%] ${user_settings.dark_mode ? 'bg-black text-white' : 'bg-white text-black'} rounded flex flex-col 
+            <div className={`w-[90%] ${background()} rounded-lg flex flex-col 
             items-center text-center gap-1 md:gap-3 p-2 md:p-3`}>
                 {isSettings ? null : <h1 className="font-semibold text-[1.3rem] sm:text-[1.5rem]">Welcome! before you proceed please select your settings.</h1>}
                 <div className='flex sm:flex-row flex-col w-full justify-center items-center gap-1 mt-3'>
@@ -95,7 +103,7 @@ const Welcome = () => {
 
                 <div className='flex sm:flex-row flex-col gap-1 md:gap-3 w-full items-center justify-center'>
                     <label className='rounded bg-[#282C34] text-white p-2 sm:text-[1.2rem] text-[1rem]'>
-                        Dark Mode
+                        {user_settings.dark_mode ? "Dark Mode" : "Light Mode"}
                         <input
                             className='ml-2'
                             type="checkbox"
@@ -132,7 +140,7 @@ const Welcome = () => {
                     </SyntaxHighlighter>
                 </div>
                 <button onClick={handleSave}
-                    className='bg-[#282C34] rounded font-semibold text-white sm:text-[1.5rem] text-[1.2rem] w-1/4 md:w-1/6 px-2'>Save</button>
+                    className='bg-[#282C34] rounded font-semibold text-white sm:text-[1.5rem] text-[1.2rem] w-full md:w-1/2 p-2'>Save</button>
                 {isSettings ? null : <p className="font-semibold mt-1">"You can change it later in (Profile) settings."</p>}
             </div>
         </div>
