@@ -12,7 +12,7 @@ const Auth = () => {
                 <h1 className="font-flower text-[2rem] font-bold ">Happy Snippet</h1>
             </div> */}
             <div className="flex flex-col justify-center mx-auto">
-                <h1 className="font-flower text-[2rem] font-bold text-center ">Happy Snippet</h1>
+                <h1 className="font-flower md:text-[5rem] text-[3rem] font-bold text-center mb-10">Happy Snippet</h1>
                 <h1 className="font-serif text-[4rem] text-center">{isLogin ? 'Login' : 'Register'}</h1>
                 {isLogin ?
                     <Login />
