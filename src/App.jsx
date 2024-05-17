@@ -12,6 +12,7 @@ import UnprotectedRoute from './middleware/UnprotectedRoute.md';
 import ProtectedRoute from './middleware/ProtectedRoute.md';
 import store from './redux/store';
 import Welcome from './components/Welcome.section';
+import About from './pages/About.page';
 
 function App() {
   console.log("App Rendering")
@@ -49,6 +50,7 @@ function Root() {
         <Route path='/settings' element={<ProtectedRoute><Settings /></ProtectedRoute>} />
         <Route path='/snippets' element={<ProtectedRoute><Snippets /></ProtectedRoute>} />
         <Route path='/home' element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path='/about' element={<ProtectedRoute><About /></ProtectedRoute>} />
         <Route path='*' element={<ProtectedRoute><NotFound /></ProtectedRoute>} />
       </Routes>
     </>

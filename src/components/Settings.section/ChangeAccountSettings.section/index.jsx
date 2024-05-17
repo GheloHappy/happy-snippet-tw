@@ -65,7 +65,7 @@ const ChangeAccountSettings = () => {
     return (
 
         <div className="w-full h-full p-1 flex flex-col items-center justify-center ">
-            <div className="w-full h-full bg-[#151515] p-2 rounded">
+            <div className="w-full h-full bg-[#1d1d1d] p-2 rounded">
                 <form className="border w-full flex flex-col rounded items-center p-4 gap-3 text-black">
                     <label className="font-semibold text-white text-[1.5rem]">Change Password</label>
                     <input type="password" className="rounded p-2 text-[1rem] w-full md:w-1/2 " placeholder="Current Password" name="old_pass" value={fields.old_pass} onChange={handleChanges} />

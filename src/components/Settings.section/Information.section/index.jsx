@@ -92,7 +92,7 @@ const Information = () => {
     }
 
     return (
-        <div className="w-full h-full p-5 flex flex-col items-center justify-center bg-[#151515] rounded text-white">
+        <div className="w-full h-full p-5 flex flex-col items-center justify-center bg-[#1d1d1d] rounded text-white">
             <form className="flex flex-col items-center text-center w-full sm:p-5 h-full rounded gap-3 md:gap-10 justify-center">
                 <div className="w-full flex gap-3 flex-col sm:px-10">
                     <div className="w-full flex items-start">

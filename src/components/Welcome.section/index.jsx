@@ -89,7 +89,7 @@ const Welcome = () => {
         }
     }
     return (
-        <div className={`w-full h-full ${isSettings ? 'mt-[1rem' : 'mt-[5rem]'} flex flex-col items-center justify-center`}>
+        <div className={`w-full h-full ${isSettings ? '' : 'mt-[5rem]'} flex flex-col items-center justify-center`}>
             <div className={`w-[90%] ${user_settings.dark_mode ? "bg-black text-white border border-white" : "bg-gray-100 text-black border border-black"} rounded-lg flex flex-col 
             items-center text-center gap-1 md:gap-3 p-2 md:p-3`}>
                 {isSettings ? null : <h1 className="font-semibold text-[1.3rem] sm:text-[1.5rem]">Welcome! before you proceed please select your settings.</h1>}
