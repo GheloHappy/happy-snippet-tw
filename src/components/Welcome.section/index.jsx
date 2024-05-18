@@ -146,7 +146,7 @@ const Welcome = () => {
                 </div>
                 <button onClick={handleSave}
                     className='bg-[#282C34] rounded font-semibold text-white sm:text-[1.5rem] text-[1.2rem] w-full md:w-1/2 p-2'>Save</button>
-                {isSettings ? null : <p className="font-semibold mt-1">"You can change it later in (Profile) settings."</p>}
+                {isSettings ? null : <p className="font-semibold mt-1">"You can change it later in (Theme Settings) settings."</p>}
             </div>
         </div>
     )

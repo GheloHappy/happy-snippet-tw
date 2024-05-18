@@ -64,10 +64,12 @@ const Information = () => {
             }
 
             // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(fields.backup_email)) {
-                toast.warning("Please enter a valid email address")
-                return;
+            if(fields.backup_email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(fields.backup_email)) {
+                    toast.warning("Please enter a valid email address")
+                    return;
+                }
             }
 
             const response = await postData(`user/info`, fields)
@@ -93,7 +95,7 @@ const Information = () => {
 
     return (
         <div className="w-full h-full p-5 flex flex-col items-center justify-center bg-[#1d1d1d] rounded text-white">
-            <form className="flex flex-col items-center text-center w-full sm:p-5 h-full rounded gap-3 md:gap-10 justify-center">
+            <form className="flex flex-col items-center text-center w-full sm:p-5 h-full rounded gap-3  justify-center">
                 <div className="w-full flex gap-3 flex-col sm:px-10">
                     <div className="w-full flex items-start">
                         <label className="font-semibold">Display Name :</label>

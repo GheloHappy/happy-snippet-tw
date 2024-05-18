@@ -57,7 +57,7 @@ const DesktopNav = () => {
                     <GiDiamondsSmile />
                     {
                         isProfile ?
-                            <div className={`w-[15%] flex flex-col ${background()}  absolute text-[1.1rem] font-bold right-8 top-16 rounded  p-3 gap-4`}>
+                            <div className={`w-[15%] flex flex-col z-50 ${background()}  absolute text-[1.1rem] font-bold right-8 top-16 rounded  p-3 gap-4`}>
                                 <div className={`w-full text-center flex flex-col items-center justify-center rounded-full p-2  ${background()}`}>
                                     <span className="font-flower text-[1.3rem]">{info ? info.display_name : "Snippet User"}</span>
                                 </div>
@@ -73,9 +73,10 @@ const DesktopNav = () => {
                                         About
                                     </span>
                                 </Link>
-                                <span className="w-full flex flex-col items-center justify-center p-3 border rounded bg-slate-50">
+                                <span className="w-full flex flex-col items-center justify-center p-3 border rounded bg-slate-50"
+                                    onClick={handleLogout}>
                                     <span className="flex items-center justify-center gap-2 text-red-500"
-                                        onClick={handleLogout}>
+                                    >
                                         <RiShutDownLine />
                                         Logout
                                     </span>
