@@ -7,8 +7,8 @@ const Settings = () => {
     const [settingsNum, setSettingsNum] = useState(1)
 
     return (
-        <div className="w-full h-screen text-white mt-[1.2rem] md:mt-[2.5rem] p-1">
-            <div className='w-full h-full md:flex pt-10'>
+        <div className="w-full h-screen text-white ">
+            <div className='w-full h-full md:flex pt-10 mt-[1.5rem] md:mt-[2.5rem] p-1'>
                 <div className='md:w-[30%] flex md:flex-col items-center md:pt-10 border-white border md:rounded-l-lg'>
                     <div className='md:gap-2 flex md:flex-col font-bold md:text-[1.5rem] text-start w-full'>
                         <button className={`w-full p-5 ${settingsNum === 1 ? 'bg-gray-50 text-black' : "bg-none"}`} onClick={() => setSettingsNum(1)}>

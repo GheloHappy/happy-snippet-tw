@@ -64,7 +64,7 @@ const ChangeAccountSettings = () => {
     }
     return (
 
-        <div className="w-full h-full p-1 flex flex-col items-center justify-center ">
+        <div className="w-full h-full flex flex-col items-center justify-center ">
             <div className="w-full h-full bg-[#1d1d1d] p-2 rounded">
                 <form className="border w-full flex flex-col rounded items-center p-4 gap-3 text-black">
                     <label className="font-semibold text-white text-[1.5rem]">Change Password</label>

@@ -56,7 +56,7 @@ const MobileNav = () => {
                     </div>
                 </div>
                 <div className="w-full flex text-center text-[1.2rem] font-bold gap-2 p-4">
-                    <Link to="/about" className="flex w-full">
+                    <Link to="/about" className="flex w-full" onClick={() => { dispatch(setNavState(false))}}>
                         <div className="flex items-center gap-2 w-1/2">
                             <FaExclamation />
                             About

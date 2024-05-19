@@ -64,7 +64,7 @@ const Information = () => {
             }
 
             // Email validation
-            if(fields.backup_email) {
+            if (fields.backup_email) {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(fields.backup_email)) {
                     toast.warning("Please enter a valid email address")
@@ -94,50 +94,52 @@ const Information = () => {
     }
 
     return (
-        <div className="w-full h-full p-5 flex flex-col items-center justify-center bg-[#1d1d1d] rounded text-white">
-            <form className="flex flex-col items-center text-center w-full sm:p-5 h-full rounded gap-3  justify-center">
-                <div className="w-full flex gap-3 flex-col sm:px-10">
-                    <div className="w-full flex items-start">
-                        <label className="font-semibold">Display Name :</label>
+        <div className="w-full h-screen ">
+            <div className="h-full p-5 flex flex-col items-center bg-[#1d1d1d] rounded text-white">
+                <form className="flex flex-col items-center text-center w-full sm:p-5 h-full rounded gap-3  md:justify-center">
+                    <div className="w-full flex gap-3 flex-col sm:px-10">
+                        <div className="w-full flex items-start">
+                            <label className="font-semibold">Display Name :</label>
+                        </div>
+                        <input className="w-full p-2 rounded text-black"
+                            type="text" name="display_name" value={fields.display_name} onChange={handleChanges} placeholder="Display Name" />
                     </div>
-                    <input className="w-full p-2 rounded text-black"
-                        type="text" name="display_name" value={fields.display_name} onChange={handleChanges} placeholder="Display Name" />
-                </div>
-                <div className="w-full flex gap-3 flex-col sm:px-10">
-                    <div className="w-full flex items-start">
-                        <label className="font-semibold">First Name :</label>
+                    <div className="w-full flex gap-3 flex-col sm:px-10">
+                        <div className="w-full flex items-start">
+                            <label className="font-semibold">First Name :</label>
+                        </div>
+                        <input className="w-full p-2 rounded text-black"
+                            type="text" name="first_name" value={fields.first_name} onChange={handleChanges} placeholder="First Name (Optional)" />
                     </div>
-                    <input className="w-full p-2 rounded text-black"
-                        type="text" name="first_name" value={fields.first_name} onChange={handleChanges} placeholder="First Name (Optional)" />
-                </div>
-                <div className="w-full flex gap-3 flex-col sm:px-10">
-                    <div className="w-full flex items-start">
-                        <label className="font-semibold">Last Name :</label>
+                    <div className="w-full flex gap-3 flex-col sm:px-10">
+                        <div className="w-full flex items-start">
+                            <label className="font-semibold">Last Name :</label>
+                        </div>
+                        <input className="w-full p-2 rounded text-black"
+                            type="text" name="last_name" value={fields.last_name} onChange={handleChanges} placeholder="Last Name (Optional)" />
                     </div>
-                    <input className="w-full p-2 rounded text-black"
-                        type="text" name="last_name" value={fields.last_name} onChange={handleChanges} placeholder="Last Name (Optional)" />
-                </div>
-                <div className="w-full flex gap-3 flex-col sm:px-10">
-                    <div className="w-full flex items-start">
-                        <label className="font-semibold">Birthday (Optional) : </label>
+                    <div className="w-full flex gap-3 flex-col sm:px-10">
+                        <div className="w-full flex items-start">
+                            <label className="font-semibold">Birthday (Optional) : </label>
+                        </div>
+                        <input className="w-full p-2 rounded text-black"
+                            type="date" name="birthday" value={fields.birthday} onChange={handleChanges} />
                     </div>
-                    <input className="w-full p-2 rounded text-black"
-                        type="date" name="birthday" value={fields.birthday} onChange={handleChanges} />
-                </div>
 
-                <div className="w-full flex gap-3 flex-col sm:px-10">
-                    <div className="w-full flex items-start">
-                        <label className="font-semibold">Backup Email : </label>
+                    <div className="w-full flex gap-3 flex-col sm:px-10">
+                        <div className="w-full flex items-start">
+                            <label className="font-semibold">Backup Email : </label>
+                        </div>
+                        <input className="w-full p-2 rounded text-black"
+                            type="text" name="backup_email" value={fields.backup_email} onChange={handleChanges} placeholder="Backup Email (Optional)" />
                     </div>
-                    <input className="w-full p-2 rounded text-black"
-                        type="text" name="backup_email" value={fields.backup_email} onChange={handleChanges} placeholder="Backup Email (Optional)" />
-                </div>
-                <div className="w-full pt-5 sm:px-10">
-                    <button className="w-full bg-[#151515] text-white border-[3px] font-serif py-2 text-[1.5rem] rounded" onClick={handleUpdateInfo}>
-                        UPDATE
-                    </button>
-                </div>
-            </form>
+                    <div className="w-full pt-5 sm:px-10">
+                        <button className="w-full bg-[#151515] text-white border-[3px] font-serif py-2 text-[1.5rem] rounded" onClick={handleUpdateInfo}>
+                            UPDATE
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }
