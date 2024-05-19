@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { postData } from "../../../utils/fetcher";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,13 +6,16 @@ import { setSnippet, setSnippetLanguage, setSnippetPreview, setSnippetSave, setS
 import { setPageNumber } from "../../../redux/system.redux.j/systemActions";
 import { FaSadTear } from "react-icons/fa";
 import { SyncLoader } from "react-spinners";
+import { SlOptions } from "react-icons/sl";
 
 const SnippetsItem = ({ data, setIsLoading, isSearching }) => {
     const dispatch = useDispatch();
     const user_id = useSelector((state) => state.user.user_id);
     const page_number = useSelector((state) => state.system.page_number)
+    const [toggleStates, setToggleStates] = useState({});
     const itemsPerPage = 10;
- 
+    const toggleRef = useRef(null);
+
     const handleView = async (snippet_id) => {
         setIsLoading(true);
         try {
@@ -37,17 +40,38 @@ const SnippetsItem = ({ data, setIsLoading, isSearching }) => {
         setIsLoading(false);
     };
 
+    const handleToggle = (id) => {
+        setToggleStates((prevState) => ({
+            ...prevState,
+            [id]: !prevState[id]
+        }));
+    }
+
     const indexOfLastItem = page_number * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
     const paginate = (page_number) => dispatch(setPageNumber(page_number));
 
+    //default use for closing modals on click outside of ref
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (toggleRef.current && !toggleRef.current.contains(event.target)) {
+                setToggleStates(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [toggleRef]);
+
     return (
         <>
             {isSearching ?
                 <div className="w-full h-screen flex flex-col items-center justify-center overflow-hidden">
-                    <SyncLoader color="#fff" size={20}/>
+                    <SyncLoader color="#fff" size={20} />
                 </div>
                 :
                 <div className="md:w-3/4 w-full overflow-auto">
@@ -62,10 +86,34 @@ const SnippetsItem = ({ data, setIsLoading, isSearching }) => {
                                         <p>{item.snippet_title}</p>
                                     </div>
                                     <div className="w-full p-2 flex flex-col text-center items-center justify-center">
-                                        <p className={`font-semibold ${item.is_public ? "text-red-500" : "text-green-600" }`}>{item.is_public ? "Public" : "Private"}</p>
+                                        <p className={`font-semibold ${item.is_public ? "text-red-500" : "text-green-600"}`}>{item.is_public ? "Public" : "Private"}</p>
                                     </div>
-                                    <div className="w-full flex flex-col items-end pr-4 justify-center">
-                                        <button className="font-semibold text-blue-500 underline" onClick={() => handleView(item.id)}>View</button>
+                                    <div className="w-full p-2 flex flex-col text-center items-center justify-center">
+                                        {
+                                            item.is_public ?
+                                                <div>
+                                                    <button className="text-[1.5rem] text-blue-800" onClick={() => handleToggle(item.id)}>
+                                                        <SlOptions />
+                                                    </button>
+                                                    {toggleStates[item.id] ?
+                                                        <div ref={toggleRef} className="fixed bg-gray-100 py-2 rounded border border-black gap-1 
+                                                        font-semibold flex flex-col items-center justify-center">
+                                                            <div className="w-full px-3" onClick={() => handleView(item.id)}>
+                                                                <span className="text-blue-500 " >View</span>
+                                                            </div>
+                                                            <div className="w-full px-3">
+                                                                <span className="text-red-500">Share</span>
+                                                            </div>
+                                                        </div>
+                                                        :
+                                                        null
+                                                    }
+                                                </div>
+                                                :
+                                                <div className="w-full flex flex-col items-end pr-4 justify-center">
+                                                    <button className="font-semibold text-blue-500 underline" onClick={() => handleView(item.id)}>View</button>
+                                                </div>
+                                        }
                                     </div>
                                 </div>
                             </div>

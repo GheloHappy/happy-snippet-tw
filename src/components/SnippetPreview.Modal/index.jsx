@@ -49,6 +49,7 @@ const SnippetPreview = () => {
             const response = await postData('snippet', fields);
 
             if (response.data.status) {
+                dispatch(setSnippet(''))
                 Clear(response);
                 return
             }
@@ -102,7 +103,7 @@ const SnippetPreview = () => {
         <>
             <div className="w-full h-screen absolute overflow-auto flex flex-col items-center justify-center bg-white bg-opacity-5 backdrop-filter backdrop-blur-sm">
                 <div className='w-full h-full p-5 bg-none'>
-                    <div className='w-full p-2 bg-white flex rounded-tl-md rounded-tr-md'>
+                    <div className='w-full p-2 bg-gray-100 flex rounded-tl-md rounded-tr-md'>
                         <div className='w-full text-start items-start justify-center flex flex-col pl-2'>
                             <p className='md:text-[2rem] text-[1.3rem] font-semibold'>{isSaving ? "Save Preview" : isViewing ? snippet_title : "Full Screen Preview"}</p>
                         </div>
