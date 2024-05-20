@@ -8,7 +8,7 @@ const CodeSnippetCard = () => {
     return (
         <div className='text-start w-full h-screen'>
             <div className='flex flex-col items-center justify-center  border p-3 rounded mt-[1rem]'>
-                <div className="w-full text-white">
+                <div className="w-full text-white gap-2 flex flex-col">
                     <div className='w-full flex'>
                         <label className="font-semibold">Preview: </label>
                         
