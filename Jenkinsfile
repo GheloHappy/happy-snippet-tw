@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     // Create and start the Docker containers for frontend and back end
-                    sh 'docker create --name happy-snippet-fe -p 5401:5401 --restart=always happy-snippet-fe:0'
+                    sh 'docker create --name happy-snippet-fe -p 5101:5101 --restart=always happy-snippet-fe:0'
                     //sh 'docker create --name mosf-fe -p 5401:5401 --restart=always -v /var/www/mosf-fe/.env:/usr/src/app/.env mosf-fe:0'
                     sh 'docker start happy-snippet-fe'
                 }
