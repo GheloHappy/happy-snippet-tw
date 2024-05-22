@@ -45,7 +45,7 @@ const Login = () => {
                     path: '/',
                     secure: true,
                     sameSite: 'Lax',
-                    httpOnly: true, //uncomment for live
+                    //httpOnly: true, //uncomment for live
                 })
 
                 const settings = decoded.user_settings
