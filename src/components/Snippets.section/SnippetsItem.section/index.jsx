@@ -8,7 +8,7 @@ import { FaSadTear } from "react-icons/fa";
 import { SyncLoader } from "react-spinners";
 import { SlOptions } from "react-icons/sl";
 
-const SnippetsItem = ({ data, setIsLoading, isSearching }) => {
+const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => {
     const dispatch = useDispatch();
     const user_id = useSelector((state) => state.user.user_id);
     const page_number = useSelector((state) => state.system.page_number)
@@ -39,6 +39,26 @@ const SnippetsItem = ({ data, setIsLoading, isSearching }) => {
         }
         setIsLoading(false);
     };
+
+    const handleDeleteSnippet = async (snippet_id) => {
+        setIsLoading(true);
+        try {
+            const payload = {
+                snippet_id: snippet_id,
+                user_id: user_id,
+            };
+
+            const response  = await postData('snippet/remove', payload)
+
+            toast.success(response.data.msg)
+
+            await fetchAllSnippets()
+        } catch (err) {
+            console.log(err);
+            toast.error('Internal Server Error.');
+        }
+        setIsLoading(false);
+    }
 
     const handleToggle = (id) => {
         setToggleStates((prevState) => ({
@@ -89,31 +109,30 @@ const SnippetsItem = ({ data, setIsLoading, isSearching }) => {
                                         <p className={`font-semibold ${item.is_public ? "text-red-500" : "text-green-600"}`}>{item.is_public ? "Public" : "Private"}</p>
                                     </div>
                                     <div className="w-full p-2 flex flex-col text-center items-center justify-center">
-                                        {
-                                            item.is_public ?
-                                                <div>
-                                                    <button className="text-[1.5rem] text-blue-800" onClick={() => handleToggle(item.id)}>
-                                                        <SlOptions />
-                                                    </button>
-                                                    {toggleStates[item.id] ?
-                                                        <div ref={toggleRef} className="fixed bg-gray-100 py-2 rounded border border-black gap-1 
+                                        <div>
+                                            <button className="text-[1.5rem] text-blue-800" onClick={() => handleToggle(item.id)}>
+                                                <SlOptions />
+                                            </button>
+                                            {toggleStates[item.id] ?
+                                                <div ref={toggleRef} className="fixed bg-gray-100 py-2 rounded border border-black gap-1 
                                                         font-semibold flex flex-col items-center justify-center">
-                                                            <div className="w-full px-3" onClick={() => handleView(item.id)}>
-                                                                <span className="text-blue-500 " >View</span>
-                                                            </div>
-                                                            <div className="w-full px-3">
-                                                                <span className="text-red-500">Share</span>
-                                                            </div>
-                                                        </div>
-                                                        :
-                                                        null
-                                                    }
+                                                    <div className="w-full px-3" onClick={() => handleView(item.id)}>
+                                                        <span className="text-blue-500 " >View</span>
+                                                    </div>
+                                                    <div className="w-full px-3">
+                                                        <span className="text-green-500">Share</span>
+                                                    </div>
+                                                    <div className="w-full px-3">
+                                                        <span className="text-red-500" onClick={() => handleDeleteSnippet(item.id)}>Delete</span>
+                                                    </div>
                                                 </div>
                                                 :
-                                                <div className="w-full flex flex-col items-end pr-4 justify-center">
-                                                    <button className="font-semibold text-blue-500 underline" onClick={() => handleView(item.id)}>View</button>
-                                                </div>
-                                        }
+                                                null
+                                            }
+                                        </div>
+                                        {/* <div className="w-full flex flex-col items-end pr-4 justify-center">
+                                            <button className="font-semibold text-blue-500 underline" onClick={() => handleView(item.id)}>View</button>  
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>

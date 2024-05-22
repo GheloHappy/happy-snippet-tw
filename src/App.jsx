@@ -15,7 +15,7 @@ import Welcome from './components/Welcome.section';
 import About from './pages/About.page';
 
 function App() {
-  console.log("App Rendering")
+  //console.log("App Rendering")
   return (
     <Provider store={store}>
       <BrowserRouter>

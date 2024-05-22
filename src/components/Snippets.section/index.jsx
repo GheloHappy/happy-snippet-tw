@@ -15,23 +15,24 @@ const SnippetSection = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isSearching, setIsSearching] = useState(false)
 
-    useEffect(() => {
-        const fetchAllSnippets = async () => {
-            setIsSearching(true)
-            try {
-                if (user_id > 0 && searchItem === "") {
-                    const response = await getData(`snippet/list/${user_id}`);
-                    const sortedData = response.data.user_snippet.sort((a, b) => new Date(b.date) - new Date(a.date));
+    const fetchAllSnippets = async () => {
+        setIsSearching(true)
+        try {
+            if (user_id > 0 && searchItem === "") {
+                const response = await getData(`snippet/list/${user_id}`);
+                const sortedData = response.data.user_snippet.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                    setData(sortedData);
-                }
+                setData(sortedData);
             }
-            catch (err) {
-                console.log(err)
-            }
-            setIsSearching(false)
         }
+        catch (err) {
+            console.log(err)
+        }
+        setIsSearching(false)
+    }
 
+
+    useEffect(() => {   
         fetchAllSnippets()
 
         const fetchSnippets = async () => {
@@ -91,7 +92,8 @@ const SnippetSection = () => {
                     </div>
                     <SnippetsItem data={data}
                         setIsLoading={setIsLoading}
-                        isSearching={isSearching} />
+                        isSearching={isSearching} 
+                        fetchAllSnippets={fetchAllSnippets}/>
                 </div>
 
             }
