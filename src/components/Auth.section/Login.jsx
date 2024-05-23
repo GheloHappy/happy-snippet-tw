@@ -43,8 +43,8 @@ const Login = () => {
                 cookies.save('_hs', response.data.token, {
                     maxAge: decoded.maxAge,
                     path: '/',
-                    secure: true,
-                    sameSite: 'Lax',
+                    //secure: true,
+                    //sameSite: 'Lax',
                     //httpOnly: true, //uncomment for live
                 })
 
