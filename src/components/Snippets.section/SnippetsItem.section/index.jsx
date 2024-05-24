@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { postData } from "../../../utils/fetcher";
 import { useDispatch, useSelector } from "react-redux";
-import { setSnippet, setSnippetLanguage, setSnippetPreview, setSnippetSave, setSnippetTittle, setSnippetView } from "../../../redux/snippet.redux/snippetActions";
+import { setSnippet, setSnippetLanguage, setSnippetSave, setSnippetTittle, setSnippetView } from "../../../redux/snippet.redux/snippetActions";
 import { setPageNumber } from "../../../redux/system.redux.j/systemActions";
 import { FaSadTear } from "react-icons/fa";
 import { SyncLoader } from "react-spinners";
 import { SlOptions } from "react-icons/sl";
+import RemoveApproval from "./RemoveApproval.modal";
 
 const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => {
     const dispatch = useDispatch();
@@ -15,6 +16,9 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
     const [toggleStates, setToggleStates] = useState({});
     const itemsPerPage = 10;
     const toggleRef = useRef(null);
+    const [isRemoving, setIsRemoving] = useState(false)
+    const [snippetToDelete, setSnippetToDelete] = useState(null);
+    const [snippetToDeleteTitle, setSnippetToDeleteTitle] = useState(null);
 
     const handleView = async (snippet_id) => {
         setIsLoading(true);
@@ -39,26 +43,35 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
         }
         setIsLoading(false);
     };
+    
 
-    const handleDeleteSnippet = async (snippet_id) => {
+    const handleDeleteSnippet = async (snippet_id, snippet_title) => {
+        setIsRemoving(true)
+        setSnippetToDelete(snippet_id)
+        setToggleStates(false);
+        setSnippetToDeleteTitle(snippet_title)
+    }
+
+    const confirmDeleteSnippet = async () => {
+        setIsRemoving(false);
         setIsLoading(true);
         try {
             const payload = {
-                snippet_id: snippet_id,
+                snippet_id: snippetToDelete,
                 user_id: user_id,
             };
 
-            const response  = await postData('snippet/remove', payload)
+            const response = await postData('snippet/remove', payload);
 
-            toast.success(response.data.msg)
+            toast.success(response.data.msg);
 
-            await fetchAllSnippets()
+            await fetchAllSnippets();
         } catch (err) {
             console.log(err);
             toast.error('Internal Server Error.');
         }
         setIsLoading(false);
-    }
+    };
 
     const handleToggle = (id) => {
         setToggleStates((prevState) => ({
@@ -89,6 +102,7 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
 
     return (
         <>
+            {isRemoving ? <RemoveApproval setIsRemoving={setIsRemoving} onDelete={confirmDeleteSnippet} title={snippetToDeleteTitle}/> : null}
             {isSearching ?
                 <div className="w-full h-screen flex flex-col items-center justify-center overflow-hidden">
                     <SyncLoader color="#fff" size={20} />
@@ -109,13 +123,13 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
                                         <p className={`font-semibold ${item.is_public ? "text-red-500" : "text-green-600"}`}>{item.is_public ? "Public" : "Private"}</p>
                                     </div>
                                     <div className="w-full p-2 flex flex-col text-center items-center justify-center">
-                                        <div>
+                                        <div className="">
                                             <button className="text-[1.5rem] text-blue-800" onClick={() => handleToggle(item.id)}>
                                                 <SlOptions />
                                             </button>
                                             {toggleStates[item.id] ?
-                                                <div ref={toggleRef} className="fixed bg-gray-100 py-2 rounded border border-black gap-1 
-                                                        font-semibold flex flex-col items-center justify-center">
+                                                <div ref={toggleRef} className="fixed bg-gray-100 py-2 rounded border border-black gap-1
+                                                        font-semibold flex flex-col items-center justify-center text-start">
                                                     <div className="w-full px-3" onClick={() => handleView(item.id)}>
                                                         <span className="text-blue-500 " >View</span>
                                                     </div>
@@ -123,7 +137,7 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
                                                         <span className="text-green-500">Share</span>
                                                     </div>
                                                     <div className="w-full px-3">
-                                                        <span className="text-red-500" onClick={() => handleDeleteSnippet(item.id)}>Delete</span>
+                                                        <span className="text-red-500" onClick={() => handleDeleteSnippet(item.id, item.snippet_title)}>Delete</span>
                                                     </div>
                                                 </div>
                                                 :

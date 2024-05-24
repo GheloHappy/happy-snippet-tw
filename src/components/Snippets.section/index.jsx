@@ -32,7 +32,7 @@ const SnippetSection = () => {
     }
 
 
-    useEffect(() => {   
+    useEffect(() => {
         fetchAllSnippets()
 
         const fetchSnippets = async () => {
@@ -64,7 +64,7 @@ const SnippetSection = () => {
         }, 300);
 
         handleSearchThrottled();
-        
+
 
         // Cleanup the throttled function to avoid memory leaks
         return () => {
@@ -92,8 +92,8 @@ const SnippetSection = () => {
                     </div>
                     <SnippetsItem data={data}
                         setIsLoading={setIsLoading}
-                        isSearching={isSearching} 
-                        fetchAllSnippets={fetchAllSnippets}/>
+                        isSearching={isSearching}
+                        fetchAllSnippets={fetchAllSnippets} />
                 </div>
 
             }
