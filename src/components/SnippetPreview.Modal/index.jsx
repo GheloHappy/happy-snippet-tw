@@ -129,8 +129,8 @@ const SnippetPreview = () => {
                                 />
                             </div>
                             <div className='w-full p-2 flex items-center bg-slate-100 rounded-br-md rounded-bl-md'>
-                                <div className='w-1/2'>
-                                    <label className='font-semibold'>
+                                <div className='w-1/2 '>
+                                    <label className='font-semibold cursor-pointer'>
                                         <input
                                             type="checkbox"
                                             className="mr-2"
@@ -141,7 +141,7 @@ const SnippetPreview = () => {
                                 </div>
                                 <div className='w-1/2 text-end pr-2 flex justify-end'>
                                     <button
-                                        className="text-[1.5rem] font-bold border-2 rounded p-2 border-black"
+                                        className="text-[1.5rem] font-bold border-2 rounded p-2 border-black flex"
                                         onClick={handleSave}
                                     >
                                         <FaSave />
@@ -153,8 +153,8 @@ const SnippetPreview = () => {
                     {isViewing && !isSaving && !isPreview ?
                         <>
                             <div className='w-full p-2 flex items-center bg-slate-100 rounded-br-md rounded-bl-md'>
-                                <div className='w-full flex'>
-                                    <div className='w-1/2 items-start justify-start flex'>
+                                <div className='w-full flex flex-col items-end'>
+                                    {/* <div className='w-1/2 items-start justify-start flex'>
                                         <div className='px-3 flex items-center border-2 border-black rounded'>
                                             <button
                                                 className="text-[1.5rem] font-bold rounded p-2">
@@ -162,15 +162,15 @@ const SnippetPreview = () => {
                                             </button>
                                             <label> Update Snippet</label>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className='w-1/2 items-end justify-end flex'>
-                                        <div className='px-3 flex items-center border-2 border-black rounded'
+                                        <div className='px-2 flex items-center border-2 border-black rounded '
                                             onClick={handleCopy}>
                                             <button
-                                                className="text-[1.5rem] font-bold rounded p-2">
+                                                className="text-[1.2rem] font-bold rounded p-2">
                                                 <FaClipboard />
                                             </button>
-                                            <label> Copy Snippet</label>
+                                            <label className='cursor-pointer'> Copy Snippet</label>
                                         </div>
                                     </div>
                                 </div>

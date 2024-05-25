@@ -9,7 +9,7 @@ import { PulseLoader } from "react-spinners"
 const Information = () => {
     const dispatch = useDispatch()
     const username = useSelector((state) => state.user.user_name)
-    //const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [fields, setFields] = useState({
         username: '',
         display_name: '',
@@ -51,15 +51,18 @@ const Information = () => {
 
     const handleUpdateInfo = async (e) => {
         e.preventDefault()
-
+        setIsLoading(true)
+        
         try {
             if (fields.display_name === '' || !fields.display_name) {
                 toast.warning('Display Name is required.')
+                setIsLoading(false)
                 return
             }
 
             if (fields.display_name.length >= 10) {
                 toast.warning('Display Name must be less than 11 characters.')
+                setIsLoading(false)
                 return
             }
 
@@ -68,6 +71,7 @@ const Information = () => {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(fields.backup_email)) {
                     toast.warning("Please enter a valid email address")
+                    setIsLoading(false)
                     return;
                 }
             }
@@ -82,6 +86,7 @@ const Information = () => {
             console.log(err)
             toast.error('Internal Server Error')
         }
+        setIsLoading(false)
     }
 
     const handleChanges = e => {
@@ -135,7 +140,7 @@ const Information = () => {
                     </div>
                     <div className="w-full pt-5 sm:px-10">
                         <button className="w-full bg-[#151515] text-white border-[3px] font-serif py-2 text-[1.5rem] rounded" onClick={handleUpdateInfo}>
-                            UPDATE
+                            {isLoading ? <PulseLoader color="#fff" size={10} /> : 'UPDATE'}
                         </button>
                     </div>
                 </form>

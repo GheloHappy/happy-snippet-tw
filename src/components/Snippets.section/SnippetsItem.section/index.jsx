@@ -43,7 +43,7 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
         }
         setIsLoading(false);
     };
-    
+
 
     const handleDeleteSnippet = async (snippet_id, snippet_title) => {
         setIsRemoving(true)
@@ -102,7 +102,7 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
 
     return (
         <>
-            {isRemoving ? <RemoveApproval setIsRemoving={setIsRemoving} onDelete={confirmDeleteSnippet} title={snippetToDeleteTitle}/> : null}
+            {isRemoving ? <RemoveApproval setIsRemoving={setIsRemoving} onDelete={confirmDeleteSnippet} title={snippetToDeleteTitle} /> : null}
             {isSearching ?
                 <div className="w-full h-screen flex flex-col items-center justify-center overflow-hidden">
                     <SyncLoader color="#fff" size={20} />
@@ -129,13 +129,19 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
                                             </button>
                                             {toggleStates[item.id] ?
                                                 <div ref={toggleRef} className="fixed bg-gray-100 py-2 rounded border border-black gap-2
-                                                        font-semibold flex flex-col items-center justify-center text-start">
+                                                        font-semibold flex flex-col items-center justify-center text-start cursor-pointer">
                                                     <div className="w-full px-3" onClick={() => handleView(item.id)}>
                                                         <span className="text-blue-500 " >View</span>
                                                     </div>
                                                     <div className="w-full px-3">
-                                                        <span className="text-green-500">Share</span>
+                                                        <span className="text-yellow-600" >Edit</span>
                                                     </div>
+                                                    {item.is_public ?
+                                                        <div className="w-full px-3">
+                                                            <span className="text-green-500">Share</span>
+                                                        </div>
+                                                        : null
+                                                    }
                                                     <div className="w-full px-3">
                                                         <span className="text-red-500" onClick={() => handleDeleteSnippet(item.id, item.snippet_title)}>Delete</span>
                                                     </div>
