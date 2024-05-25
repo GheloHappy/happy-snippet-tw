@@ -111,12 +111,12 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
                 <div className="md:w-3/4 w-full overflow-auto">
                     {currentItems.length > 0 ? (
                         currentItems.map((item, index) => (
-                            <div key={index} className="w-full bg-white rounded flex text-[1rem] p-3 mt-2 gap-5">
-                                <div className="grid grid-cols-4 w-full">
+                            <div key={index} className="w-full bg-white rounded flex text-[1rem] mt-2">
+                                <div className="grid grid-cols-[25%,40%,10%,25%] w-full py-3">
                                     <div className="w-full flex flex-col items-center justify-center font-semibold">
                                         <p>{item.date}</p>
                                     </div>
-                                    <div className="w-full overflow-auto p-2 flex flex-col text-center">
+                                    <div className="w-full overflow-auto p-2 flex flex-col text-center font-semibold">
                                         <p>{item.snippet_title}</p>
                                     </div>
                                     <div className="w-full p-2 flex flex-col text-center items-center justify-center">
@@ -128,7 +128,7 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
                                                 <SlOptions />
                                             </button>
                                             {toggleStates[item.id] ?
-                                                <div ref={toggleRef} className="fixed bg-gray-100 py-2 rounded border border-black gap-1
+                                                <div ref={toggleRef} className="fixed bg-gray-100 py-2 rounded border border-black gap-2
                                                         font-semibold flex flex-col items-center justify-center text-start">
                                                     <div className="w-full px-3" onClick={() => handleView(item.id)}>
                                                         <span className="text-blue-500 " >View</span>

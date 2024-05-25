@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { setUserSettings } from '../../redux/user.redux/userActions';
+import { PulseLoader } from 'react-spinners';
 
 const Welcome = () => {
     const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Welcome = () => {
         snippet_line_numbers: false,
         snippet_wrap_lines: false,
     })
+    const [isLoading, setIsLoading] = useState(false)
 
     //handling in settings
     const isSettings = useMatch({ path: '/settings' })
@@ -54,6 +56,7 @@ const Welcome = () => {
     }
 
     const handleSave = async () => {
+        setIsLoading(true)
         const data = {
             user_id: user_id,
             dark_mode: user_settings.dark_mode,
@@ -77,6 +80,7 @@ const Welcome = () => {
                 toast.success(response.data.msg)
                 if (isSettings) {
                     navigate('/settings')
+                    setIsLoading(false)
                     return
                 }
                 navigate('/home')
@@ -87,6 +91,7 @@ const Welcome = () => {
             console.log(err)
             toast.error('Internal Server Error');
         }
+        setIsLoading(false)
     }
     return (
         <div className={`w-full h-full ${isSettings ? '' : 'mt-[5rem]'} flex flex-col items-center justify-center`}>
@@ -145,7 +150,7 @@ const Welcome = () => {
                     </SyntaxHighlighter>
                 </div>
                 <button onClick={handleSave}
-                    className='bg-[#282C34] rounded font-semibold text-white sm:text-[1.5rem] text-[1.2rem] w-full md:w-1/2 p-2'>Save</button>
+                    className='bg-[#282C34] rounded font-semibold text-white sm:text-[1.5rem] text-[1.2rem] w-full md:w-1/2 p-2'>{isLoading ? <PulseLoader color="#fff" size={10} /> : 'Save'}</button>
                 {isSettings ? null : <p className="font-semibold mt-1">"You can change it later in (Theme Settings) settings."</p>}
             </div>
         </div>
