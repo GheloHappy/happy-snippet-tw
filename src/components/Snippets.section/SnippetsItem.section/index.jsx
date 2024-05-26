@@ -165,9 +165,16 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
                     {/* Pagination */}
                     <ul className="flex justify-center mt-4 w-full text-black">
                         {Array.from({ length: Math.ceil(data.length / itemsPerPage) }, (_, index) => (
-                            <li key={index} className="mx-2">
-                                <button onClick={() => paginate(index + 1)} className="text-white text-[1.2rem] font-semibold">{index + 1}</button>
-                            </li>
+                             <li key={index} className="mx-2">
+                             <button
+                                 onClick={() => paginate(index + 1)}
+                                 className={`text-[1.2rem] font-semibold ${
+                                     page_number === index + 1 ? "text-red-500" : "text-white"
+                                 }`}
+                             >
+                                 {index + 1}
+                             </button>
+                         </li>
                         ))}
                     </ul>
                 </div>
