@@ -45,19 +45,18 @@ const EditSnippet = () => {
                     value={snippet}
                 />
                 <div className='w-full flex items-center justify-center gap-5 px-2'>
-                    <div className='w-1/2 flex flex-col items-start'>
+                    {/* <div className='w-1/2 flex flex-col items-start'>
                         <button className='border-white border-[2px] p-2 text-[1.5rem] rounded flex items-center'>
                             <GrFormView />
                             View
                         </button>
-                    </div>
-                    <div className='w-1/2 flex flex-col items-end'>
-                        <button className='border-white border-[2px] p-2 text-[1.5rem] rounded flex items-center gap-2'>
-                            <GrUpdate />
-                            Update
-                        </button>
-                    </div>
-
+                    </div> */}
+                    {/* <div className='w-1/2 flex flex-col items-end'> */}
+                    <button className='w-full justify-center border-white border-[2px] p-2 text-[1.2rem] rounded flex items-center gap-2'>
+                        <GrUpdate />
+                        Update
+                    </button>
+                    {/* </div> */}
                 </div>
             </div>
         </div>
