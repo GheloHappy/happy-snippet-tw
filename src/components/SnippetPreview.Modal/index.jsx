@@ -163,7 +163,7 @@ const SnippetPreview = () => {
                                             <label> Update Snippet</label>
                                         </div>
                                     </div> */}
-                                    <div className='w-1/2 items-end justify-end flex'>
+                                    <div className='w-full items-center justify-start flex'>
                                         <div className='px-2 flex items-center border-2 border-black rounded '
                                             onClick={handleCopy}>
                                             <button
