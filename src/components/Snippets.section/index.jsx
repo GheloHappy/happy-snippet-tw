@@ -6,11 +6,13 @@ import { IoIosSearch } from "react-icons/io"
 import Loading from '../Loading'
 import SnippetPreview from "../SnippetPreview.Modal"
 import _ from "lodash"
+import EditSnippet from "./EditSnippet.section"
 
 const SnippetSection = () => {
     const user_id = useSelector((state) => state.user.user_id)
     const [searchItem, setSearchItem] = useState('')
     const isViewing = useSelector((state) => state.snippet.snippet_view)
+    const isEditing = useSelector((state) => state.snippet.snippet_editing)
     const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [isSearching, setIsSearching] = useState(false)
@@ -79,24 +81,29 @@ const SnippetSection = () => {
     return (
         <>
             {isLoading ? <Loading /> : null}
-            {isViewing ?
+            {isEditing ? (
+                <EditSnippet />
+            ) : isViewing ? (
                 <SnippetPreview />
-                :
+            ) : (
                 <div className="flex-col flex mt-[2.5rem] md:mt-[4.5rem] w-full pt-6 md:gap-3 items-center justify-center">
                     <div className="w-full bg-white rounded p-1 flex gap-3 md:w-3/4">
-                        <input className="text-[1.1rem] w-full border rounded p-2"
+                        <input
+                            className="text-[1.1rem] w-full border rounded p-2"
                             placeholder={`Search Title`}
                             type="text"
-                            onChange={handleSearch} />
+                            onChange={handleSearch}
+                        />
                         {/* <button className="text-[2rem]"><IoIosSearch /> </button> */}
                     </div>
-                    <SnippetsItem data={data}
+                    <SnippetsItem
+                        data={data}
                         setIsLoading={setIsLoading}
                         isSearching={isSearching}
-                        fetchAllSnippets={fetchAllSnippets} />
+                        fetchAllSnippets={fetchAllSnippets}
+                    />
                 </div>
-
-            }
+            )}
         </>
 
     )

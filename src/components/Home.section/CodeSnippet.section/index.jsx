@@ -51,7 +51,7 @@ const CodeSnippet = () => {
                 </div>
 
                 <TextareaAutosize
-                    className="text-black w-full p-2 rounded"
+                    className="text-black min-w-full text-nowrap p-2 rounded"
                     minRows={10}
                     maxRows={30}
                     placeholder='Enter your snippet here...'

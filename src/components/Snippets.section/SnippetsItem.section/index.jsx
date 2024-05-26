@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { postData } from "../../../utils/fetcher";
 import { useDispatch, useSelector } from "react-redux";
-import { setSnippet, setSnippetLanguage, setSnippetSave, setSnippetTittle, setSnippetView } from "../../../redux/snippet.redux/snippetActions";
+import { setSnippet, setSnippetEditing, setSnippetLanguage, setSnippetSave, setSnippetTittle, setSnippetView } from "../../../redux/snippet.redux/snippetActions";
 import { setPageNumber } from "../../../redux/system.redux.j/systemActions";
 import { FaSadTear } from "react-icons/fa";
 import { SyncLoader } from "react-spinners";
@@ -20,7 +20,7 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
     const [snippetToDelete, setSnippetToDelete] = useState(null);
     const [snippetToDeleteTitle, setSnippetToDeleteTitle] = useState(null);
 
-    const handleView = async (snippet_id) => {
+    const handleViewEdit = async (snippet_id, isEdit) => {
         setIsLoading(true);
         try {
             const payload = {
@@ -35,8 +35,14 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
             dispatch(setSnippetLanguage(snippet_data.snippet_language))
             dispatch(setSnippet(snippet_data.snippet_code))
             dispatch(setSnippetTittle(snippet_data.snippet_title))
-            dispatch(setSnippetView(true))
-            dispatch(setSnippetSave(false))
+
+            if (isEdit) {
+                dispatch(setSnippetEditing(true))
+            } else {
+                dispatch(setSnippetView(true))
+                dispatch(setSnippetSave(false))
+            }
+            setToggleStates(false);
         } catch (err) {
             console.log(err);
             toast.error('Internal Server Error.');
@@ -94,9 +100,16 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
             }
         };
 
+        const handleScroll = () => {
+            setToggleStates(false);
+        };
+
         document.addEventListener('mousedown', handleClickOutside);
+        window.addEventListener('scroll', handleScroll);
+
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
+            window.removeEventListener('scroll', handleScroll);
         };
     }, [toggleRef]);
 
@@ -108,7 +121,7 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
                     <SyncLoader color="#fff" size={20} />
                 </div>
                 :
-                <div className="md:w-3/4 w-full overflow-auto">
+                <div className="md:w-3/4 w-full overflow-auto px-1">
                     {currentItems.length > 0 ? (
                         currentItems.map((item, index) => (
                             <div key={index} className="w-full bg-white rounded flex text-[1rem] mt-2">
@@ -130,11 +143,11 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
                                             {toggleStates[item.id] ?
                                                 <div ref={toggleRef} className="fixed bg-gray-100 py-2 rounded border border-black gap-2
                                                         font-semibold flex flex-col items-center justify-center text-start cursor-pointer">
-                                                    <div className="w-full px-3" onClick={() => handleView(item.id)}>
+                                                    <div className="w-full px-3" onClick={() => handleViewEdit(item.id, false)}>
                                                         <span className="text-blue-500 " >View</span>
                                                     </div>
                                                     <div className="w-full px-3">
-                                                        <span className="text-yellow-600" >Edit</span>
+                                                        <span className="text-yellow-600" onClick={() => handleViewEdit(item.id, true)}>Edit</span>
                                                     </div>
                                                     {item.is_public ?
                                                         <div className="w-full px-3">
@@ -165,16 +178,15 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
                     {/* Pagination */}
                     <ul className="flex justify-center mt-4 w-full text-black">
                         {Array.from({ length: Math.ceil(data.length / itemsPerPage) }, (_, index) => (
-                             <li key={index} className="mx-2">
-                             <button
-                                 onClick={() => paginate(index + 1)}
-                                 className={`text-[1.2rem] font-semibold ${
-                                     page_number === index + 1 ? "text-red-500" : "text-white"
-                                 }`}
-                             >
-                                 {index + 1}
-                             </button>
-                         </li>
+                            <li key={index} className="mx-2">
+                                <button
+                                    onClick={() => paginate(index + 1)}
+                                    className={`text-[1.2rem] font-semibold ${page_number === index + 1 ? "text-red-500" : "text-white"
+                                        }`}
+                                >
+                                    {index + 1}
+                                </button>
+                            </li>
                         ))}
                     </ul>
                 </div>

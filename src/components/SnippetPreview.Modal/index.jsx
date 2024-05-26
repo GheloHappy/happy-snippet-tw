@@ -108,7 +108,7 @@ const SnippetPreview = () => {
                             <p className='md:text-[2rem] text-[1.3rem] font-semibold'>{isSaving ? "Save Preview" : isViewing ? snippet_title : "Full Screen Preview"}</p>
                         </div>
                         <div className='w-[10%] items-end justify-center flex flex-col'>
-                            <button className='text-[1.5rem] text-red-500 font-bold' onClick={
+                            <button className='text-[2rem] text-red-500 font-bold' onClick={
                                 handleCloseClear
                             }>
                                 <RxCross1 />
