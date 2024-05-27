@@ -9,6 +9,8 @@ const EditSnippet = () => {
     const dispatch = useDispatch()
     const snippet = useSelector((state) => state.snippet.snippet_code)
     const language = useSelector((state) => state.snippet.snippet_language)
+    const snippet_title = useSelector((state) => state.snippet.snippet_title)
+    const is_public = useSelector((state) => state.snippet.snippet_privacy)
 
     const handleCloseClear = () => {
         dispatch(setSnippetEditing(false))
@@ -40,7 +42,8 @@ const EditSnippet = () => {
                     </div>
                     <div className='w-full flex md:items-center p-0 md:p-2 md:flex-row flex-col items-start gap-2'>
                         <label className='font-semibold text-[1.2rem]'>Title: </label>
-                        <input type='text' className='w-full p-2 text-black font-normal rounded' />
+                        <input type='text' className='w-full p-2 text-black font-normal rounded' 
+                        defaultValue={snippet_title}/>
                     </div>
                     <div className='w-full flex items-center justify-start md:justify-end md:pr-2'>
                         <label className='font-semibold cursor-pointer'>
@@ -48,7 +51,8 @@ const EditSnippet = () => {
                                 type="checkbox"
                                 className="mr-2"
                                 name='is_public'
-                            /> Make it public?
+                                defaultChecked={is_public}
+                            /> Make it {is_public ? "private" : "public" } ?
                         </label>
                     </div>
                 </div>
