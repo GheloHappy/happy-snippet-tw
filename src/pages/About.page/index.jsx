@@ -8,7 +8,7 @@ const About = () => {
     const is_dark = useSelector((state) => state.user.user_settings.dark_mode)
 
     return (
-        <div className={`flex flex-col items-center w-full h-screen ${is_dark ? "bg-[#1d1d1d]" : "bg-gray-100"} p-1`}>
+        <div className={`flex flex-col items-center w-full ${is_dark ? "bg-[#1d1d1d]" : "bg-gray-100"} p-1`}>
             <div className={`w-full mt-[4rem] md:mt-[5rem] flex flex-col items-center ${is_dark ? "text-white border-white border": "text-black border-black border"}
             h-full rounded-md p-5 gap-5 font-flower border-4 md:justify-center`}>
                 <div className="w-full flex justify-center text-[5rem] gap-5">

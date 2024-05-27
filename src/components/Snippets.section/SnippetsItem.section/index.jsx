@@ -138,7 +138,7 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
                                         </div>
                                     </div>
                                     :
-                                    <div className="grid grid-cols-[25%,40%,10%,25%] w-full py-3">
+                                    <div className="grid grid-cols-[28%,37%,10%,25%] w-full py-3">
                                         <div className="w-full flex flex-col items-center justify-center font-semibold">
                                             <p>{item.date}</p>
                                         </div>
