@@ -6,7 +6,7 @@ import { GrFormView } from 'react-icons/gr';
 const CodeSnippetCard = () => {
     const dispatch = useDispatch()
     return (
-        <div className='text-start w-full h-screen'>
+        <div className='text-start w-full h-full'>
             <div className='flex flex-col items-center justify-center  border p-3 rounded mt-[1rem]'>
                 <div className="w-full text-white gap-2 flex flex-col">
                     <div className='w-full flex'>

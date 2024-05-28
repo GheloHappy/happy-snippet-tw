@@ -21,6 +21,7 @@ const SyntaxHighlighterComponent = () => {
     }, [])
 
     return (
+
         <SyntaxHighlighter
             language={language}
             style={theme}
@@ -29,7 +30,6 @@ const SyntaxHighlighterComponent = () => {
         >
             {snippet}
         </SyntaxHighlighter>
-
     )
 }
 
