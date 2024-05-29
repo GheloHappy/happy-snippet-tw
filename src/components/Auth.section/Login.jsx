@@ -5,7 +5,7 @@ import { PulseLoader } from "react-spinners";
 import cookies from 'react-cookies'
 import { jwtDecode } from "jwt-decode";
 import { useDispatch } from "react-redux";
-import { setUserDisplayName, setUserId, setUserSettings } from "../../redux/user.redux/userActions";
+import { setUserId, setUserSettings } from "../../redux/user.redux/userActions";
 
 const Login = () => {
     const navigate = useNavigate();
