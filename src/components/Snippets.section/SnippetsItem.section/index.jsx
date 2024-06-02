@@ -122,16 +122,16 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
                             <div key={index} className="w-full bg-white rounded flex text-[1rem] mt-2">
                                 {toggleStates[item.id] ?
                                     <div ref={toggleRef} className="grid grid-cols-5 w-full py-5 font-semibold rounded">
-                                        <div className="w-full flex flex-col items-center justify-center text-blue-500 "  onClick={() => handleViewEdit(item.id, false)}>
+                                        <div className="w-full flex flex-col items-center justify-center text-blue-500 cursor-pointer"  onClick={() => handleViewEdit(item.id, false)}>
                                             <span>View</span>
                                         </div>
-                                        <div className="w-full flex flex-col items-center justify-center text-yellow-600" onClick={() => handleViewEdit(item.id, true)}>
+                                        <div className="w-full flex flex-col items-center justify-center text-yellow-600 cursor-pointer" onClick={() => handleViewEdit(item.id, true)}>
                                             <span>Edit</span>
                                         </div>
-                                        <div className="w-full flex flex-col items-center justify-center text-green-500">
+                                        <div className="w-full flex flex-col items-center justify-center text-green-500 cursor-pointer">
                                             <span>Share</span>
                                         </div>
-                                        <div className="w-full flex flex-col items-center justify-center text-red-500" onClick={() => handleDeleteSnippet(item.id, item.snippet_title)}>
+                                        <div className="w-full flex flex-col items-center justify-center text-red-500 cursor-pointer" onClick={() => handleDeleteSnippet(item.id, item.snippet_title)}>
                                             <span>Delete</span>
                                         </div>
                                         <div className="w-full flex flex-col items-center justify-center ">
