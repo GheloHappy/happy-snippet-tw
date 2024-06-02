@@ -13,6 +13,9 @@ import ProtectedRoute from './middleware/ProtectedRoute.md';
 import store from './redux/store';
 import Welcome from './components/Welcome.section';
 import About from './pages/About.page';
+import setupAxiosInterceptors from './utils/axiosInterceptors';
+
+setupAxiosInterceptors();
 
 function App() {
   //console.log("App Rendering")
