@@ -7,7 +7,6 @@ const SyntaxHighlighterComponent = () => {
     const [theme, setTheme] = useState()
     const snippet = useSelector((state) => state.snippet.snippet_code)
     const language = useSelector((state) => state.snippet.snippet_language)
-
     const user_settings = JSON.parse(localStorage.getItem('user_settings'));
 
     useEffect(() => {
