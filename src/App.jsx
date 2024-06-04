@@ -44,7 +44,6 @@ function Root() {
   const match = useMatch({ path: '/' })
 
   return (
-    //update middleware 
     <>
       {!match ? <Nav /> : <></>}
       <Routes>
