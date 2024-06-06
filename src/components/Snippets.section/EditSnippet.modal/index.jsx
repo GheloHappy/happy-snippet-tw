@@ -5,29 +5,58 @@ import { RxCross1 } from 'react-icons/rx';
 import { setSnippet, setSnippetEditing, setSnippetLanguage } from '../../../redux/snippet.redux/snippetActions';
 import { GrUpdate } from 'react-icons/gr';
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { postData } from '../../../utils/fetcher';
 
-const EditSnippet = () => {
+const EditSnippet = ({ fetchAllSnippets }) => {
     const dispatch = useDispatch();
-    const snippet = useSelector((state) => state.snippet.snippet_code);
-    const language = useSelector((state) => state.snippet.snippet_language);
+    const user_id = useSelector((state) => state.user.user_id)
+    const snippet_id = useSelector((state) => state.snippet.snippet_id)
     const snippet_title = useSelector((state) => state.snippet.snippet_title);
+    const snippet_language = useSelector((state) => state.snippet.snippet_language);
+    const snippet_code = useSelector((state) => state.snippet.snippet_code);
     const is_public = useSelector((state) => state.snippet.snippet_privacy);
 
     const [fields, setFields] = useState({
-        language: '',
         snippet_title: '',
+        snippet_language: '',
+        snippet_code: '',
         is_public: false,
-        snippet: ''
     });
 
     useEffect(() => {
         setFields({
-            language: language,
+            snippet_language: snippet_language,
             snippet_title: snippet_title,
             is_public: is_public,
-            snippet: snippet,
+            snippet_code: snippet_code,
         });
-    }, [language, snippet, snippet_title, is_public]);
+    }, [snippet_language, snippet_code, snippet_title, is_public]);
+
+    const handleUpdateSnippet = async () => {
+        try {
+            const payload = {
+                user_id: user_id,
+                snippet_id: snippet_id,
+                snippet_title: fields.snippet_title,
+                snippet_language: fields.snippet_language,
+                snippet_code: fields.snippet_code,
+                is_public: fields.is_public,
+            }
+
+            const response = await postData('snippet/update', payload)
+
+            if (response.data.status) {
+                toast.success(response.data.msg)
+                fetchAllSnippets()
+            } else {
+                toast.error(response.data.msg)
+            }
+        } catch (err) {
+            console.log(err)
+            toast.error('Internal Server Error')
+        }
+    }
 
     const handleCloseClear = () => {
         dispatch(setSnippetEditing(false));
@@ -58,8 +87,8 @@ const EditSnippet = () => {
                         <label className="font-semibold text-[1.2rem]">Language: </label>
                         <select
                             className="w-5/6 p-2 rounded text-black"
-                            name="language"
-                            value={fields.language}
+                            name="snippet_language"
+                            value={fields.snippet_language}
                             onChange={handleChange}
                         >
                             {languageOptions.map(option => (
@@ -69,9 +98,9 @@ const EditSnippet = () => {
                     </div>
                     <div className='w-full flex md:items-center p-0 md:p-2 md:flex-row flex-col items-start gap-2'>
                         <label className='font-semibold text-[1.2rem]'>Title: </label>
-                        <input 
-                            type='text' 
-                            className='w-full p-2 text-black font-normal rounded' 
+                        <input
+                            type='text'
+                            className='w-full p-2 text-black font-normal rounded'
                             name="snippet_title"
                             value={fields.snippet_title}
                             onChange={handleChange}
@@ -94,12 +123,13 @@ const EditSnippet = () => {
                     minRows={10}
                     maxRows={30}
                     placeholder="Enter your snippet here..."
-                    name="snippet"
-                    value={fields.snippet}
+                    name="snippet_code"
+                    value={fields.snippet_code}
                     onChange={handleChange}
                 />
                 <div className='w-full flex items-center justify-center gap-5 px-2'>
-                    <button className='w-full justify-center border-white border-[2px] p-2 text-[1.2rem] rounded flex items-center gap-2'>
+                    <button className='w-full justify-center border-white border-[2px] p-2 text-[1.2rem] rounded flex items-center gap-2'
+                        onClick={handleUpdateSnippet}>
                         <GrUpdate />
                         Update
                     </button>

@@ -6,7 +6,7 @@ import { IoIosSearch } from "react-icons/io"
 import Loading from '../Loading'
 import SnippetPreview from "../SnippetPreview.Modal"
 import _ from "lodash"
-import EditSnippet from "./EditSnippet.section"
+import EditSnippet from "./EditSnippet.modal"
 
 const SnippetSection = () => {
     const user_id = useSelector((state) => state.user.user_id)
@@ -82,7 +82,7 @@ const SnippetSection = () => {
         <>
             {isLoading ? <Loading /> : null}
             {isEditing ? (
-                <EditSnippet />
+                <EditSnippet fetchAllSnippets={fetchAllSnippets}/>
             ) : isViewing ? (
                 <SnippetPreview />
             ) : (

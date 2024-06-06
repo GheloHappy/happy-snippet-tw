@@ -78,7 +78,6 @@ const Information = () => {
 
             const response = await postData(`user/info`, fields)
 
-
             dispatch(setUserDisplayName({ display_name: fields.display_name }))
 
             toast.success(response.data.msg)

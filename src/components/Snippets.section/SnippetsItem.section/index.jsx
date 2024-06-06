@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { postData } from "../../../utils/fetcher";
 import { useDispatch, useSelector } from "react-redux";
-import { setSnippet, setSnippetEditing, setSnippetLanguage, setSnippetPrivacy, setSnippetSave, setSnippetTittle, setSnippetView } from "../../../redux/snippet.redux/snippetActions";
+import { setSnippet, setSnippetEditing, setSnippetId, setSnippetLanguage, setSnippetPrivacy, setSnippetSave, setSnippetTittle, setSnippetView } from "../../../redux/snippet.redux/snippetActions";
 import { setPageNumber } from "../../../redux/system.redux.j/systemActions";
 import { FaSadTear } from "react-icons/fa";
 import { SyncLoader } from "react-spinners";
@@ -36,6 +36,7 @@ const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => 
             dispatch(setSnippet(snippet_data.snippet_code))
             dispatch(setSnippetTittle(snippet_data.snippet_title))
             dispatch(setSnippetPrivacy(snippet_data.is_public))
+            dispatch(setSnippetId(snippet_id))
 
             if (isEdit) {
                 dispatch(setSnippetEditing(true))
