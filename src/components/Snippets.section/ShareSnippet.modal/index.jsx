@@ -1,6 +1,6 @@
 const ShareSnippet = () => {
     return (
-        <div>
+        <div className="">
 
         </div>
     )

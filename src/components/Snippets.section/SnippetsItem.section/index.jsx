@@ -7,7 +7,7 @@ import { setPageNumber } from "../../../redux/system.redux.j/systemActions";
 import { FaSadTear } from "react-icons/fa";
 import { SyncLoader } from "react-spinners";
 import { SlOptions } from "react-icons/sl";
-import RemoveApproval from "./RemoveApproval.modal";
+import RemoveApproval from "../RemoveApproval.modal";
 
 const SnippetsItem = ({ data, setIsLoading, isSearching, fetchAllSnippets }) => {
     const dispatch = useDispatch();
