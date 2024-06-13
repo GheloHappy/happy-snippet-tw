@@ -19,7 +19,6 @@ setupAxiosInterceptors();
 
 function App() {
   //console.log("App Rendering")
-  //test
   return (
     <Provider store={store}>
       <BrowserRouter>
