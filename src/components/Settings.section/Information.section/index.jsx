@@ -66,7 +66,7 @@ const Information = () => {
                 return
             }
 
-            // Email validation
+            // Email validation 
             if (fields.backup_email) {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(fields.backup_email)) {
