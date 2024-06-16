@@ -18,7 +18,7 @@ import setupAxiosInterceptors from './utils/axiosInterceptors';
 setupAxiosInterceptors();
 
 function App() {
-  //console.log("App Rendering") 
+  //console.log("App Rendering")
   return (
     <Provider store={store}>
       <BrowserRouter>
