@@ -4,7 +4,7 @@ import { postData } from "../../../utils/fetcher"
 import { useSelector } from "react-redux"
 import { PulseLoader } from "react-spinners"
 
-const ChangeAccountSettings = () => {
+const ChangeAccountSettings = ({ setIsDelete }) => {
     const username = useSelector((state) => state.user.user_name)
 
     const initialFields = {
@@ -76,7 +76,8 @@ const ChangeAccountSettings = () => {
                     </button>
                 </form>
                 <div className="border w-full flex flex-col rounded items-center p-4 gap-3 text-black mt-[1rem]">
-                    <button className="bg-gray-100 text-red-600 w-full md:w-1/2 p-4 font-bold rounded font-flower text-[1.4rem]">delete account</button>
+                    <button className="bg-gray-100 text-red-600 w-full md:w-1/2 p-4 font-bold rounded font-flower text-[1.4rem]"
+                        onClick={() => { setIsDelete(true) }}>delete account</button>
                 </div>
             </div>
         </div>
