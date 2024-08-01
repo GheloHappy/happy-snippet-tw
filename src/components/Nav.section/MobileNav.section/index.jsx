@@ -50,10 +50,10 @@ const MobileNav = () => {
                     </ul>
                 </div>
                 <div className={` w-full ${is_dark ?  "border-t" : "border-t"}  h-[10%] items-start px-3 p-4`}>
-                    <div className={` p-2 ${is_dark ? "bg-gray-100 text-black" : "bg-black text-white"}  rounded-full text-[1.5rem] sm:text-[2rem] gap-4 flex items-center justify-center `}>
+                    <Link to="/profile" className={` p-2 ${is_dark ? "bg-gray-100 text-black" : "bg-black text-white"}  rounded-full text-[1.5rem] sm:text-[2rem] gap-4 flex items-center justify-center `}>
                         <GiDiamondsSmile />
                         <span className="font-flower">{info ? info.display_name : "Snippet User"}</span>
-                    </div>
+                    </Link>
                 </div>
                 <div className="w-full flex text-center text-[1.2rem] font-bold gap-2 p-4">
                     <Link to="/about" className="flex w-full" onClick={() => { dispatch(setNavState(false))}}>

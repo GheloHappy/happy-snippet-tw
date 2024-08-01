@@ -14,6 +14,7 @@ import store from './redux/store';
 import Welcome from './components/Welcome.section';
 import About from './pages/About.page';
 import setupAxiosInterceptors from './utils/axiosInterceptors';
+import Profile from './pages/Profile.page';
 
 setupAxiosInterceptors();
 
@@ -53,6 +54,7 @@ function Root() {
         <Route path='/snippets' element={<ProtectedRoute><Snippets /></ProtectedRoute>} />
         <Route path='/home' element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path='/about' element={<ProtectedRoute><About /></ProtectedRoute>} />
+        <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path='*' element={<ProtectedRoute><NotFound /></ProtectedRoute>} />
       </Routes>
     </>

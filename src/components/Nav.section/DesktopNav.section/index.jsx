@@ -58,9 +58,9 @@ const DesktopNav = () => {
                     {
                         isProfile ?
                             <div className={`w-[15%] flex flex-col z-50 ${background()}  absolute text-[1.1rem] font-bold right-8 top-16 rounded  p-3 gap-4`}>
-                                <div className={`w-full text-center flex flex-col items-center justify-center rounded-full p-2  ${background()}`}>
+                                <Link to="/profile" className={`w-full text-center flex flex-col items-center justify-center rounded-full p-2  ${background()}`}>
                                     <span className="font-flower text-[1.3rem]">{info ? info.display_name : "Snippet User"}</span>
-                                </div>
+                                </Link>
                                 <Link to="/settings">
                                     <span className="w-full flex gap-2 items-center justify-center">
                                         <MdOutlineSettings />
