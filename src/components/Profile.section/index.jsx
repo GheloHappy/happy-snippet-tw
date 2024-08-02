@@ -12,7 +12,7 @@ const ProfileSection = () => {
                     <div className="w-[70%] flex justify-center">
                         <h1>STATS</h1>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
     )
