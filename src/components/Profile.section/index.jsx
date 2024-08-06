@@ -6,7 +6,7 @@ const ProfileSection = () => {
             <div className="w-[70%] bg-red-50">
                 <div className="w-full flex text-black">
                     <div className="w-[30%] flex justify-center flex-col items-center">
-                        <h1>IMAGE</h1>
+                        <h1>IMAGE </h1>
                         <h1>{info ? info.display_name : "Snippet User"}</h1>
                     </div>
                     <div className="w-[70%] flex justify-center">
