@@ -16,7 +16,7 @@ import About from './pages/About.page';
 import setupAxiosInterceptors from './utils/axiosInterceptors';
 import Profile from './pages/Profile.page';
 
-setupAxiosInterceptors();
+setupAxiosInterceptors(); 
 
 function App() {
   //console.log("App Rendering") 
