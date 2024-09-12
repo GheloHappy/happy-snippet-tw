@@ -20,7 +20,7 @@ const SnippetSection = () => {
     const fetchAllSnippets = async () => {
         setIsSearching(true)
         try {
-            if (user_id > 0 && searchItem === "") { 
+            if (user_id > 0 && searchItem === "") {
                 const response = await getData(`snippet/list/${user_id}`);
 
                 const sortedData = response.data.user_snippet.sort((a, b) =>
