@@ -22,7 +22,6 @@ const SnippetSection = () => {
         try {
             if (user_id > 0 && searchItem === "") {
                 const response = await getData(`snippet/list/${user_id}`);
-
                 const sortedData = response.data.user_snippet.sort((a, b) =>
                     new Date(b.date) - new Date(a.date) || b.id - a.id
                 );
