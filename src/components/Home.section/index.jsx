@@ -1,13 +1,25 @@
 import CodeSnippet from "./CodeSnippet.section";
 import CodeSnippetCard from './CodeSnippetCard.section'
 import SnippetPreview from "../SnippetPreview.Modal";
-import { useSelector } from "react-redux";
-// import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setSnippet, setSnippetEditing } from "../../redux/snippet.redux/snippetActions";
+import { useEffect } from "react";
 
 const HomeSection = () => {
+    const dispatch = useDispatch()
+    const isEditing = useSelector((state) => state.snippet.snippet_editing)
     const isViewing = useSelector((state) => state.snippet.snippet_view)
     const isSaving = useSelector((state) => state.snippet.snippet_save)
     const isPreview = useSelector((state) => state.snippet.snippet_preview)
+
+    //initial state to clear if user comes back from editting
+    useEffect(() => { 
+        if(isEditing) {
+            dispatch(setSnippetEditing(false));
+            dispatch(setSnippet(''));
+        }
+    }, [])
+
     return (
         <>
             {isViewing || isPreview || isSaving ?

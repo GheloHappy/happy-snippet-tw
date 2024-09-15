@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import SnippetsItem from "./SnippetsItem.section"
 import { getData, postData } from "../../utils/fetcher"
 import { useSelector } from "react-redux"
-import { IoIosSearch } from "react-icons/io"
 import Loading from '../Loading'
 import SnippetPreview from "../SnippetPreview.Modal"
 import _ from "lodash"
@@ -16,6 +15,8 @@ const SnippetSection = () => {
     const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [isSearching, setIsSearching] = useState(false)
+
+
 
     const fetchAllSnippets = async () => {
         setIsSearching(true)
