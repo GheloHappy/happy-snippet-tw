@@ -31,7 +31,7 @@ const About = () => {
                 <div className="w-full flex flex-col md:flex-row items-center text-[1.5rem] md:text-[2rem] justify-center px-4 ">
                     <h1 className="text-blue-500 flex gap-2 items-center font-bold"><IoMdLink /> Portfolio: &nbsp;</h1>
                     <a href="https://ghelo.prohub.site" target="_blank" className="underline truncate hover:text-clip"> 
-                    https://ghelo.prohub.site</a>
+                    https://ghelo.site</a>
                 </div>
             </div>
         </div>
