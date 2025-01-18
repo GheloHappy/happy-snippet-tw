@@ -19,7 +19,7 @@ import Profile from './pages/Profile.page';
 setupAxiosInterceptors(); 
 
 function App() {
-  //console.log("App Rendering") 
+  //console.log("App Rendering")
   return ( 
     <Provider store={store}>
       <BrowserRouter>
