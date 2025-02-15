@@ -99,6 +99,7 @@ const SnippetSection = () => {
                         <SnippetsItem
                             data={data}
                             setIsLoading={setIsLoading}
+                            isLoading={isLoading}
                             isSearching={isSearching}
                             fetchAllSnippets={fetchAllSnippets}
                         />
