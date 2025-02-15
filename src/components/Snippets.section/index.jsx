@@ -83,30 +83,28 @@ const SnippetSection = () => {
 
     return (
         <>
-            {isLoading ? <Loading /> : null}
-            {isEditing ? (
-                <EditSnippet fetchAllSnippets={fetchAllSnippets} />
-            ) : isViewing ? (
-                <SnippetPreview />
-            ) : (
-                <div className="flex-col flex mt-[2.5rem] md:mt-[4.5rem] w-full pt-6 md:gap-3 items-center justify-center">
-                    <div className="w-full bg-white rounded p-1 flex gap-3 md:w-3/4">
-                        <input
-                            className="text-[1.1rem] w-full border rounded p-2"
-                            placeholder={`Search Title`}
-                            type="text"
-                            onChange={handleSearch}
+            {isLoading && <Loading />}
+            {isEditing ? (<EditSnippet fetchAllSnippets={fetchAllSnippets} />) : isViewing ? (<SnippetPreview />)
+                : (
+                    <div className="flex-col flex mt-[2.5rem] md:mt-[4.5rem] w-full pt-6 md:gap-3 items-center justify-center">
+                        <div className="w-full bg-white rounded p-1 flex gap-3 md:w-3/4">
+                            <input
+                                className="text-[1.1rem] w-full border rounded p-2"
+                                placeholder={`Search Title`}
+                                type="text"
+                                onChange={handleSearch}
+                            />
+                            {/* <button className="text-[2rem]"><IoIosSearch /> </button> */}
+                        </div>
+                        <SnippetsItem
+                            data={data}
+                            setIsLoading={setIsLoading}
+                            isSearching={isSearching}
+                            fetchAllSnippets={fetchAllSnippets}
                         />
-                        {/* <button className="text-[2rem]"><IoIosSearch /> </button> */}
                     </div>
-                    <SnippetsItem
-                        data={data}
-                        setIsLoading={setIsLoading}
-                        isSearching={isSearching}
-                        fetchAllSnippets={fetchAllSnippets}
-                    />
-                </div>
-            )}
+                )
+            }
         </>
 
     )
