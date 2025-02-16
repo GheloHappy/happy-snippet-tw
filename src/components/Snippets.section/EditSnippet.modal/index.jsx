@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { postData } from '../../../utils/fetcher';
 
-const EditSnippet = ({ fetchAllSnippets }) => {
+const EditSnippet = ({ fetchAllSnippets, isEditing }) => {
     const dispatch = useDispatch();
     const user_id = useSelector((state) => state.user.user_id)
     const snippet_id = useSelector((state) => state.snippet.snippet_id)
@@ -49,6 +49,7 @@ const EditSnippet = ({ fetchAllSnippets }) => {
             if (response.data.status) {
                 toast.success(response.data.msg)
                 fetchAllSnippets()
+                dispatch(setSnippetEditing(false))
             } else {
                 toast.error(response.data.msg)
             }
